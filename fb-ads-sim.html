@@ -1,609 +1,678 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FB/Meta Ads Simulator - MARK 4360: Social Media & eMarketing</title>
-     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-            line-height: 1.6;
-            padding: 20px;
-            color: #1c1e21;
-            background: #f0f2f5;
-        }
-
-        .nav-container {
-            background: #ffffff;
-            padding: 1rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-menu {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-menu a {
-            text-decoration: none;
-            color: #1877f2;
-            font-weight: 600;
-            padding: 0.5rem 1rem;
-            transition: all 0.3s ease;
-            border-radius: 6px;
-        }
-
-        .nav-menu a:hover {
-            background: #e7f3ff;
-        }
-
-        h1 {
-            text-align: center;
-            color: #1877f2;
-            margin-bottom: 2rem;
-        }
-
-        section {
-            background: #ffffff;
-            margin-bottom: 2rem;
-            padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        h2 {
-            color: #1c1e21;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid #e4e6eb;
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: #050505;
-        }
-
-        input[type="text"],
-        input[type="number"],
-        input[type="date"],
-        input[type="url"],
-        select,
-        textarea {
-            width: 100%;
-            padding: 0.75rem;
-            margin-bottom: 0.5rem;
-            border: 1px solid #ced0d4;
-            border-radius: 6px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        input:focus,
-        select:focus,
-        textarea:focus {
-            outline: none;
-            border-color: #1877f2;
-            box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2);
-        }
-
-        .targeting-info {
-            background: #f7f8fa;
-            padding: 1rem;
-            margin: 0.5rem 0;
-            border-radius: 6px;
-            border-left: 4px solid #1877f2;
-        }
-
-        .targeting-info a {
-            color: #1877f2;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .targeting-info a:hover {
-            text-decoration: underline;
-        }
-
-        button {
-            background: #1877f2;
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border: none;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background: #166fe5;
-        }
-
-        .button-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .print-button {
-            background: #42b72a;
-        }
-
-        .print-button:hover {
-            background: #36a420;
-        }
-
-        #preview-section {
-            display: none;
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-
-        .preview-container {
-            border: 1px solid #ddd;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-
-        .preview-image {
-            max-width: 100%;
-            height: auto;
-            margin: 10px 0;
-            border-radius: 8px;
-        }
-
-        .preview-text {
-            margin: 10px 0;
-        }
-
-        .error {
-            border-color: #ff4444 !important;
-        }
-
-        .error-message {
-            color: #ff4444;
-            font-size: 0.875rem;
-            margin-top: 0.25rem;
-        }
-
-        @media (max-width: 768px) {
-            .nav-menu {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            section {
-                padding: 1rem;
-            }
-
-            .button-group {
-                flex-direction: column;
-            }
-        }
-@media print {
-        /* Hide everything except the preview section when printing */
-        body > *:not(#preview-section) {
-            display: none !important;
-        }
-
-        #preview-section {
-            display: block !important;
-            padding: 0 !important;
-            margin: 0 !important;
-        }
-
-        .preview-container {
-            border: none !important;
-            padding: 0 !important;
-        }
-
-        /* Ensure images print properly */
-        .preview-image {
-            max-width: 100% !important;
-            page-break-inside: avoid;
-        }
-
-        /* Remove unnecessary shadows and effects for print */
-        * {
-            box-shadow: none !important;
-            text-shadow: none !important;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FB/Meta Ads Simulator - MARK 4360: Social Media & eMarketing</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-    </style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      line-height: 1.6;
+      padding: 20px;
+      color: #1c1e21;
+      background: #f0f2f5;
+    }
+    .nav-container {
+      background: #ffffff;
+      padding: 1rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .nav-menu a {
+      text-decoration: none;
+      color: #1877f2;
+      font-weight: 600;
+      padding: 0.5rem 1rem;
+      transition: all 0.3s ease;
+      border-radius: 6px;
+    }
+    .nav-menu a:hover {
+      background: #e7f3ff;
+    }
+    h1 {
+      text-align: center;
+      color: #1877f2;
+      margin-bottom: 2rem;
+    }
+    section.step {
+      background: #ffffff;
+      margin-bottom: 2rem;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h2 {
+      color: #1c1e21;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid #e4e6eb;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #050505;
+    }
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    input[type="url"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 0.5rem;
+      border: 1px solid #ced0d4;
+      border-radius: 6px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #1877f2;
+      box-shadow: 0 0 0 2px rgba(24, 119, 242, 0.2);
+    }
+    .targeting-info {
+      background: #f7f8fa;
+      padding: 1rem;
+      margin: 0.5rem 0;
+      border-radius: 6px;
+      border-left: 4px solid #1877f2;
+    }
+    .targeting-info a {
+      color: #1877f2;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .targeting-info a:hover {
+      text-decoration: underline;
+    }
+    button {
+      background: #1877f2;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background: #166fe5;
+    }
+    .button-group {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .print-button {
+      background: #42b72a;
+    }
+    .print-button:hover {
+      background: #36a420;
+    }
+    #preview-section, #performance-section {
+      display: none;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .preview-container {
+      border: 1px solid #ddd;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .preview-image {
+      max-width: 100%;
+      height: auto;
+      margin: 10px 0;
+      border-radius: 8px;
+    }
+    .preview-text {
+      margin: 10px 0;
+    }
+    .error {
+      border-color: #ff4444 !important;
+    }
+    .error-message {
+      color: #ff4444;
+      font-size: 0.875rem;
+      margin-top: 0.25rem;
+    }
+    @media (max-width: 768px) {
+      .nav-menu {
+        flex-direction: column;
+        gap: 1rem;
+      }
+      section.step {
+        padding: 1rem;
+      }
+      .button-group {
+        flex-direction: column;
+      }
+    }
+    @media print {
+      /* Hide everything except the preview section when printing */
+      body > *:not(#preview-section) {
+        display: none !important;
+      }
+      #preview-section {
+        display: block !important;
+        padding: 0 !important;
+        margin: 0 !important;
+      }
+      .preview-container {
+        border: none !important;
+        padding: 0 !important;
+      }
+      .preview-image {
+        max-width: 100% !important;
+        page-break-inside: avoid;
+      }
+      * {
+        box-shadow: none !important;
+        text-shadow: none !important;
+      }
+    }
+  </style>
 </head>
 <body>
-    <nav class="nav-container">
-        <ul class="nav-menu">
-            <li><a href="#campaign-setup">Campaigns</a></li>
-            <li><a href="#ad-set-configuration">Ad Sets</a></li>
-            <li><a href="#ad-creation">Ads</a></li>
-            <li><a href="https://www.facebook.com/business/tools/ads-manager/help" target="_blank">Help</a></li>
-        </ul>
-    </nav>
+  <nav class="nav-container">
+    <ul class="nav-menu">
+      <li><a href="#step1">Campaigns</a></li>
+      <li><a href="#step2">Ad Sets</a></li>
+      <li><a href="#step3">Ads</a></li>
+      <li><a href="#step4">Review</a></li>
+      <li><a href="https://www.facebook.com/business/tools/ads-manager/help" target="_blank">Help</a></li>
+    </ul>
+  </nav>
 
-    <h1>FB/Meta Ads Simulator - MARK 4360: Social Media & eMarketing</h1>
-<section id="campaign-setup">
-        <h2>1. Campaign Setup</h2>
-        <div class="form-group">
-            <label for="campaign-name">Campaign Name:</label>
-            <input type="text" id="campaign-name" required title="Choose a clear, descriptive name that includes key campaign elements like: target audience + objective + timeframe (e.g., 'StudentDiscount_Leads_Fall2024'). Good naming conventions make reporting and optimization easier.">
-        </div>
+  <h1>FB/Meta Ads Simulator - MARK 4360: Social Media & eMarketing</h1>
 
-        <div class="form-group">
-            <label for="buying-type">Buying Type:</label>
-            <select id="buying-type" required title="• Auction: Best for most advertisers. Compete for ad space based on bid and performance.
-• Reach and Frequency: Reserved in advance, better for large budgets and predictable reach.">
-                <option value="auction">Auction</option>
-                <option value="reach-frequency">Reach and Frequency</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="spending-limit">Campaign Spending Limit ($):</label>
-            <input type="number" id="spending-limit" min="1" step="0.01" title="Set an overall budget cap for your entire campaign. This is especially useful for fixed-budget projects or to prevent overspending. Remember to account for learning phase costs.">
-        </div>
-
-        <div class="form-group">
-            <label for="campaign-objective">Campaign Objective:</label>
-            <select id="campaign-objective" required title="Choose based on your marketing funnel stage:
-• Awareness: Best for new brands or products
-• Traffic: Drive visitors to your website
-• Engagement: Increase page interaction
-• Leads: Collect customer information
-• App Promotion: Drive app installations
-• Sales: Convert customers on your website">
-                <option value="">Select an objective</option>
-                <option value="awareness">Awareness</option>
-                <option value="traffic">Traffic</option>
-                <option value="engagement">Engagement</option>
-                <option value="leads">Leads</option>
-                <option value="app-promotion">App Promotion</option>
-                <option value="sales">Sales</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="special-category">Special Ad Category:</label>
-            <select id="special-category" title="Required for regulated industries:
-• Housing: Real estate, apartments, mortgages
-• Employment: Job postings, recruitment
-• Credit: Credit cards, loans, financial services.
-These have restricted targeting options due to anti-discrimination policies.">
-                <option value="none">None</option>
-                <option value="housing">Housing</option>
-                <option value="employment">Employment</option>
-                <option value="credit">Credit</option>
-            </select>
-        </div>
+  <div id="wizard">
+    <!-- Step 1: Campaign Setup -->
+    <section class="step" id="step1">
+      <h2>Step 1: Campaign Setup</h2>
+      <div class="form-group">
+        <label for="campaign-name">Campaign Name:</label>
+        <input type="text" id="campaign-name" required title="Choose a clear, descriptive name that includes key elements like target audience, objective, and timeframe.">
+      </div>
+      <div class="form-group">
+        <label for="buying-type">Buying Type:</label>
+        <select id="buying-type" required title="Auction is best for most advertisers; Reach and Frequency is ideal for larger budgets with predictable reach.">
+          <option value="auction">Auction</option>
+          <option value="reach-frequency">Reach and Frequency</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="spending-limit">Campaign Spending Limit ($):</label>
+        <input type="number" id="spending-limit" min="1" step="0.01" title="Set an overall budget cap for your entire campaign.">
+      </div>
+      <div class="form-group">
+        <label for="campaign-objective">Campaign Objective:</label>
+        <select id="campaign-objective" required title="Choose an objective based on your funnel stage.">
+          <option value="">Select an objective</option>
+          <option value="awareness">Awareness</option>
+          <option value="traffic">Traffic</option>
+          <option value="engagement">Engagement</option>
+          <option value="leads">Leads</option>
+          <option value="app-promotion">App Promotion</option>
+          <option value="sales">Sales</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="special-category">Special Ad Category:</label>
+        <select id="special-category" title="For regulated industries only.">
+          <option value="none">None</option>
+          <option value="housing">Housing</option>
+          <option value="employment">Employment</option>
+          <option value="credit">Credit</option>
+        </select>
+      </div>
+      <div class="button-group">
+        <button class="next-button" onclick="nextStep()">Next</button>
+        <button onclick="saveDraft()">Save Draft</button>
+      </div>
     </section>
 
-    <section id="ad-set-configuration">
-        <h2>2. Ad Set Configuration</h2>
-        <div class="form-group">
-            <label for="budget-type">Budget Type:</label>
-            <select id="budget-type" required title="• Daily Budget: Spend up to this amount each day.
-• Lifetime Budget: Total spend distributed over campaign duration.
-Consider your cash flow and testing needs when choosing.">
-                <option value="daily">Daily Budget</option>
-                <option value="lifetime">Lifetime Budget</option>
-            </select>
+    <!-- Step 2: Ad Set Configuration -->
+    <section class="step" id="step2" style="display:none;">
+      <h2>Step 2: Ad Set Configuration</h2>
+      <div class="form-group">
+        <label for="budget-type">Budget Type:</label>
+        <select id="budget-type" required title="Choose daily or lifetime budget based on your needs.">
+          <option value="daily">Daily Budget</option>
+          <option value="lifetime">Lifetime Budget</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="budget-amount">Budget Amount ($):</label>
+        <input type="number" id="budget-amount" min="1" step="0.01" required title="Start with a minimum daily budget and adjust as needed.">
+      </div>
+      <div class="form-group">
+        <label for="start-date">Start Date:</label>
+        <input type="date" id="start-date" required title="Set your campaign start date.">
+      </div>
+      <div class="form-group">
+        <label for="end-date">End Date:</label>
+        <input type="date" id="end-date" title="Set your campaign end date, if applicable.">
+      </div>
+      <div class="form-group">
+        <label for="locations">Locations:</label>
+        <input type="text" id="locations" placeholder="Enter locations" title="Target areas where your customers are located.">
+      </div>
+      <div class="form-group">
+        <label for="age-range">Age Range:</label>
+        <select id="age-range" required title="Select an age range that fits your target audience.">
+          <option value="">Select age range</option>
+          <option value="18-24">18-24</option>
+          <option value="25-34">25-34</option>
+          <option value="35-44">35-44</option>
+          <option value="45+">45+</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="gender">Gender:</label>
+        <select id="gender" required title="Choose based on product relevance.">
+          <option value="all">All</option>
+          <option value="men">Men</option>
+          <option value="women">Women</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="detailed-targeting">Detailed Targeting:</label>
+        <textarea id="detailed-targeting" rows="3" title="Combine demographics, interests, and behaviors for precise targeting."></textarea>
+        <div class="targeting-info">
+          View the <a href="https://alchemymarketing.com/the-seo-checklist/complete-list-of-facebook-ads-targeting-options/" target="_blank">complete list of Facebook targeting options</a>.
         </div>
-
-        <div class="form-group">
-            <label for="budget-amount">Budget Amount ($):</label>
-            <input type="number" id="budget-amount" min="1" step="0.01" required title="Start with a minimum of $5-10 daily for testing. Allocate enough budget to exit the learning phase (50 optimization events). Higher budgets generally mean faster learning.">
-        </div>
-
-        <div class="form-group">
-            <label for="start-date">Start Date:</label>
-            <input type="date" id="start-date" required title="Consider seasonal factors, business hours, event timing, and sales cycles. Allow enough time for the learning phase (3-7 days minimum).">
-        </div>
-
-        <div class="form-group">
-            <label for="end-date">End Date:</label>
-            <input type="date" id="end-date" title="Set an appropriate end date considering seasonal factors, event timelines, and your overall campaign objectives.">
-        </div>
-
-        <div class="form-group">
-            <label for="locations">Locations:</label>
-            <input type="text" id="locations" placeholder="Enter locations" title="Target areas where your customers are located. Consider:
-• Business service area
-• Shipping capabilities
-• Language considerations
-• Local regulations">
-        </div>
-
-        <div class="form-group">
-            <label for="age-range">Age Range:</label>
-            <select id="age-range" required title="Match your target demographic. Consider product relevance, purchasing power, and platform usage habits. Some age groups are more active on certain platforms.">
-                <option value="">Select age range</option>
-                <option value="18-24">18-24</option>
-                <option value="25-34">25-34</option>
-                <option value="35-44">35-44</option>
-                <option value="45+">45+</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="gender">Gender:</label>
-            <select id="gender" required title="Only specify if your product is gender-specific. Otherwise, test all genders first to avoid limiting your reach unnecessarily.">
-                <option value="all">All</option>
-                <option value="men">Men</option>
-                <option value="women">Women</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="detailed-targeting">Detailed Targeting:</label>
-            <textarea id="detailed-targeting" rows="3" title="Combine demographics, interests, and behaviors. Start broad, then refine based on performance data. Aim for audience sizes of 500K-1M for best results."></textarea>
-            <div class="targeting-info">
-                View the <a href="https://alchemymarketing.com/the-seo-checklist/complete-list-of-facebook-ads-targeting-options/" target="_blank">complete list of Facebook targeting options</a> to refine your audience.
-            </div>
-        </div>
+      </div>
+      <div class="button-group">
+        <button class="prev-button" onclick="prevStep()">Back</button>
+        <button class="next-button" onclick="nextStep()">Next</button>
+        <button onclick="saveDraft()">Save Draft</button>
+      </div>
     </section>
 
-    <section id="ad-creation">
-        <h2>3. Ad Creation</h2>
-        <div class="form-group">
-            <label for="facebook-page">Facebook Page URL:</label>
-            <input type="url" id="facebook-page" placeholder="https://facebook.com/your-page" title="Must be Business accounts with proper permissions. Ensure branding is consistent and profiles are complete.">
-        </div>
-
-        <div class="form-group">
-            <label for="instagram-account">Instagram Account:</label>
-            <input type="text" id="instagram-account" placeholder="@youraccount" title="Link a business Instagram account to ensure proper tracking and branding.">
-        </div>
-
-        <div class="form-group">
-            <label for="ad-format">Ad Format:</label>
-            <select id="ad-format" required title="Choose based on your goals:
-• Single Image: Simple, effective for most cases
-• Video: Higher engagement, better storytelling
-• Carousel: Multiple products or features
-• Collection: Mobile shopping experiences
-• Stories: Full-screen, immersive content">
-                <option value="single-image">Single Image</option>
-                <option value="single-video">Single Video</option>
-                <option value="carousel">Carousel</option>
-                <option value="collection">Collection</option>
-                <option value="instant-experience">Instant Experience</option>
-                <option value="stories">Stories</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label for="image-url">Ad Image URL:</label>
-            <input type="url" id="image-url" placeholder="https://example.com/your-image.jpg" title="Provide a high-quality image. Ensure it follows the 20% text rule for better performance.">
-        </div>
-
-        <div class="form-group">
-            <label for="primary-text">Primary Text:</label>
-            <textarea id="primary-text" rows="3" title="Hook attention in the first 3 lines. Use concise, engaging language to draw users in."></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="headline">Headline:</label>
-            <input type="text" id="headline" title="Write a clear, compelling value proposition that grabs attention.">
-        </div>
-
-        <div class="form-group">
-            <label for="description">Description:</label>
-            <textarea id="description" rows="2" title="Support the main message with additional information or context. Keep it brief."></textarea>
-        </div>
-
-        <div class="form-group">
-            <label for="website-url">Website URL:</label>
-            <input type="url" id="website-url" title="Ensure the landing page:
-• Loads quickly (under 3 seconds)
-• Is mobile-optimized
-• Matches the ad promise
-• Has proper tracking setup">
-        </div>
-
-        <div class="form-group">
-            <label for="call-to-action">Call to Action:</label>
-            <select id="call-to-action" title="Match your campaign objective:
-• Learn More: Information gathering
-• Shop Now: Direct sales
-• Sign Up: Lead generation
-• Book Now: Services
-• Contact Us: Complex sales">
-                <option value="learn-more">Learn More</option>
-                <option value="shop-now">Shop Now</option>
-                <option value="sign-up">Sign Up</option>
-                <option value="book-now">Book Now</option>
-                <option value="contact-us">Contact Us</option>
-            </select>
-        </div>
+    <!-- Step 3: Ad Creation -->
+    <section class="step" id="step3" style="display:none;">
+      <h2>Step 3: Ad Creation</h2>
+      <div class="form-group">
+        <label for="facebook-page">Facebook Page URL:</label>
+        <input type="url" id="facebook-page" placeholder="https://facebook.com/your-page" title="Enter your Facebook business page URL.">
+      </div>
+      <div class="form-group">
+        <label for="instagram-account">Instagram Account:</label>
+        <input type="text" id="instagram-account" placeholder="@youraccount" title="Enter your linked Instagram account.">
+      </div>
+      <div class="form-group">
+        <label for="ad-format">Ad Format:</label>
+        <select id="ad-format" required title="Select the ad format that best suits your campaign.">
+          <option value="single-image">Single Image</option>
+          <option value="single-video">Single Video</option>
+          <option value="carousel">Carousel</option>
+          <option value="collection">Collection</option>
+          <option value="instant-experience">Instant Experience</option>
+          <option value="stories">Stories</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="image-url">Ad Image URL:</label>
+        <input type="url" id="image-url" placeholder="https://example.com/your-image.jpg" title="Provide a high-quality image URL.">
+      </div>
+      <div class="form-group">
+        <label for="primary-text">Primary Text:</label>
+        <textarea id="primary-text" rows="3" title="Enter compelling primary text for your ad."></textarea>
+      </div>
+      <div class="form-group">
+        <label for="headline">Headline:</label>
+        <input type="text" id="headline" title="Write a clear and compelling headline.">
+      </div>
+      <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea id="description" rows="2" title="Provide a brief description that supports your headline."></textarea>
+      </div>
+      <div class="form-group">
+        <label for="website-url">Website URL:</label>
+        <input type="url" id="website-url" title="Ensure your landing page is optimized and fast.">
+      </div>
+      <div class="form-group">
+        <label for="call-to-action">Call to Action:</label>
+        <select id="call-to-action" title="Select a call to action that aligns with your objective.">
+          <option value="learn-more">Learn More</option>
+          <option value="shop-now">Shop Now</option>
+          <option value="sign-up">Sign Up</option>
+          <option value="book-now">Book Now</option>
+          <option value="contact-us">Contact Us</option>
+        </select>
+      </div>
+      <div class="button-group">
+        <button class="prev-button" onclick="prevStep()">Back</button>
+        <button class="next-button" onclick="nextStep()">Next</button>
+        <button onclick="saveDraft()">Save Draft</button>
+      </div>
     </section>
 
-    <section id="ad-review">
-        <h2>4. Ad Review Summary</h2>
-        <div class="form-group">
-            <label for="student-name">Student Name:</label>
-            <input type="text" id="student-name">
-        </div>
-
-        <div class="form-group">
-            <label for="strategy-description">Description of Your Strategy:</label>
-            <textarea id="strategy-description" rows="4" title="Document your choices and reasoning:
-• Target audience rationale
-• Creative strategy
-• Expected outcomes
-• Success metrics
-• Testing approach
-This helps with future optimization and learning."></textarea>
-        </div>
-
-       <div class="button-group">
-    <button onclick="reviewAd()">Preview Ad</button>
-    <button class="print-button" onclick="window.print()">Print to PDF</button>
-</div>
+    <!-- Step 4: Ad Review Summary -->
+    <section class="step" id="step4" style="display:none;">
+      <h2>Step 4: Ad Review Summary</h2>
+      <div class="form-group">
+        <label for="student-name">Student Name:</label>
+        <input type="text" id="student-name">
+      </div>
+      <div class="form-group">
+        <label for="strategy-description">Description of Your Strategy:</label>
+        <textarea id="strategy-description" rows="4" title="Document your choices, rationale, and expected outcomes."></textarea>
+      </div>
+      <div class="button-group">
+        <button class="prev-button" onclick="prevStep()">Back</button>
+        <button onclick="reviewAd()">Preview Ad</button>
+        <button class="print-button" onclick="window.print()">Print to PDF</button>
+        <button onclick="saveDraft()">Save Draft</button>
+      </div>
     </section>
+  </div>
 
-    <section id="preview-section">
-        <h2>Ad Preview</h2>
-        <div class="preview-container">
-            <!-- Preview content will be inserted here -->
-        </div>
-    </section>
+  <!-- Preview Section -->
+  <section id="preview-section">
+    <h2>Ad Preview</h2>
+    <div class="preview-container">
+      <!-- Live preview content -->
+    </div>
+  </section>
 
-    <script>
-        function reviewAd() {
-            if (!validateForm()) {
-                alert('Please fill in all required fields before previewing.');
-                return;
-            }
+  <!-- Performance Metrics Section -->
+  <section id="performance-section">
+    <h2>Estimated Performance</h2>
+    <div id="performance-metrics">
+      <!-- Dynamic performance metrics will appear here -->
+    </div>
+  </section>
 
-            const previewSection = document.getElementById('preview-section');
-            const previewContainer = document.querySelector('.preview-container');
-            
-            // Gather all form data
-            const campaignName = document.getElementById('campaign-name').value;
-            const objective = document.getElementById('campaign-objective').value;
-            const budget = document.getElementById('budget-amount').value;
-            const imageUrl = document.getElementById('image-url').value;
-            const primaryText = document.getElementById('primary-text').value;
-            const headline = document.getElementById('headline').value;
-            const description = document.getElementById('description').value;
-            const callToAction = document.getElementById('call-to-action').value;
-            const studentName = document.getElementById('student-name').value;
-            const strategy = document.getElementById('strategy-description').value;
-
-            // Create preview HTML
-            let previewHTML = `
-                <h3>Campaign Details</h3>
-                <div class="preview-text"><strong>Campaign Name:</strong> ${campaignName}</div>
-                <div class="preview-text"><strong>Objective:</strong> ${objective}</div>
-                <div class="preview-text"><strong>Budget:</strong> $${budget}</div>
-
-                <h3>Ad Creative</h3>
-                ${imageUrl ? `<img src="${imageUrl}" alt="Ad Preview" class="preview-image">` : '<div class="preview-text">[No image provided]</div>'}
-                <div class="preview-text"><strong>Primary Text:</strong> ${primaryText}</div>
-                <div class="preview-text"><strong>Headline:</strong> ${headline}</div>
-                <div class="preview-text"><strong>Description:</strong> ${description}</div>
-                <div class="preview-text"><strong>Call to Action:</strong> ${callToAction}</div>
-
-                <h3>Strategy Summary</h3>
-                <div class="preview-text"><strong>Student Name:</strong> ${studentName}</div>
-                <div class="preview-text"><strong>Strategy:</strong> ${strategy}</div>
-            `;
-
-            // Update preview container and show section
-            previewContainer.innerHTML = previewHTML;
-            previewSection.style.display = 'block';
-
-            // Scroll to preview
-            previewSection.scrollIntoView({ behavior: 'smooth' });
+  <script>
+    // Wizard Navigation
+    let currentStep = 0;
+    const steps = document.querySelectorAll('.step');
+    function showStep(index) {
+      steps.forEach((step, i) => {
+        step.style.display = (i === index) ? 'block' : 'none';
+      });
+    }
+    function nextStep() {
+      if (validateCurrentStep()) {
+        currentStep++;
+        if (currentStep >= steps.length) currentStep = steps.length - 1;
+        showStep(currentStep);
+      } else {
+        alert('Please fill in all required fields in this step.');
+      }
+    }
+    function prevStep() {
+      currentStep--;
+      if (currentStep < 0) currentStep = 0;
+      showStep(currentStep);
+    }
+    function validateCurrentStep() {
+      let valid = true;
+      const currentFields = steps[currentStep].querySelectorAll('[required]');
+      currentFields.forEach(field => {
+        if (!field.value.trim()) {
+          field.classList.add('error');
+          valid = false;
         }
+      });
+      return valid;
+    }
+    showStep(currentStep);
 
-                function validateForm() {
-            let isValid = true;
-            const requiredFields = document.querySelectorAll('[required]');
-            
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    field.classList.add('error');
-                    isValid = false;
-                }
-            });
-
-            return isValid;
-        }
-
-        // Add form validation
-        document.querySelectorAll('input, select, textarea').forEach(element => {
-            element.addEventListener('input', function() {
-                this.classList.remove('error');
-            });
+    // Top Navigation Links: Set wizard step based on anchor click
+    document.querySelectorAll('.nav-menu a').forEach(link => {
+      // Only handle links that point to steps (e.g., #step1, #step2, etc.)
+      if(link.getAttribute('href').startsWith("#step")){
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const stepId = this.getAttribute('href').substring(1);
+          const targetStepIndex = Array.from(steps).findIndex(step => step.id === stepId);
+          if (targetStepIndex !== -1) {
+            currentStep = targetStepIndex;
+            showStep(currentStep);
+          }
         });
-
-        // Set minimum date for start date to today
-        const today = new Date().toISOString().split('T')[0];
-        document.getElementById('start-date').min = today;
-
-        // Update end date minimum when start date changes
-        document.getElementById('start-date').addEventListener('change', function() {
-            document.getElementById('end-date').min = this.value;
-        });
-document.addEventListener('DOMContentLoaded', function() {
-    // Create a custom tooltip div
-    const customTooltip = document.createElement('div');
-    customTooltip.className = 'custom-tooltip';
-    document.body.appendChild(customTooltip);
-
-    // Add styles for the custom tooltip
-    const style = document.createElement('style');
-    style.textContent = `
-        .custom-tooltip {
-            display: none;
-            position: absolute;
-            background: #333;
-            color: white;
-            padding: 10px;
-            border-radius: 4px;
-            z-index: 1000;
-            max-width: 300px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            font-size: 14px;
-            pointer-events: none; /* Prevents tooltip from interfering with other elements */
-        }
-    `;
-    document.head.appendChild(style);
-
-    // Get all elements with title attributes
-    const elementsWithTitle = document.querySelectorAll('[title]');
-
-    elementsWithTitle.forEach(element => {
-        const originalTitle = element.title;
-        element.removeAttribute('title');
-        
-        element.addEventListener('mouseenter', (e) => {
-            customTooltip.textContent = originalTitle;
-            customTooltip.style.display = 'block';
-            
-            // Get element's position relative to the viewport
-            const rect = e.target.getBoundingClientRect();
-            
-            // Position tooltip 10px below the element
-            // Add window.scrollY to account for page scroll
-            customTooltip.style.top = (rect.bottom + window.scrollY + 10) + 'px';
-            customTooltip.style.left = rect.left + 'px';
-        });
-
-        element.addEventListener('mouseleave', () => {
-            customTooltip.style.display = 'none';
-        });
+      }
     });
-});
-</script>
+
+    // Real-Time Preview Update (Debounced)
+    const updatePreviewDebounced = debounce(updatePreview, 300);
+    document.querySelectorAll('input, textarea, select').forEach(input => {
+      input.addEventListener('input', updatePreviewDebounced);
+    });
+    function updatePreview() {
+      const previewContainer = document.querySelector('.preview-container');
+      previewContainer.innerHTML = generatePreviewHTML();
+    }
+    function generatePreviewHTML() {
+      const campaignName = document.getElementById('campaign-name').value;
+      const objective = document.getElementById('campaign-objective').value;
+      const budget = document.getElementById('budget-amount').value;
+      const imageUrl = document.getElementById('image-url').value;
+      const primaryText = document.getElementById('primary-text').value;
+      const headline = document.getElementById('headline').value;
+      const description = document.getElementById('description').value;
+      const callToAction = document.getElementById('call-to-action').value;
+      const studentName = document.getElementById('student-name').value;
+      const strategy = document.getElementById('strategy-description').value;
+      return `
+        <h3>Campaign Details</h3>
+        <div class="preview-text"><strong>Campaign Name:</strong> ${campaignName}</div>
+        <div class="preview-text"><strong>Objective:</strong> ${objective}</div>
+        <div class="preview-text"><strong>Budget:</strong> $${budget}</div>
+        <h3>Ad Creative</h3>
+        ${imageUrl ? `<img src="${imageUrl}" alt="Ad Preview" class="preview-image">` : '<div class="preview-text">[No image provided]</div>'}
+        <div class="preview-text"><strong>Primary Text:</strong> ${primaryText}</div>
+        <div class="preview-text"><strong>Headline:</strong> ${headline}</div>
+        <div class="preview-text"><strong>Description:</strong> ${description}</div>
+        <div class="preview-text"><strong>Call to Action:</strong> ${callToAction}</div>
+        <h3>Strategy Summary</h3>
+        <div class="preview-text"><strong>Student Name:</strong> ${studentName}</div>
+        <div class="preview-text"><strong>Strategy:</strong> ${strategy}</div>
+      `;
+    }
+    function reviewAd() {
+      if (!validateAllSteps()) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+      updatePerformanceMetrics();
+      document.getElementById('preview-section').scrollIntoView({ behavior: 'smooth' });
+    }
+    function validateAllSteps() {
+      let valid = true;
+      document.querySelectorAll('[required]').forEach(field => {
+        if (!field.value.trim()) {
+          field.classList.add('error');
+          valid = false;
+        }
+      });
+      return valid;
+    }
+    // Debounce utility
+    function debounce(func, delay) {
+      let inDebounce;
+      return function() {
+        const context = this;
+        const args = arguments;
+        clearTimeout(inDebounce);
+        inDebounce = setTimeout(() => func.apply(context, args), delay);
+      }
+    }
+
+    // Save and Load Draft Functionality on All Steps
+    function saveDraft() {
+      const formData = {
+        campaignName: document.getElementById('campaign-name').value,
+        buyingType: document.getElementById('buying-type').value,
+        spendingLimit: document.getElementById('spending-limit').value,
+        campaignObjective: document.getElementById('campaign-objective').value,
+        specialCategory: document.getElementById('special-category').value,
+        budgetType: document.getElementById('budget-type').value,
+        budgetAmount: document.getElementById('budget-amount').value,
+        startDate: document.getElementById('start-date').value,
+        endDate: document.getElementById('end-date').value,
+        locations: document.getElementById('locations').value,
+        ageRange: document.getElementById('age-range').value,
+        gender: document.getElementById('gender').value,
+        detailedTargeting: document.getElementById('detailed-targeting').value,
+        facebookPage: document.getElementById('facebook-page').value,
+        instagramAccount: document.getElementById('instagram-account').value,
+        adFormat: document.getElementById('ad-format').value,
+        imageUrl: document.getElementById('image-url').value,
+        primaryText: document.getElementById('primary-text').value,
+        headline: document.getElementById('headline').value,
+        description: document.getElementById('description').value,
+        websiteUrl: document.getElementById('website-url').value,
+        callToAction: document.getElementById('call-to-action').value,
+        studentName: document.getElementById('student-name').value,
+        strategy: document.getElementById('strategy-description').value,
+        currentStep: currentStep
+      };
+      localStorage.setItem('fbAdDraft', JSON.stringify(formData));
+      alert('Draft saved successfully!');
+    }
+    function loadDraft() {
+      const draft = localStorage.getItem('fbAdDraft');
+      if (draft) {
+        const data = JSON.parse(draft);
+        document.getElementById('campaign-name').value = data.campaignName || '';
+        document.getElementById('buying-type').value = data.buyingType || 'auction';
+        document.getElementById('spending-limit').value = data.spendingLimit || '';
+        document.getElementById('campaign-objective').value = data.campaignObjective || '';
+        document.getElementById('special-category').value = data.specialCategory || 'none';
+        document.getElementById('budget-type').value = data.budgetType || 'daily';
+        document.getElementById('budget-amount').value = data.budgetAmount || '';
+        document.getElementById('start-date').value = data.startDate || '';
+        document.getElementById('end-date').value = data.endDate || '';
+        document.getElementById('locations').value = data.locations || '';
+        document.getElementById('age-range').value = data.ageRange || '';
+        document.getElementById('gender').value = data.gender || 'all';
+        document.getElementById('detailed-targeting').value = data.detailedTargeting || '';
+        document.getElementById('facebook-page').value = data.facebookPage || '';
+        document.getElementById('instagram-account').value = data.instagramAccount || '';
+        document.getElementById('ad-format').value = data.adFormat || 'single-image';
+        document.getElementById('image-url').value = data.imageUrl || '';
+        document.getElementById('primary-text').value = data.primaryText || '';
+        document.getElementById('headline').value = data.headline || '';
+        document.getElementById('description').value = data.description || '';
+        document.getElementById('website-url').value = data.websiteUrl || '';
+        document.getElementById('call-to-action').value = data.callToAction || 'learn-more';
+        document.getElementById('student-name').value = data.studentName || '';
+        document.getElementById('strategy-description').value = data.strategy || '';
+        currentStep = data.currentStep !== undefined ? data.currentStep : 0;
+        showStep(currentStep);
+        updatePreview();
+        alert('Draft loaded successfully!');
+      }
+    }
+    window.onload = function() {
+      if (localStorage.getItem('fbAdDraft')) {
+        if (confirm('Load saved draft?')) {
+          loadDraft();
+        }
+      }
+    }
+
+    // Update Performance Metrics based on Budget
+    function updatePerformanceMetrics() {
+      const budget = parseFloat(document.getElementById('budget-amount').value);
+      const performanceSection = document.getElementById('performance-section');
+      let estimatedReach = budget ? Math.round(budget * 50) : 0;
+      let estimatedClicks = budget ? Math.round(budget * 5) : 0;
+      let estimatedCostPerClick = budget && estimatedClicks ? (budget / estimatedClicks).toFixed(2) : 0;
+      const metricsHTML = `
+        <div><strong>Estimated Reach:</strong> ${estimatedReach} people</div>
+        <div><strong>Estimated Clicks:</strong> ${estimatedClicks} clicks</div>
+        <div><strong>Estimated CPC:</strong> $${estimatedCostPerClick}</div>
+      `;
+      document.getElementById('performance-metrics').innerHTML = metricsHTML;
+      performanceSection.style.display = 'block';
+    }
+
+    // Tooltip Enhancement
+    document.addEventListener('DOMContentLoaded', function() {
+      const customTooltip = document.createElement('div');
+      customTooltip.className = 'custom-tooltip';
+      document.body.appendChild(customTooltip);
+      const style = document.createElement('style');
+      style.textContent = `
+        .custom-tooltip {
+          display: none;
+          position: absolute;
+          background: #333;
+          color: white;
+          padding: 10px;
+          border-radius: 4px;
+          z-index: 1000;
+          max-width: 300px;
+          box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+          font-size: 14px;
+          pointer-events: none;
+        }
+      `;
+      document.head.appendChild(style);
+      const elementsWithTitle = document.querySelectorAll('[title]');
+      elementsWithTitle.forEach(element => {
+        const originalTitle = element.getAttribute('data-original-title') || element.title;
+        element.setAttribute('data-original-title', originalTitle);
+        element.removeAttribute('title');
+        element.addEventListener('mouseenter', (e) => {
+          customTooltip.textContent = originalTitle;
+          customTooltip.style.display = 'block';
+          const rect = e.target.getBoundingClientRect();
+          customTooltip.style.top = (rect.bottom + window.scrollY + 10) + 'px';
+          customTooltip.style.left = rect.left + 'px';
+        });
+        element.addEventListener('mouseleave', () => {
+          customTooltip.style.display = 'none';
+        });
+      });
+    });
+
+    // Set minimum date for Start Date and update End Date accordingly
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('start-date').min = today;
+    document.getElementById('start-date').addEventListener('change', function() {
+      document.getElementById('end-date').min = this.value;
+    });
+  </script>
 </body>
 </html>
