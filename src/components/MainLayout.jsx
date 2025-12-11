@@ -15,10 +15,10 @@ const MainLayout = ({ leftPanel, rightPanel }) => {
           </div>
 
           {/* Right Panel: Preview/Simulator (Sticky) */}
-          <div className="lg:w-2/5 hidden lg:block">
-            <div className="sticky top-28 space-y-6">
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 overflow-hidden">
-                <h3 className="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-4 border-b pb-2">
+          <div className="lg:w-2/5 hidden lg:block print:block">
+            <div className="sticky top-28 space-y-6 print:static">
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 overflow-hidden print:border-none print:shadow-none print:p-0">
+                <h3 className="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-4 border-b pb-2 print:hidden">
                   Live Preview & Analysis
                 </h3>
                 {rightPanel}

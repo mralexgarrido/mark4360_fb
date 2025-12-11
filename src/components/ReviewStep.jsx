@@ -108,17 +108,17 @@ const ReviewStep = () => {
 
         <div className="flex flex-col md:flex-row gap-3">
           <button
-            onClick={handlePrint}
-            className="flex items-center justify-center gap-2 bg-gray-800 hover:bg-gray-900 text-white font-medium py-2 px-6 rounded-lg shadow-sm transition-colors"
+            onClick={handleFinish}
+            className="flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-6 rounded-lg shadow-sm transition-colors"
           >
-            <Printer size={18} /> Print / Save PDF
+            <CheckCircle size={18} /> Finish & Reset
           </button>
 
           <button
-            onClick={handleFinish}
-            className="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white font-medium py-2 px-6 rounded-lg shadow-sm transition-colors"
+            onClick={handlePrint}
+            className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg shadow-sm transition-colors"
           >
-            <CheckCircle size={18} /> Finish & Reset
+            <Printer size={18} /> Print / Save PDF
           </button>
         </div>
       </div>
@@ -132,12 +132,20 @@ const ReviewStep = () => {
           #root, #root * {
             visibility: visible;
           }
-          nav, button, .sticky {
+          /* Hide non-printable elements */
+          nav, button, .sticky-nav, .navigation-buttons, .progress-bar {
             display: none !important;
           }
+          /* Ensure layout is conducive to printing */
           .min-h-screen {
             height: auto !important;
             overflow: visible !important;
+          }
+
+          /* Force backgrounds to print */
+          * {
+            -webkit-print-color-adjust: exact !important;
+            print-color-adjust: exact !important;
           }
         }
       `}</style>

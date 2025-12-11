@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { useAdCampaign } from '../context/AdCampaignContext';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { MapPin, Users, DollarSign, Info } from 'lucide-react';
+import InfoIcon from './InfoIcon';
 
 const AdSetStep = () => {
   const { campaignData, updateField, nextStep, prevStep } = useAdCampaign();
@@ -48,7 +49,7 @@ const AdSetStep = () => {
       {/* Budget & Schedule Section */}
       <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
         <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-          <DollarSign size={20} className="text-blue-600" /> Budget & Schedule
+          <DollarSign size={20} className="text-blue-600" /> Budget & Schedule <InfoIcon contentKey="budget" />
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -133,12 +134,14 @@ const AdSetStep = () => {
       {/* Audience Section */}
       <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
         <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-          <Users size={20} className="text-blue-600" /> Audience Controls
+          <Users size={20} className="text-blue-600" /> Audience Controls <InfoIcon contentKey="audience" />
         </h3>
 
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Locations</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Locations <InfoIcon contentKey="locations" />
+            </label>
             <div className="flex gap-2">
               <div className="flex-1 relative">
                 <MapPin className="absolute left-3 top-2.5 text-gray-400" size={18} />
