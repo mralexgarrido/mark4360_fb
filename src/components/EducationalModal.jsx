@@ -4,25 +4,39 @@ import { X } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const EducationalModal = ({ onClose, title, content }) => {
+  const handleBackdropClick = (e) => {
+    e.stopPropagation(); // Stop bubbling to React tree (InfoIcon -> Label)
+    onClose();
+  };
+
+  const handleContentClick = (e) => {
+    e.stopPropagation();
+  };
+
+  const handleCloseButtonClick = (e) => {
+    e.stopPropagation();
+    onClose();
+  };
+
   return createPortal(
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
-      onClick={onClose}
+      onClick={handleBackdropClick}
     >
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        onClick={(e) => e.stopPropagation()}
+        onClick={handleContentClick}
         className="bg-white rounded-xl shadow-xl max-w-lg w-full overflow-hidden"
       >
         <div className="bg-blue-600 p-6 flex justify-between items-start">
           <h3 className="text-xl font-bold text-white pr-8">{title}</h3>
           <button
-            onClick={onClose}
+            onClick={handleCloseButtonClick}
             className="text-blue-100 hover:text-white transition-colors bg-blue-700 hover:bg-blue-800 rounded-full p-1 cursor-pointer"
           >
             <X size={20} />
