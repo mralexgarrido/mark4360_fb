@@ -25,7 +25,7 @@ const MainLayout = ({ leftPanel, rightPanel }) => {
               </div>
 
               {/* Educational Context Widget (Example) */}
-              <div className="bg-blue-50 border border-blue-100 rounded-lg p-4">
+              <div className="hidden print:hidden bg-blue-50 border border-blue-100 rounded-lg p-4">
                 <div className="flex items-start gap-3">
                   <div className="bg-blue-100 p-2 rounded-full text-blue-600">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

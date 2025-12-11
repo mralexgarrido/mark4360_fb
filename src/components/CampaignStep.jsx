@@ -126,7 +126,9 @@ const CampaignStep = () => {
 
       {/* Spending Limit */}
       <div className="space-y-2 pt-4 border-t border-gray-100">
-        <label className="block text-sm font-medium text-gray-700">Campaign Spending Limit ($)</label>
+        <label className="block text-sm font-medium text-gray-700">
+          Campaign Spending Limit ($) <InfoIcon contentKey="spendingLimit" />
+        </label>
         <input
           type="number"
           value={campaignData.spendingLimit}

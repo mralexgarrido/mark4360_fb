@@ -18,8 +18,16 @@ const ReviewStep = () => {
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div>
-        <h2 className="text-2xl font-bold text-gray-900">Review & Submit</h2>
-        <p className="text-gray-500 mt-1">Review your campaign details and document your strategy.</p>
+        <div className="flex justify-between items-start">
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900">Review & Submit</h2>
+            <p className="text-gray-500 mt-1">Review your campaign details and document your strategy.</p>
+          </div>
+          <div className="text-right hidden print:block">
+            <p className="text-sm text-gray-500">Date Generated</p>
+            <p className="font-medium text-gray-900">{new Date().toLocaleDateString()}</p>
+          </div>
+        </div>
       </div>
 
       {/* Summary Cards */}
