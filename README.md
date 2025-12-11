@@ -1,16 +1,27 @@
-# React + Vite
+# Facebook Ads Campaign Simulator for MARK 4360
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive educational simulator designed to help students understand the fundamentals of Facebook advertising campaigns. This tool provides hands-on experience in campaign optimization and budget management in a risk-free environment.
 
-Currently, two official plugins are available:
+## Quick Start
+Access the simulator at: [Facebook Ads Simulator](https://mralexgarrido.github.io/mark4360_fb/fb-ads-sim.html)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
+- Real-time campaign performance simulation
+- Budget allocation practice
+- Key metrics visualization
+- Interactive learning environment
+- Student-friendly interface
 
-## React Compiler
+## Documentation
+For detailed usage instructions, please see our [Usage Guide](docs/USAGE.md).
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Contributing
+Please read our [Contributing Guidelines](.github/CONTRIBUTING.md) before submitting any changes.
 
-## Expanding the ESLint configuration
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Contact
+**Course Instructor:** Alex Garrido
+- Institution: University of Texas Rio Grande Valley
+- Course: MARK 4360 Social Media & eMarketing
