@@ -49,7 +49,8 @@ const ProgressBar = () => {
                 >
                   {isCompleted ? <Check size={16} /> : <span>{step.id + 1}</span>}
                 </div>
-                <span className={`mt-2 text-xs font-medium ${isActive ? 'text-blue-600' : 'text-gray-500'}`}>
+                {/* Increased spacing margin from mt-2 to mt-4 and added bg-white to label to prevent line overlap */}
+                <span className={`mt-4 px-2 bg-white text-xs font-medium ${isActive ? 'text-blue-600' : 'text-gray-500'}`}>
                   {step.label}
                 </span>
               </div>

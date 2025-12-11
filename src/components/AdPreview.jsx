@@ -110,7 +110,13 @@ const AdPreview = () => {
           <div className="bg-gray-50 p-3 border-t border-gray-100 flex items-center justify-between">
             <div className="flex-1 min-w-0 pr-2">
               <div className="text-xs text-gray-500 uppercase truncate">
-                {campaignData.websiteUrl ? new URL(campaignData.websiteUrl).hostname : 'WEBSITE.COM'}
+                {(() => {
+                  try {
+                    return campaignData.websiteUrl ? new URL(campaignData.websiteUrl).hostname : 'WEBSITE.COM';
+                  } catch (e) {
+                    return campaignData.websiteUrl || 'WEBSITE.COM';
+                  }
+                })()}
               </div>
               <div className="font-bold text-sm text-gray-900 truncate">
                 {campaignData.headline || 'Your Headline Here'}
