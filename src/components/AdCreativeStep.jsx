@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { useAdCampaign } from '../context/AdCampaignContext';
 import { Image as ImageIcon, Link, Type } from 'lucide-react';
+import InfoIcon from './InfoIcon';
 
 const AdCreativeStep = () => {
   const { campaignData, updateField, nextStep, prevStep } = useAdCampaign();
@@ -63,7 +64,7 @@ const AdCreativeStep = () => {
       {/* Ad Setup */}
       <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm space-y-6">
         <div className="flex justify-between items-center">
-           <h3 className="font-semibold text-gray-900">Ad Setup</h3>
+           <h3 className="font-semibold text-gray-900">Ad Setup <InfoIcon contentKey="creativeFormat" /></h3>
            <div className="flex items-center gap-2 text-sm">
              <span className="text-gray-500">Ad Strength:</span>
              <div className="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
@@ -90,7 +91,7 @@ const AdCreativeStep = () => {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
-              <Type size={16} /> Primary Text
+              <Type size={16} /> Primary Text <InfoIcon contentKey="primaryText" />
             </label>
             <textarea
               value={campaignData.primaryText}
@@ -102,7 +103,9 @@ const AdCreativeStep = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Headline</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Headline <InfoIcon contentKey="headline" />
+            </label>
             <input
               type="text"
               value={campaignData.headline}
@@ -137,7 +140,9 @@ const AdCreativeStep = () => {
                />
              </div>
              <div>
-               <label className="block text-sm font-medium text-gray-700 mb-1">Call to Action</label>
+               <label className="block text-sm font-medium text-gray-700 mb-1">
+                 Call to Action <InfoIcon contentKey="callToAction" />
+               </label>
                <select
                  value={campaignData.callToAction}
                  onChange={(e) => updateField('callToAction', e.target.value)}

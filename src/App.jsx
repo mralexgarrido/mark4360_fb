@@ -25,15 +25,7 @@ const StepContent = () => {
 };
 
 const PreviewContent = () => {
-  const { currentStep } = useAdCampaign();
-
-  if (currentStep === 3) return null; // Hide preview on review step or show summary?
-  // Actually, on review step we might want to see the ad preview too, but let's stick to the form logic
-  // User might want to see the preview on the right always.
-  // The ReviewStep has its own layout logic (print friendly), but in MainLayout the right panel is hidden on mobile anyway.
-  // Let's keep AdPreview always visible on the right for steps 0-2.
-  // For step 3, maybe we show a static summary or keep the preview.
-
+  // We want the preview to be visible on all steps, including Review (step 3)
   return <AdPreview />;
 };
 
