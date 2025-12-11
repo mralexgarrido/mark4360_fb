@@ -14,7 +14,7 @@ const ProgressBar = () => {
   const { currentStep, goToStep } = useAdCampaign();
 
   return (
-    <div className="w-full bg-white border-b border-gray-200 py-4 px-6 sticky top-0 z-50 shadow-sm">
+    <div className="print:hidden w-full bg-white border-b border-gray-200 py-4 px-6 sticky top-0 z-50 shadow-sm">
       <div className="max-w-4xl mx-auto">
         <div className="relative flex justify-between items-center">
           {/* Background Line */}

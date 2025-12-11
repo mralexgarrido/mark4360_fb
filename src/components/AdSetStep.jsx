@@ -80,7 +80,9 @@ const AdSetStep = () => {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Start Date</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Start Date <InfoIcon contentKey="startDate" />
+                </label>
                 <input
                   type="date"
                   value={campaignData.startDate}
@@ -89,7 +91,9 @@ const AdSetStep = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">End Date</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  End Date <InfoIcon contentKey="endDate" />
+                </label>
                 <input
                   type="date"
                   value={campaignData.endDate}
@@ -158,7 +162,9 @@ const AdSetStep = () => {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Age Range</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Age Range <InfoIcon contentKey="ageRange" />
+              </label>
               <select
                 value={campaignData.ageRange}
                 onChange={(e) => updateField('ageRange', e.target.value)}
@@ -172,7 +178,9 @@ const AdSetStep = () => {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Gender</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Gender <InfoIcon contentKey="gender" />
+              </label>
               <select
                 value={campaignData.gender}
                 onChange={(e) => updateField('gender', e.target.value)}
@@ -186,7 +194,9 @@ const AdSetStep = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Detailed Targeting</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Detailed Targeting <InfoIcon contentKey="detailedTargeting" />
+            </label>
             <textarea
               value={campaignData.detailedTargeting}
               onChange={(e) => updateField('detailedTargeting', e.target.value)}
@@ -194,13 +204,6 @@ const AdSetStep = () => {
               rows={3}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg resize-none"
             />
-            <div className="mt-2 p-3 bg-blue-50 rounded-lg text-sm text-blue-800 flex items-start gap-2">
-              <Info size={16} className="mt-0.5 shrink-0" />
-              <span>
-                <strong>Educational Tip:</strong> Narrowing your audience too much can increase costs.
-                Broader audiences allow the algorithm to find the best people.
-              </span>
-            </div>
           </div>
         </div>
       </div>

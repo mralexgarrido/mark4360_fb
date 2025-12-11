@@ -39,7 +39,9 @@ const AdCreativeStep = () => {
         <h3 className="font-semibold text-gray-900">Identity</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Facebook Page</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Facebook Page <InfoIcon contentKey="facebookPage" />
+            </label>
             <input
               type="text"
               value={campaignData.facebookPage}
@@ -49,7 +51,9 @@ const AdCreativeStep = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Instagram Account</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Instagram Account <InfoIcon contentKey="instagramAccount" />
+            </label>
             <input
               type="text"
               value={campaignData.instagramAccount}
@@ -77,7 +81,7 @@ const AdCreativeStep = () => {
         <div className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
-              <ImageIcon size={16} /> Image URL
+              <ImageIcon size={16} /> Image URL <InfoIcon contentKey="imageUrl" />
             </label>
             <input
               type="url"
@@ -116,7 +120,9 @@ const AdCreativeStep = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Description <span className="text-gray-400 font-normal">(Optional)</span></label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">
+              Description <span className="text-gray-400 font-normal">(Optional)</span> <InfoIcon contentKey="description" />
+            </label>
             <input
               type="text"
               value={campaignData.description}
@@ -129,7 +135,7 @@ const AdCreativeStep = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
              <div>
                <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
-                 <Link size={16} /> Website URL
+                 <Link size={16} /> Website URL <InfoIcon contentKey="websiteUrl" />
                </label>
                <input
                  type="url"
