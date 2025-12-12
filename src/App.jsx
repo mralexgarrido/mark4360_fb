@@ -1,5 +1,6 @@
 import React from 'react';
 import { AdCampaignProvider, useAdCampaign } from './context/AdCampaignContext';
+import { EducationalModalProvider } from './context/EducationalModalContext';
 import MainLayout from './components/MainLayout';
 import CampaignStep from './components/CampaignStep';
 import AdSetStep from './components/AdSetStep';
@@ -31,12 +32,14 @@ const PreviewContent = () => {
 
 function App() {
   return (
-    <AdCampaignProvider>
-      <MainLayout
-        leftPanel={<StepContent />}
-        rightPanel={<PreviewContent />}
-      />
-    </AdCampaignProvider>
+    <EducationalModalProvider>
+      <AdCampaignProvider>
+        <MainLayout
+          leftPanel={<StepContent />}
+          rightPanel={<PreviewContent />}
+        />
+      </AdCampaignProvider>
+    </EducationalModalProvider>
   );
 }
 
