@@ -38,7 +38,7 @@ const ReviewStep = () => {
           <dl className="space-y-2 text-sm">
             <div className="flex justify-between">
               <dt className="text-gray-500">Name</dt>
-              <dd className="font-medium text-gray-900">{campaignData.campaignName}</dd>
+              <dd className="font-medium text-gray-900 text-right">{campaignData.campaignName}</dd>
             </div>
             <div className="flex justify-between">
               <dt className="text-gray-500">Objective</dt>
@@ -47,6 +47,14 @@ const ReviewStep = () => {
             <div className="flex justify-between">
               <dt className="text-gray-500">Buying Type</dt>
               <dd className="font-medium text-gray-900 capitalize">{campaignData.buyingType}</dd>
+            </div>
+            <div className="flex justify-between">
+              <dt className="text-gray-500">Spending Limit</dt>
+              <dd className="font-medium text-gray-900">{campaignData.spendingLimit ? `$${campaignData.spendingLimit}` : 'None'}</dd>
+            </div>
+            <div className="flex justify-between">
+              <dt className="text-gray-500">Special Category</dt>
+              <dd className="font-medium text-gray-900 capitalize">{campaignData.specialCategory}</dd>
             </div>
           </dl>
         </div>
@@ -60,14 +68,67 @@ const ReviewStep = () => {
               <dd className="font-medium text-gray-900">${campaignData.budgetAmount} ({campaignData.budgetType})</dd>
             </div>
             <div className="flex justify-between">
+              <dt className="text-gray-500">Schedule</dt>
+              <dd className="font-medium text-gray-900 text-right">
+                {campaignData.startDate} to {campaignData.endDate || 'Ongoing'}
+              </dd>
+            </div>
+            <div className="flex justify-between">
               <dt className="text-gray-500">Audience</dt>
               <dd className="font-medium text-gray-900">{campaignData.ageRange} • {campaignData.gender}</dd>
             </div>
             <div className="flex justify-between">
               <dt className="text-gray-500">Locations</dt>
-              <dd className="font-medium text-gray-900 truncate max-w-[150px]">{campaignData.locations}</dd>
+              <dd className="font-medium text-gray-900 text-right max-w-[150px] truncate">{campaignData.locations}</dd>
+            </div>
+            <div className="flex justify-between items-start">
+              <dt className="text-gray-500 shrink-0">Targeting</dt>
+              <dd className="font-medium text-gray-900 text-right line-clamp-2">{campaignData.detailedTargeting || 'None'}</dd>
             </div>
           </dl>
+        </div>
+
+        {/* Ad Creative Summary */}
+        <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm md:col-span-2">
+          <h3 className="font-semibold text-gray-900 mb-3 border-b pb-2">Ad Creative Details</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <dl className="space-y-2 text-sm">
+              <div className="flex justify-between">
+                <dt className="text-gray-500">Facebook Page</dt>
+                <dd className="font-medium text-gray-900">{campaignData.facebookPage}</dd>
+              </div>
+              <div className="flex justify-between">
+                <dt className="text-gray-500">Instagram</dt>
+                <dd className="font-medium text-gray-900">{campaignData.instagramAccount || 'None'}</dd>
+              </div>
+              <div className="flex justify-between">
+                <dt className="text-gray-500">Format</dt>
+                <dd className="font-medium text-gray-900 capitalize">{campaignData.adFormat}</dd>
+              </div>
+              <div className="flex justify-between">
+                <dt className="text-gray-500">Call to Action</dt>
+                <dd className="font-medium text-gray-900 capitalize">{campaignData.callToAction.replace('-', ' ')}</dd>
+              </div>
+            </dl>
+            <dl className="space-y-2 text-sm">
+              <div className="flex justify-between">
+                <dt className="text-gray-500">Headline</dt>
+                <dd className="font-medium text-gray-900 text-right truncate max-w-[200px]">{campaignData.headline}</dd>
+              </div>
+              <div className="flex justify-between">
+                <dt className="text-gray-500">Primary Text</dt>
+                <dd className="font-medium text-gray-900 text-right truncate max-w-[200px]">{campaignData.primaryText}</dd>
+              </div>
+              <div className="flex justify-between">
+                <dt className="text-gray-500">Website URL</dt>
+                <dd className="font-medium text-gray-900 text-right truncate max-w-[200px]">{campaignData.websiteUrl}</dd>
+              </div>
+              <div className="flex justify-between">
+                <dt className="text-gray-500">Image URL</dt>
+                <dd className="font-medium text-gray-900 text-right truncate max-w-[200px]">{campaignData.imageUrl}</dd>
+              </div>
+            </dl>
+          </div>
         </div>
       </div>
 
