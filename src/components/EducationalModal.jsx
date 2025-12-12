@@ -45,7 +45,12 @@ const EducationalModal = ({ onClose, title, content }) => {
 
         <div className="p-6 overflow-y-auto max-h-[60vh]">
           <div className="prose prose-blue max-w-none text-gray-700 whitespace-pre-line">
-            {content}
+            {content.split(/(\*\*.*?\*\*)/g).map((part, index) => {
+              if (part.startsWith('**') && part.endsWith('**')) {
+                return <strong key={index}>{part.slice(2, -2)}</strong>;
+              }
+              return part;
+            })}
           </div>
 
           <div className="mt-8 pt-4 border-t border-gray-100">
