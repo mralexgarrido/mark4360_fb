@@ -33,9 +33,12 @@ const CampaignStep = () => {
 
       {/* Campaign Name */}
       <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">
-          Campaign Name <InfoIcon contentKey="campaignName" />
-        </label>
+        <div className="flex items-center">
+          <label className="block text-sm font-medium text-gray-700">
+            Campaign Name
+          </label>
+          <InfoIcon contentKey="campaignName" />
+        </div>
         <input
           type="text"
           value={campaignData.campaignName}
@@ -52,9 +55,12 @@ const CampaignStep = () => {
       {/* Buying Type & Special Category */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
-          <label className="block text-sm font-medium text-gray-700">
-            Buying Type <InfoIcon contentKey="buyingType" />
-          </label>
+          <div className="flex items-center">
+            <label className="block text-sm font-medium text-gray-700">
+              Buying Type
+            </label>
+            <InfoIcon contentKey="buyingType" />
+          </div>
           <div className="relative">
             <select
               value={campaignData.buyingType}
@@ -68,10 +74,13 @@ const CampaignStep = () => {
         </div>
 
         <div className="space-y-2">
-          <label className="block text-sm font-medium text-gray-700">
-            Special Ad Category <InfoIcon contentKey="specialCategory" />
+          <div className="flex items-center">
+            <label className="block text-sm font-medium text-gray-700">
+              Special Ad Category
+            </label>
+            <InfoIcon contentKey="specialCategory" />
             <span className="text-gray-400 font-normal ml-1">(Optional)</span>
-          </label>
+          </div>
           <select
             value={campaignData.specialCategory}
             onChange={(e) => updateField('specialCategory', e.target.value)}
@@ -88,9 +97,12 @@ const CampaignStep = () => {
       {/* Campaign Objective */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <label className="block text-sm font-medium text-gray-700">
-            Campaign Objective <InfoIcon contentKey="campaignObjective" />
-          </label>
+          <div className="flex items-center">
+            <label className="block text-sm font-medium text-gray-700">
+              Campaign Objective
+            </label>
+            <InfoIcon contentKey="campaignObjective" />
+          </div>
           <a href="#" className="text-xs text-blue-600 hover:underline flex items-center gap-1">
             <HelpCircle size={12} /> Help me choose
           </a>
@@ -126,9 +138,12 @@ const CampaignStep = () => {
 
       {/* Spending Limit */}
       <div className="space-y-2 pt-4 border-t border-gray-100">
-        <label className="block text-sm font-medium text-gray-700">
-          Campaign Spending Limit ($) <InfoIcon contentKey="spendingLimit" />
-        </label>
+        <div className="flex items-center">
+          <label className="block text-sm font-medium text-gray-700">
+            Campaign Spending Limit ($)
+          </label>
+          <InfoIcon contentKey="spendingLimit" />
+        </div>
         <input
           type="number"
           value={campaignData.spendingLimit}

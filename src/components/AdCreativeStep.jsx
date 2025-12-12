@@ -39,9 +39,12 @@ const AdCreativeStep = () => {
         <h3 className="font-semibold text-gray-900">Identity</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Facebook Page <InfoIcon contentKey="facebookPage" />
-            </label>
+            <div className="flex items-center mb-1">
+              <label className="block text-sm font-medium text-gray-700">
+                Facebook Page
+              </label>
+              <InfoIcon contentKey="facebookPage" />
+            </div>
             <input
               type="text"
               value={campaignData.facebookPage}
@@ -51,9 +54,12 @@ const AdCreativeStep = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Instagram Account <InfoIcon contentKey="instagramAccount" />
-            </label>
+            <div className="flex items-center mb-1">
+              <label className="block text-sm font-medium text-gray-700">
+                Instagram Account
+              </label>
+              <InfoIcon contentKey="instagramAccount" />
+            </div>
             <input
               type="text"
               value={campaignData.instagramAccount}
@@ -68,7 +74,10 @@ const AdCreativeStep = () => {
       {/* Ad Setup */}
       <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm space-y-6">
         <div className="flex justify-between items-center">
-           <h3 className="font-semibold text-gray-900">Ad Setup <InfoIcon contentKey="creativeFormat" /></h3>
+           <div className="flex items-center">
+             <h3 className="font-semibold text-gray-900">Ad Setup</h3>
+             <InfoIcon contentKey="creativeFormat" />
+           </div>
            <div className="flex items-center gap-2 text-sm">
              <span className="text-gray-500">Ad Strength:</span>
              <div className="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
@@ -80,9 +89,12 @@ const AdCreativeStep = () => {
 
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
-              <ImageIcon size={16} /> Image URL <InfoIcon contentKey="imageUrl" />
-            </label>
+            <div className="flex items-center mb-1">
+              <label className="block text-sm font-medium text-gray-700 flex items-center gap-1">
+                <ImageIcon size={16} /> Image URL
+              </label>
+              <InfoIcon contentKey="imageUrl" />
+            </div>
             <input
               type="url"
               value={campaignData.imageUrl}
@@ -94,9 +106,12 @@ const AdCreativeStep = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
-              <Type size={16} /> Primary Text <InfoIcon contentKey="primaryText" />
-            </label>
+            <div className="flex items-center mb-1">
+              <label className="block text-sm font-medium text-gray-700 flex items-center gap-1">
+                <Type size={16} /> Primary Text
+              </label>
+              <InfoIcon contentKey="primaryText" />
+            </div>
             <textarea
               value={campaignData.primaryText}
               onChange={(e) => updateField('primaryText', e.target.value)}
@@ -107,9 +122,12 @@ const AdCreativeStep = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Headline <InfoIcon contentKey="headline" />
-            </label>
+            <div className="flex items-center mb-1">
+              <label className="block text-sm font-medium text-gray-700">
+                Headline
+              </label>
+              <InfoIcon contentKey="headline" />
+            </div>
             <input
               type="text"
               value={campaignData.headline}
@@ -120,9 +138,12 @@ const AdCreativeStep = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Description <span className="text-gray-400 font-normal">(Optional)</span> <InfoIcon contentKey="description" />
-            </label>
+            <div className="flex items-center mb-1">
+              <label className="block text-sm font-medium text-gray-700">
+                Description <span className="text-gray-400 font-normal">(Optional)</span>
+              </label>
+              <InfoIcon contentKey="description" />
+            </div>
             <input
               type="text"
               value={campaignData.description}
@@ -134,9 +155,12 @@ const AdCreativeStep = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
              <div>
-               <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-1">
-                 <Link size={16} /> Website URL <InfoIcon contentKey="websiteUrl" />
-               </label>
+               <div className="flex items-center mb-1">
+                 <label className="block text-sm font-medium text-gray-700 flex items-center gap-1">
+                   <Link size={16} /> Website URL
+                 </label>
+                 <InfoIcon contentKey="websiteUrl" />
+               </div>
                <input
                  type="url"
                  value={campaignData.websiteUrl}
@@ -146,9 +170,12 @@ const AdCreativeStep = () => {
                />
              </div>
              <div>
-               <label className="block text-sm font-medium text-gray-700 mb-1">
-                 Call to Action <InfoIcon contentKey="callToAction" />
-               </label>
+               <div className="flex items-center mb-1">
+                 <label className="block text-sm font-medium text-gray-700">
+                   Call to Action
+                 </label>
+                 <InfoIcon contentKey="callToAction" />
+               </div>
                <select
                  value={campaignData.callToAction}
                  onChange={(e) => updateField('callToAction', e.target.value)}

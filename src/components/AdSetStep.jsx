@@ -80,9 +80,12 @@ const AdSetStep = () => {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Start Date <InfoIcon contentKey="startDate" />
-                </label>
+                <div className="flex items-center mb-1">
+                  <label className="block text-sm font-medium text-gray-700">
+                    Start Date
+                  </label>
+                  <InfoIcon contentKey="startDate" />
+                </div>
                 <input
                   type="date"
                   value={campaignData.startDate}
@@ -91,9 +94,12 @@ const AdSetStep = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  End Date <InfoIcon contentKey="endDate" />
-                </label>
+                <div className="flex items-center mb-1">
+                  <label className="block text-sm font-medium text-gray-700">
+                    End Date
+                  </label>
+                  <InfoIcon contentKey="endDate" />
+                </div>
                 <input
                   type="date"
                   value={campaignData.endDate}
@@ -143,9 +149,12 @@ const AdSetStep = () => {
 
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Locations <InfoIcon contentKey="locations" />
-            </label>
+            <div className="flex items-center mb-1">
+              <label className="block text-sm font-medium text-gray-700">
+                Locations
+              </label>
+              <InfoIcon contentKey="locations" />
+            </div>
             <div className="flex gap-2">
               <div className="flex-1 relative">
                 <MapPin className="absolute left-3 top-2.5 text-gray-400" size={18} />
@@ -162,9 +171,12 @@ const AdSetStep = () => {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Age Range <InfoIcon contentKey="ageRange" />
-              </label>
+              <div className="flex items-center mb-1">
+                <label className="block text-sm font-medium text-gray-700">
+                  Age Range
+                </label>
+                <InfoIcon contentKey="ageRange" />
+              </div>
               <select
                 value={campaignData.ageRange}
                 onChange={(e) => updateField('ageRange', e.target.value)}
@@ -178,9 +190,12 @@ const AdSetStep = () => {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                Gender <InfoIcon contentKey="gender" />
-              </label>
+              <div className="flex items-center mb-1">
+                <label className="block text-sm font-medium text-gray-700">
+                  Gender
+                </label>
+                <InfoIcon contentKey="gender" />
+              </div>
               <select
                 value={campaignData.gender}
                 onChange={(e) => updateField('gender', e.target.value)}
@@ -194,9 +209,12 @@ const AdSetStep = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Detailed Targeting <InfoIcon contentKey="detailedTargeting" />
-            </label>
+            <div className="flex items-center mb-1">
+              <label className="block text-sm font-medium text-gray-700">
+                Detailed Targeting
+              </label>
+              <InfoIcon contentKey="detailedTargeting" />
+            </div>
             <textarea
               value={campaignData.detailedTargeting}
               onChange={(e) => updateField('detailedTargeting', e.target.value)}
