@@ -15,48 +15,59 @@ const ProgressBar = () => {
 
   return (
     <div className="print:hidden w-full bg-white border-b border-gray-200 py-4 px-6 sticky top-0 z-50 shadow-sm">
-      <div className="max-w-4xl mx-auto">
-        <div className="relative flex justify-between items-center">
-          {/* Background Line */}
-          <div className="absolute left-0 top-1/2 w-full h-1 bg-gray-200 -z-10 rounded-full" />
+      <div className="max-w-7xl mx-auto flex items-center justify-between gap-4">
+        {/* Branding */}
+        <h1 className="hidden md:block text-lg font-bold text-gray-800 whitespace-nowrap">
+          MARK 4360 Meta Ads Simulator
+        </h1>
 
-          {/* Active Line (Animated) */}
-          <motion.div
-            className="absolute left-0 top-1/2 h-1 bg-blue-600 -z-10 rounded-full origin-left"
-            initial={{ width: '0%' }}
-            animate={{ width: `${(currentStep / (steps.length - 1)) * 100}%` }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
-          />
+        {/* Progress Steps */}
+        <div className="w-full max-w-3xl mx-auto">
+          <div className="relative flex justify-between items-center">
+            {/* Background Line */}
+            <div className="absolute left-0 top-1/2 w-full h-1 bg-gray-200 -z-10 rounded-full" />
 
-          {steps.map((step) => {
-            const isCompleted = currentStep > step.id;
-            const isActive = currentStep === step.id;
+            {/* Active Line (Animated) */}
+            <motion.div
+              className="absolute left-0 top-1/2 h-1 bg-blue-600 -z-10 rounded-full origin-left"
+              initial={{ width: '0%' }}
+              animate={{ width: `${(currentStep / (steps.length - 1)) * 100}%` }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+            />
 
-            return (
-              <div
-                key={step.id}
-                className="flex flex-col items-center cursor-pointer group"
-                onClick={() => isCompleted && goToStep(step.id)} // Only allow going back to completed steps usually, or allow free nav?
-              >
+            {steps.map((step) => {
+              const isCompleted = currentStep > step.id;
+              const isActive = currentStep === step.id;
+
+              return (
                 <div
-                  className={`w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
-                    isActive
-                      ? 'border-blue-600 bg-white text-blue-600 scale-110'
-                      : isCompleted
-                        ? 'border-blue-600 bg-blue-600 text-white'
-                        : 'border-gray-300 bg-gray-100 text-gray-400'
-                  }`}
+                  key={step.id}
+                  className="flex flex-col items-center cursor-pointer group"
+                  onClick={() => isCompleted && goToStep(step.id)} // Only allow going back to completed steps usually, or allow free nav?
                 >
-                  {isCompleted ? <Check size={16} /> : <span>{step.id + 1}</span>}
+                  <div
+                    className={`w-8 h-8 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
+                      isActive
+                        ? 'border-blue-600 bg-white text-blue-600 scale-110'
+                        : isCompleted
+                          ? 'border-blue-600 bg-blue-600 text-white'
+                          : 'border-gray-300 bg-gray-100 text-gray-400'
+                    }`}
+                  >
+                    {isCompleted ? <Check size={16} /> : <span>{step.id + 1}</span>}
+                  </div>
+                  {/* Increased spacing margin from mt-2 to mt-4 and added bg-white to label to prevent line overlap */}
+                  <span className={`mt-4 px-2 bg-white text-xs font-medium ${isActive ? 'text-blue-600' : 'text-gray-500'}`}>
+                    {step.label}
+                  </span>
                 </div>
-                {/* Increased spacing margin from mt-2 to mt-4 and added bg-white to label to prevent line overlap */}
-                <span className={`mt-4 px-2 bg-white text-xs font-medium ${isActive ? 'text-blue-600' : 'text-gray-500'}`}>
-                  {step.label}
-                </span>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
+
+        {/* Spacer for centering logic if needed, or keeping it strictly left-aligned branding + centered bar */}
+        <div className="hidden md:block w-32 xl:w-64" />
       </div>
     </div>
   );
