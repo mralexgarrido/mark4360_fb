@@ -106,34 +106,46 @@ const AdCreativeStep = () => {
           </div>
 
           <div>
-            <div className="flex items-center mb-1">
-              <label className="block text-sm font-medium text-gray-700 flex items-center gap-1">
-                <Type size={16} /> Primary Text
-              </label>
-              <InfoIcon contentKey="primaryText" />
+            <div className="flex justify-between items-end mb-1">
+              <div className="flex items-center">
+                <label htmlFor="primaryText" className="block text-sm font-medium text-gray-700 flex items-center gap-1">
+                  <Type size={16} /> Primary Text
+                </label>
+                <InfoIcon contentKey="primaryText" />
+              </div>
+              <span className={`text-xs ${campaignData.primaryText?.length > 20 ? 'text-green-600 font-medium' : 'text-gray-400'}`}>
+                {campaignData.primaryText?.length || 0} / 20+ chars
+              </span>
             </div>
             <textarea
+              id="primaryText"
               value={campaignData.primaryText}
               onChange={(e) => updateField('primaryText', e.target.value)}
               rows={3}
               placeholder="Tell people what your ad is about..."
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg resize-none"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
             />
           </div>
 
           <div>
-            <div className="flex items-center mb-1">
-              <label className="block text-sm font-medium text-gray-700">
-                Headline
-              </label>
-              <InfoIcon contentKey="headline" />
+            <div className="flex justify-between items-end mb-1">
+              <div className="flex items-center">
+                <label htmlFor="headline" className="block text-sm font-medium text-gray-700">
+                  Headline
+                </label>
+                <InfoIcon contentKey="headline" />
+              </div>
+              <span className={`text-xs ${campaignData.headline?.length > 5 ? 'text-green-600 font-medium' : 'text-gray-400'}`}>
+                {campaignData.headline?.length || 0} / 5+ chars
+              </span>
             </div>
             <input
+              id="headline"
               type="text"
               value={campaignData.headline}
               onChange={(e) => updateField('headline', e.target.value)}
               placeholder="Write a short headline"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
             />
           </div>
 
