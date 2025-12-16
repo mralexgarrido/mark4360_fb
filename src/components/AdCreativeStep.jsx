@@ -40,12 +40,13 @@ const AdCreativeStep = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <div className="flex items-center mb-1">
-              <label className="block text-sm font-medium text-gray-700">
+              <label htmlFor="facebookPage" className="block text-sm font-medium text-gray-700">
                 Facebook Page
               </label>
               <InfoIcon contentKey="facebookPage" />
             </div>
             <input
+              id="facebookPage"
               type="text"
               value={campaignData.facebookPage}
               onChange={(e) => updateField('facebookPage', e.target.value)}
@@ -55,12 +56,13 @@ const AdCreativeStep = () => {
           </div>
           <div>
             <div className="flex items-center mb-1">
-              <label className="block text-sm font-medium text-gray-700">
+              <label htmlFor="instagramAccount" className="block text-sm font-medium text-gray-700">
                 Instagram Account
               </label>
               <InfoIcon contentKey="instagramAccount" />
             </div>
             <input
+              id="instagramAccount"
               type="text"
               value={campaignData.instagramAccount}
               onChange={(e) => updateField('instagramAccount', e.target.value)}
@@ -89,13 +91,19 @@ const AdCreativeStep = () => {
 
         <div className="space-y-4">
           <div>
-            <div className="flex items-center mb-1">
-              <label className="block text-sm font-medium text-gray-700 flex items-center gap-1">
-                <ImageIcon size={16} /> Image URL
-              </label>
-              <InfoIcon contentKey="imageUrl" />
+            <div className="flex justify-between items-end mb-1">
+              <div className="flex items-center">
+                <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700 flex items-center gap-1">
+                  <ImageIcon size={16} /> Image URL
+                </label>
+                <InfoIcon contentKey="imageUrl" />
+              </div>
+              <span className={`text-xs ${campaignData.imageUrl ? 'text-green-600 font-medium' : 'text-gray-400'}`}>
+                {campaignData.imageUrl ? 'Image added (+25%)' : 'Required for Ad Strength'}
+              </span>
             </div>
             <input
+              id="imageUrl"
               type="url"
               value={campaignData.imageUrl}
               onChange={(e) => updateField('imageUrl', e.target.value)}
@@ -151,12 +159,13 @@ const AdCreativeStep = () => {
 
           <div>
             <div className="flex items-center mb-1">
-              <label className="block text-sm font-medium text-gray-700">
+              <label htmlFor="description" className="block text-sm font-medium text-gray-700">
                 Description <span className="text-gray-400 font-normal">(Optional)</span>
               </label>
               <InfoIcon contentKey="description" />
             </div>
             <input
+              id="description"
               type="text"
               value={campaignData.description}
               onChange={(e) => updateField('description', e.target.value)}
@@ -167,13 +176,19 @@ const AdCreativeStep = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
              <div>
-               <div className="flex items-center mb-1">
-                 <label className="block text-sm font-medium text-gray-700 flex items-center gap-1">
-                   <Link size={16} /> Website URL
-                 </label>
-                 <InfoIcon contentKey="websiteUrl" />
+               <div className="flex justify-between items-end mb-1">
+                 <div className="flex items-center">
+                   <label htmlFor="websiteUrl" className="block text-sm font-medium text-gray-700 flex items-center gap-1">
+                     <Link size={16} /> Website URL
+                   </label>
+                   <InfoIcon contentKey="websiteUrl" />
+                 </div>
+                 <span className={`text-xs ${campaignData.websiteUrl ? 'text-green-600 font-medium' : 'text-gray-400'}`}>
+                   {campaignData.websiteUrl ? 'Link added (+25%)' : 'Required'}
+                 </span>
                </div>
                <input
+                 id="websiteUrl"
                  type="url"
                  value={campaignData.websiteUrl}
                  onChange={(e) => updateField('websiteUrl', e.target.value)}
@@ -183,12 +198,13 @@ const AdCreativeStep = () => {
              </div>
              <div>
                <div className="flex items-center mb-1">
-                 <label className="block text-sm font-medium text-gray-700">
+                 <label htmlFor="callToAction" className="block text-sm font-medium text-gray-700">
                    Call to Action
                  </label>
                  <InfoIcon contentKey="callToAction" />
                </div>
                <select
+                 id="callToAction"
                  value={campaignData.callToAction}
                  onChange={(e) => updateField('callToAction', e.target.value)}
                  className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white"

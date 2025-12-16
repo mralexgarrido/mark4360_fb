@@ -34,12 +34,13 @@ const CampaignStep = () => {
       {/* Campaign Name */}
       <div className="space-y-2">
         <div className="flex items-center">
-          <label className="block text-sm font-medium text-gray-700">
+          <label htmlFor="campaignName" className="block text-sm font-medium text-gray-700">
             Campaign Name
           </label>
           <InfoIcon contentKey="campaignName" />
         </div>
         <input
+          id="campaignName"
           type="text"
           value={campaignData.campaignName}
           onChange={(e) => updateField('campaignName', e.target.value)}
@@ -56,13 +57,14 @@ const CampaignStep = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
           <div className="flex items-center">
-            <label className="block text-sm font-medium text-gray-700">
+            <label htmlFor="buyingType" className="block text-sm font-medium text-gray-700">
               Buying Type
             </label>
             <InfoIcon contentKey="buyingType" />
           </div>
           <div className="relative">
             <select
+              id="buyingType"
               value={campaignData.buyingType}
               onChange={(e) => updateField('buyingType', e.target.value)}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg appearance-none bg-white focus:ring-2 focus:ring-blue-500 outline-none"
@@ -75,13 +77,14 @@ const CampaignStep = () => {
 
         <div className="space-y-2">
           <div className="flex items-center">
-            <label className="block text-sm font-medium text-gray-700">
+            <label htmlFor="specialCategory" className="block text-sm font-medium text-gray-700">
               Special Ad Category
             </label>
             <InfoIcon contentKey="specialCategory" />
             <span className="text-gray-400 font-normal ml-1">(Optional)</span>
           </div>
           <select
+            id="specialCategory"
             value={campaignData.specialCategory}
             onChange={(e) => updateField('specialCategory', e.target.value)}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 outline-none"
@@ -139,12 +142,13 @@ const CampaignStep = () => {
       {/* Spending Limit */}
       <div className="space-y-2 pt-4 border-t border-gray-100">
         <div className="flex items-center">
-          <label className="block text-sm font-medium text-gray-700">
+          <label htmlFor="spendingLimit" className="block text-sm font-medium text-gray-700">
             Campaign Spending Limit ($)
           </label>
           <InfoIcon contentKey="spendingLimit" />
         </div>
         <input
+          id="spendingLimit"
           type="number"
           value={campaignData.spendingLimit}
           onChange={(e) => updateField('spendingLimit', e.target.value)}
