@@ -55,8 +55,9 @@ const AdSetStep = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Budget Type</label>
+              <label htmlFor="budgetType" className="block text-sm font-medium text-gray-700 mb-1">Budget Type</label>
               <select
+                id="budgetType"
                 value={campaignData.budgetType}
                 onChange={(e) => updateField('budgetType', e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white"
@@ -67,8 +68,9 @@ const AdSetStep = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Amount ($)</label>
+              <label htmlFor="budgetAmount" className="block text-sm font-medium text-gray-700 mb-1">Amount ($)</label>
               <input
+                id="budgetAmount"
                 type="number"
                 value={campaignData.budgetAmount}
                 onChange={(e) => updateField('budgetAmount', e.target.value)}
@@ -81,12 +83,13 @@ const AdSetStep = () => {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <div className="flex items-center mb-1">
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="startDate" className="block text-sm font-medium text-gray-700">
                     Start Date
                   </label>
                   <InfoIcon contentKey="startDate" />
                 </div>
                 <input
+                  id="startDate"
                   type="date"
                   value={campaignData.startDate}
                   onChange={(e) => updateField('startDate', e.target.value)}
@@ -95,12 +98,13 @@ const AdSetStep = () => {
               </div>
               <div>
                 <div className="flex items-center mb-1">
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="endDate" className="block text-sm font-medium text-gray-700">
                     End Date
                   </label>
                   <InfoIcon contentKey="endDate" />
                 </div>
                 <input
+                  id="endDate"
                   type="date"
                   value={campaignData.endDate}
                   onChange={(e) => updateField('endDate', e.target.value)}
@@ -150,7 +154,7 @@ const AdSetStep = () => {
         <div className="space-y-4">
           <div>
             <div className="flex items-center mb-1">
-              <label className="block text-sm font-medium text-gray-700">
+              <label htmlFor="locations" className="block text-sm font-medium text-gray-700">
                 Locations
               </label>
               <InfoIcon contentKey="locations" />
@@ -159,6 +163,7 @@ const AdSetStep = () => {
               <div className="flex-1 relative">
                 <MapPin className="absolute left-3 top-2.5 text-gray-400" size={18} />
                 <input
+                  id="locations"
                   type="text"
                   value={campaignData.locations}
                   onChange={(e) => updateField('locations', e.target.value)}
@@ -172,12 +177,13 @@ const AdSetStep = () => {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <div className="flex items-center mb-1">
-                <label className="block text-sm font-medium text-gray-700">
+                <label htmlFor="ageRange" className="block text-sm font-medium text-gray-700">
                   Age Range
                 </label>
                 <InfoIcon contentKey="ageRange" />
               </div>
               <select
+                id="ageRange"
                 value={campaignData.ageRange}
                 onChange={(e) => updateField('ageRange', e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white"
@@ -191,12 +197,13 @@ const AdSetStep = () => {
             </div>
             <div>
               <div className="flex items-center mb-1">
-                <label className="block text-sm font-medium text-gray-700">
+                <label htmlFor="gender" className="block text-sm font-medium text-gray-700">
                   Gender
                 </label>
                 <InfoIcon contentKey="gender" />
               </div>
               <select
+                id="gender"
                 value={campaignData.gender}
                 onChange={(e) => updateField('gender', e.target.value)}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white"
@@ -210,12 +217,13 @@ const AdSetStep = () => {
 
           <div>
             <div className="flex items-center mb-1">
-              <label className="block text-sm font-medium text-gray-700">
+              <label htmlFor="detailedTargeting" className="block text-sm font-medium text-gray-700">
                 Detailed Targeting
               </label>
               <InfoIcon contentKey="detailedTargeting" />
             </div>
             <textarea
+              id="detailedTargeting"
               value={campaignData.detailedTargeting}
               onChange={(e) => updateField('detailedTargeting', e.target.value)}
               placeholder="Add demographics, interests, or behaviors..."
