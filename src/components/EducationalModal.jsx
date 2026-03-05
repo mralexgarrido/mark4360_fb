@@ -1,7 +1,6 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
-import { motion } from 'framer-motion';
 
 const EducationalModal = ({ onClose, title, content }) => {
   const handleBackdropClick = (e) => {
@@ -19,19 +18,13 @@ const EducationalModal = ({ onClose, title, content }) => {
   };
 
   return createPortal(
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm"
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200"
       onClick={handleBackdropClick}
     >
-      <motion.div
-        initial={{ opacity: 0, scale: 0.95 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.95 }}
+      <div
         onClick={handleContentClick}
-        className="bg-white rounded-xl shadow-xl max-w-lg w-full overflow-hidden"
+        className="bg-white rounded-xl shadow-xl max-w-lg w-full overflow-hidden animate-in zoom-in-95 duration-200"
       >
         <div className="bg-blue-600 p-6 flex justify-between items-start">
           <h3 className="text-xl font-bold text-white pr-8">{title}</h3>
@@ -65,8 +58,8 @@ const EducationalModal = ({ onClose, title, content }) => {
             </div>
           </div>
         </div>
-      </motion.div>
-    </motion.div>,
+      </div>
+    </div>,
     document.body
   );
 };

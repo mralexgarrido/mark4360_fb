@@ -4,6 +4,7 @@ import { educationalContent } from '../data/educationalContent';
 
 const EducationalModalContext = createContext();
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useEducationalModal = () => {
   const context = useContext(EducationalModalContext);
   if (!context) {

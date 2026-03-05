@@ -113,7 +113,7 @@ const AdPreview = () => {
                 {(() => {
                   try {
                     return campaignData.websiteUrl ? new URL(campaignData.websiteUrl).hostname : 'WEBSITE.COM';
-                  } catch (e) {
+                  } catch {
                     return campaignData.websiteUrl || 'WEBSITE.COM';
                   }
                 })()}
