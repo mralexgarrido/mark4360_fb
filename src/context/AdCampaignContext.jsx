@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const AdCampaignContext = createContext();
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useAdCampaign = () => {
   const context = useContext(AdCampaignContext);
   if (!context) {

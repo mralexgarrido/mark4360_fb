@@ -1,5 +1,4 @@
 import React from 'react';
-import { useAdCampaign } from '../context/AdCampaignContext';
 import ProgressBar from './ProgressBar';
 
 const MainLayout = ({ leftPanel, rightPanel }) => {

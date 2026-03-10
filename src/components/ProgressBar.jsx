@@ -1,6 +1,5 @@
 import React from 'react';
 import { useAdCampaign } from '../context/AdCampaignContext';
-import { motion } from 'framer-motion';
 import { Check } from 'lucide-react';
 
 const steps = [
@@ -28,11 +27,9 @@ const ProgressBar = () => {
             <div className="absolute left-0 top-1/2 w-full h-1 bg-gray-200 -z-10 rounded-full" />
 
             {/* Active Line (Animated) */}
-            <motion.div
-              className="absolute left-0 top-1/2 h-1 bg-blue-600 -z-10 rounded-full origin-left"
-              initial={{ width: '0%' }}
-              animate={{ width: `${(currentStep / (steps.length - 1)) * 100}%` }}
-              transition={{ duration: 0.5, ease: "easeInOut" }}
+            <div
+              className="absolute left-0 top-1/2 h-1 bg-blue-600 -z-10 rounded-full origin-left transition-all duration-500 ease-in-out"
+              style={{ width: `${(currentStep / (steps.length - 1)) * 100}%` }}
             />
 
             {steps.map((step) => {

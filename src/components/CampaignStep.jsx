@@ -1,7 +1,6 @@
 import React from 'react';
 import { useAdCampaign } from '../context/AdCampaignContext';
 import { Target, TrendingUp, MessageCircle, Users, Download, ShoppingBag, HelpCircle, Info } from 'lucide-react';
-import { motion } from 'framer-motion';
 import InfoIcon from './InfoIcon';
 
 const objectives = [
@@ -117,12 +116,10 @@ const CampaignStep = () => {
             const isSelected = campaignData.campaignObjective === obj.id;
 
             return (
-              <motion.div
+              <div
                 key={obj.id}
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
                 onClick={() => updateField('campaignObjective', obj.id)}
-                className={`cursor-pointer p-4 rounded-xl border-2 transition-all ${
+                className={`cursor-pointer p-4 rounded-xl border-2 transition-transform transform hover:scale-[1.02] active:scale-[0.98] ${
                   isSelected
                     ? 'border-blue-500 bg-blue-50 shadow-md ring-1 ring-blue-500'
                     : 'border-gray-200 hover:border-blue-200 hover:bg-gray-50'
@@ -133,7 +130,7 @@ const CampaignStep = () => {
                 </div>
                 <h3 className={`font-semibold ${isSelected ? 'text-blue-900' : 'text-gray-900'}`}>{obj.label}</h3>
                 <p className="text-xs text-gray-500 mt-1 leading-relaxed">{obj.desc}</p>
-              </motion.div>
+              </div>
             );
           })}
         </div>

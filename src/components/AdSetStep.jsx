@@ -14,7 +14,6 @@ const AdSetStep = () => {
 
     // Generate a curve that shows diminishing returns
     return Array.from({ length: 7 }, (_, i) => {
-      const dayBudget = budget * (1 + i * 0.1);
       return {
         name: `Day ${i + 1}`,
         reach: Math.round(baseReach * (1 + Math.log(i + 1)) * 0.5),
