@@ -1,10 +1,22 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useAdCampaign } from '../context/AdCampaignContext';
-import { Image as ImageIcon, Link, Type } from 'lucide-react';
+import { Image as ImageIcon, Link, Type, Upload } from 'lucide-react';
 import InfoIcon from './InfoIcon';
 
 const AdCreativeStep = () => {
   const { campaignData, updateField, nextStep, prevStep } = useAdCampaign();
+  const [imageMode, setImageMode] = useState('url'); // 'url' or 'upload'
+
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        updateField('imageUrl', reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   // Simple Ad Strength Logic
   const adStrength = useMemo(() => {
@@ -91,26 +103,66 @@ const AdCreativeStep = () => {
 
         <div className="space-y-4">
           <div>
-            <div className="flex justify-between items-end mb-1">
-              <div className="flex items-center">
-                <label htmlFor="imageUrl" className="block text-sm font-medium text-gray-700 flex items-center gap-1">
-                  <ImageIcon size={16} /> Image URL
+            <div className="flex justify-between items-end mb-2">
+              <div className="flex items-center gap-4">
+                <label className="block text-sm font-medium text-gray-700 flex items-center gap-1">
+                  <ImageIcon size={16} /> Ad Media
                 </label>
+                <div className="flex bg-gray-100 rounded-lg p-1">
+                  <button
+                    onClick={() => setImageMode('url')}
+                    className={`px-3 py-1 text-xs font-medium rounded-md transition-colors ${
+                      imageMode === 'url' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500 hover:text-gray-700'
+                    }`}
+                  >
+                    URL
+                  </button>
+                  <button
+                    onClick={() => setImageMode('upload')}
+                    className={`px-3 py-1 text-xs font-medium rounded-md transition-colors ${
+                      imageMode === 'upload' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-500 hover:text-gray-700'
+                    }`}
+                  >
+                    Upload
+                  </button>
+                </div>
                 <InfoIcon contentKey="imageUrl" />
               </div>
               <span className={`text-xs ${campaignData.imageUrl ? 'text-green-600 font-medium' : 'text-gray-400'}`}>
                 {campaignData.imageUrl ? 'Image added (+25%)' : 'Required for Ad Strength'}
               </span>
             </div>
-            <input
-              id="imageUrl"
-              type="url"
-              value={campaignData.imageUrl}
-              onChange={(e) => updateField('imageUrl', e.target.value)}
-              placeholder="https://images.unsplash.com/photo-..."
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg"
-            />
-            <p className="text-xs text-gray-500 mt-1">Paste a URL to an image. Unsplash URLs work great.</p>
+
+            {imageMode === 'url' ? (
+              <div>
+                <input
+                  id="imageUrl"
+                  type="url"
+                  value={campaignData.imageUrl.startsWith('data:') ? '' : campaignData.imageUrl}
+                  onChange={(e) => updateField('imageUrl', e.target.value)}
+                  placeholder="https://images.unsplash.com/photo-..."
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg"
+                />
+                <p className="text-xs text-gray-500 mt-1">Paste a URL to an image. Unsplash URLs work great.</p>
+              </div>
+            ) : (
+              <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-blue-400 transition-colors">
+                <div className="space-y-1 text-center">
+                  <Upload className="mx-auto h-12 w-12 text-gray-400" />
+                  <div className="flex text-sm text-gray-600 justify-center">
+                    <label
+                      htmlFor="file-upload"
+                      className="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-blue-500"
+                    >
+                      <span>Upload a file</span>
+                      <input id="file-upload" name="file-upload" type="file" className="sr-only" accept="image/*" onChange={handleImageUpload} />
+                    </label>
+                    <p className="pl-1">or drag and drop</p>
+                  </div>
+                  <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                </div>
+              </div>
+            )}
           </div>
 
           <div>
