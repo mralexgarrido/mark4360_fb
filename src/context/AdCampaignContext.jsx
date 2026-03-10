@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import localforage from 'localforage';
 
 const AdCampaignContext = createContext();
 
@@ -47,14 +48,30 @@ const initialCampaignState = {
 
 export const AdCampaignProvider = ({ children }) => {
   const [currentStep, setCurrentStep] = useState(0);
-  const [campaignData, setCampaignData] = useState(() => {
-    const saved = localStorage.getItem('fbAdsSimData');
-    return saved ? JSON.parse(saved) : initialCampaignState;
-  });
+  const [campaignData, setCampaignData] = useState(initialCampaignState);
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-    localStorage.setItem('fbAdsSimData', JSON.stringify(campaignData));
-  }, [campaignData]);
+    // Load initial data from localforage
+    localforage.getItem('fbAdsSimData').then((saved) => {
+      if (saved) {
+        setCampaignData(saved);
+      }
+      setIsLoaded(true);
+    }).catch((err) => {
+      console.error('Error loading data from localforage', err);
+      setIsLoaded(true);
+    });
+  }, []);
+
+  useEffect(() => {
+    // Save to localforage on changes, but only after initial load
+    if (isLoaded) {
+      localforage.setItem('fbAdsSimData', campaignData).catch(err => {
+         console.error('Error saving data to localforage', err);
+      });
+    }
+  }, [campaignData, isLoaded]);
 
   const updateField = (field, value) => {
     setCampaignData(prev => ({ ...prev, [field]: value }));
@@ -67,8 +84,12 @@ export const AdCampaignProvider = ({ children }) => {
   const resetCampaign = () => {
     setCampaignData(initialCampaignState);
     setCurrentStep(0);
-    localStorage.removeItem('fbAdsSimData');
+    localforage.removeItem('fbAdsSimData');
   };
+
+  if (!isLoaded) {
+    return null; // Or a loading spinner
+  }
 
   return (
     <AdCampaignContext.Provider value={{
