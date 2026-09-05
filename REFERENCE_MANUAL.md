@@ -1,108 +1,47 @@
-# Facebook Ads Simulator - Reference Manual
+# Facebook Ads Simulator: user guide
 
-**Version:** 2.0
-**Course:** MARK 4360: Social Media & eMarketing
-**Target Audience:** Marketing Students & Instructors
+This guide describes the teaching workflow in the current React application. It is not a Meta platform-policy reference or a guarantee of current Ads Manager interface parity.
 
----
+## 1. Campaign: explain the objective
 
-## 1. Introduction
+Choose a campaign name that communicates the business, objective, and context. Select the objective and campaign-level settings. The learning question is: **What result should this campaign pursue, and why is it appropriate?**
 
-The **Facebook Ads Simulator** is an interactive educational tool designed to simulate the experience of creating a professional advertising campaign on the Meta (Facebook/Instagram) platform.
+Special-category controls are included for classroom discussion. Check official platform guidance before planning an actual regulated-category campaign; a simulator selection is not a compliance check.
 
-Unlike the complex and overwhelming interface of the actual Meta Ads Manager, this simulator provides a streamlined, scaffolded environment. It focuses on the core strategic decisions—Objective, Audience, and Creative—while providing real-time educational feedback and high-fidelity visual previews.
+## 2. Ad set: connect the audience and budget
 
-### Key Goals
-*   **Educational**: Teaches standard industry terminology and strategy via integrated tooltips.
-*   **Realistic**: Generates pixel-perfect previews of how ads appear on mobile and desktop feeds.
-*   **Assessable**: Generates a clean, date-stamped PDF report for students to submit to instructors.
+Plan daily or lifetime budget, dates, locations, and the audience. Use the budget visualization to discuss assumptions, not to quote expected real-world reach or clicks. Explain why the intended audience would care about the offer.
 
----
+## 3. Creative: make the offer understandable
 
-## 2. Core Workflow
+Configure the represented page/account identity, image, primary text, headline, destination, and call to action. Review the ad preview for message clarity and consistency. Preview layouts illustrate the concept; live platforms can render content differently.
 
-The application guides users through a **4-step linear wizard**, mirroring the actual hierarchy of a Meta ad account:
+Use images you have permission to use. An externally hosted image can become unavailable or make a request to its hosting provider. Do not use confidential files or personally identifying student images in demonstrations.
 
-### Step 1: Campaign Level
-*Focus: The "Why" of the advertisement.*
+The strength indicator encourages completeness. It does not independently evaluate conversion potential, legal compliance, brand quality, or campaign performance.
 
-*   **Campaign Name**: Students learn professional naming conventions (e.g., *Client_Objective_Date*).
-*   **Buying Type**: Simulates the choice between 'Auction' (standard) and 'Reach and Frequency'.
-*   **Special Ad Categories**: Highlights restricted categories (Housing, Credit, Employment) to teach compliance.
-*   **Campaign Objective**: The critical decision point. Users choose from 6 objectives (Awareness, Traffic, Engagement, Leads, App Promotion, Sales).
-*   **Spending Limit**: Introduces the concept of campaign-level budget caps.
+## 4. Review: defend the choices
 
-### Step 2: Ad Set Level
-*Focus: The "Who", "When", and "How Much".*
+Check the summary and complete the student-name and strategy fields required by the activity. Explain how the objective, audience, budget, creative, and destination fit together.
 
-*   **Budget & Schedule**:
-    *   **Daily vs. Lifetime Budget**: Explains the difference between pacing methods.
-    *   **Budget Simulator**: An interactive **Area Chart** visualizes estimated reach and clicks based on the entered budget, helping students understand the correlation between spend and results.
-*   **Audience Controls**:
-    *   **Locations**: Geotargeting input.
-    *   **Demographics**: Age and Gender selection.
-    *   **Detailed Targeting**: A free-text area for interests and behaviors, accompanied by tips on not "over-constraining" the audience.
+Use the print control to review the browser's print preview. Choose Save as PDF when available. Submit the resulting file through the instructor's designated channel; the application does not upload it to a course system.
 
-### Step 3: Ad Creative Level
-*Focus: The "What" (Visuals and Copy).*
+The printed date is generated from the browser. It is a convenience, not verified evidence of when the work was completed.
 
-*   **Identity**: Configuration of the Facebook Page and Instagram Account representation.
-*   **Ad Setup**:
-    *   **Image URL**: Accepts external image links (supports Unsplash for easy testing).
-    *   **Primary Text**: The main copy appearing above (FB) or below (IG) the creative.
-    *   **Headline**: The bold text next to the call-to-action.
-    *   **Website URL**: The destination landing page.
-    *   **Call to Action (CTA)**: Dropdown of standard buttons (e.g., Learn More, Shop Now).
-*   **Ad Strength Meter**: A gamified "health bar" that updates in real-time (Poor/Good/Excellent) to encourage students to complete all fields for maximum effectiveness.
+## Saved work and reset
 
-### Step 4: Review & Submit
-*Focus: Reflection and Submission.*
+Campaign changes are persisted in the current browser using localForage after the initial saved-state load. Data is associated with this site and browser, with no cross-device account sync. Persistence can fail if browser storage is unavailable or restricted.
 
-*   **Summary Cards**: A read-only overview of all choices made in previous steps.
-*   **Strategy Rationale**: A dedicated section for students to explain *why* they made their choices, connecting theory to practice.
-    *   *Student Name*: For grading identification.
-    *   *Strategic Reasoning*: Text area for justification.
-*   **Date Stamp**: Automatically generates the current date to verify timely submission.
+Keep a printed/exported copy of work that matters. The finish/reset action asks for confirmation and resets the campaign. Clearing browser site data also removes the local draft. On shared computers, reset the exercise after saving the submission elsewhere.
 
----
+## Suggested reflection questions
 
-## 3. Key Features
+- Which audience need connects the objective to the offer?
+- What assumption would you test first with real campaign data?
+- What would you change if the budget were halved?
 
-### 📱 Real-Time Live Preview
-The simulator features a persistent "Right Panel" that updates instantly as the user types.
-*   **Platform Toggle**: Switch between **Facebook** and **Instagram** views to see how the same creative adapts to different platforms.
-*   **Device Toggle**: Switch between **Mobile** and **Desktop** layouts.
-*   **High Fidelity**: Mimics fonts, colors, spacing, and UI elements (like the "Sponsored" tag and "Like/Comment/Share" buttons) of the actual platforms.
+These are suggested instructional prompts, not an automated grade or an official course requirement.
 
-### 🎓 Educational Info Icons
-Every input field is paired with a blue **Info Icon (`i`)**.
-*   **Contextual Learning**: Clicking an icon opens a modal with a concise, professional definition of the term (e.g., defining "Lookalike Audiences" or "Auction Buying").
-*   **Marketing Best Practices**: Tooltips include tips, such as "Ensure your image has less than 20% text" or "Narrowing your audience too much can increase costs."
+## Troubleshooting
 
-### 🖨️ Optimized Print/PDF Mode
-The "Review" step is specifically engineered for submission.
-*   **Clean Layout**: When `Print / Save PDF` is clicked, the app applies a special CSS print stylesheet.
-*   **Automatic Hiding**: Navigation bars, progress steps, and non-essential UI elements (like the "Back" button) are hidden.
-*   **Date Verification**: A "Date Generated" timestamp appears in the top right corner of the printed document.
-*   **WYSIWYG**: The Student Rationale and the Ad Preview are preserved, allowing instructors to grade both the strategy and the creative execution.
-
----
-
-## 4. Technical Specifications
-
-*   **Framework**: React 19
-*   **Build Tool**: Vite
-*   **Styling**: Tailwind CSS v4 (Utility-first styling)
-*   **Animations**: Framer Motion (Smooth page transitions and modal effects)
-*   **Charts**: Recharts (Budget simulation visualization)
-*   **Icons**: Lucide React
-*   **Architecture**:
-    *   `AdCampaignContext`: Centralized state management for the wizard data.
-    *   `docs/`: Production build output directory, configured for zero-config deployment to **GitHub Pages**.
-
-## 5. Deployment Guide
-
-The project is pre-configured for deployment to GitHub Pages.
-
-1.  **Build**: Run `npm run build`. This generates the static application in the `docs/` folder.
-2.  **Deploy**: Push the code to a GitHub repository. Enable GitHub Pages in the repository settings and select the `docs` folder as the source.
+If saved work does not return, confirm that you are using the same site, browser, and profile and that site storage is allowed. If the page or image fails to load, record the browser and step and check the image URL without sharing private data. For deployment and build issues, use [MAINTAINING.md](MAINTAINING.md).
