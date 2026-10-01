@@ -1,0 +1,12 @@
+import { getObjective, destinationLabels, categoryLabels, ctaLabels } from '../data/platformOptions';
+import { budgetSummary, selectedPlacements, trackedUrl } from '../lib/campaign';
+function Details({ title, items }) { return <section className="summary-card"><h3>{title}</h3><dl>{items.map(([label,value]) => <div key={label}><dt>{label}</dt><dd>{value || 'Not provided'}</dd></div>)}</dl></section>; }
+export default function CampaignSummary({ data }) {
+  return <div className="summary-grid"><Details title="Campaign" items={[
+    ['Name',data.campaignName],['Objective',getObjective(data.campaignObjective)?.label],['Buying type',data.buyingType === 'auction' ? 'Auction' : 'Reach and frequency (restored draft)'],['Special category',categoryLabels[data.specialCategory]],['Spending limit',data.spendingLimit ? `$${data.spendingLimit} USD` : 'No campaign cap'],
+  ]}/><Details title="Ad set" items={[
+    ['Name',data.adSetName],['Conversion location',destinationLabels[data.destination]],['Performance goal',data.performanceGoal],['Budget',budgetSummary(data)],['Starts',`${data.startDate} ${data.startTime} (${data.timezone})`],['Ends',data.endDate || 'Ongoing'],['Locations',data.locations],['Audience type',data.audienceMode],['Age / gender',`${data.ageRange} / ${data.gender}`],['Audience source',data.audienceSource || 'Not applicable'],['Detailed targeting',data.detailedTargeting || 'None specified'],['Placement control',data.placementMode === 'advantage' ? 'Advantage+ placements' : 'Manual placements'],['Placements represented',selectedPlacements(data).map(p => p.label).join(', ')],...(data.destination === 'website' && ['sales','leads'].includes(data.campaignObjective) ? [['Dataset',data.datasetName],['Conversion event',data.conversionEvent]] : []),
+  ]}/><Details title="Ad" items={[
+    ['Name',data.adName],['Facebook Page',data.facebookPage],['Instagram account',data.instagramAccount || 'Page identity fallback'],['Format',data.adFormat === 'carousel' ? 'Carousel' : 'Single image'],['Primary text',data.primaryText],['Headline',data.headline],['Description',data.description],['Call to action',ctaLabels[data.callToAction]],['Media',data.adFormat === 'carousel' ? `${data.carouselCards.length} carousel cards` : data.imageName || (data.imageUrl.startsWith('data:') ? 'Uploaded image' : data.imageUrl)],['Image description',data.imageAlt],...(data.destination === 'website' || data.destination === 'app' ? [['Destination URL',trackedUrl(data)],['URL parameters',data.urlParameters || 'None']] : []),
+  ]}/></div>;
+}

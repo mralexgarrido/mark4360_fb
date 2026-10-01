@@ -8,5 +8,5 @@
 
 ## Pull Request Process
 1. Update the README.md with details of changes if applicable
-2. Update the docs/USAGE.md with any new usage instructions
+2. Update the documentation/USAGE.md with any new usage instructions
 3. The PR will be merged once you have the sign-off of the repository owner

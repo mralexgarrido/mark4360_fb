@@ -1,95 +1,29 @@
+const window = (title, what, consider, platform, prompt) => ({ title, content: { what, consider, platform, prompt } });
 export const educationalContent = {
-  // Campaign Step
-  campaignName: {
-    title: "Campaign Name",
-    content: "Naming your campaign clearly is the first step in organization. In a professional setting, naming conventions often include the Client Name, Objective, Year, and Quarter (e.g., 'Nike_Traffic_Q3_2023'). This makes it easy to search for and analyze campaigns later."
-  },
-  buyingType: {
-    title: "Buying Type",
-    content: "There are two main ways to buy ads on Facebook:\n\n• **Auction**: This is the standard buying type. You bid against other advertisers to reach your audience. The cost varies based on demand and competition.\n\n• **Reach and Frequency**: This allows you to book campaigns in advance with predictable reach and frequency settings. It's often used by large brands for brand awareness campaigns where they want to guarantee a specific number of people see their ad."
-  },
-  spendingLimit: {
-    title: "Campaign Spending Limit",
-    content: "A campaign spending limit is an optional cap on the total amount you want to spend for this specific campaign. It prevents you from accidentally overspending if you have multiple campaigns running simultaneously. Once the limit is reached, all ads in the campaign stop running."
-  },
-  campaignObjective: {
-    title: "Campaign Objective",
-    content: "Your objective determines who Facebook shows your ads to. Their algorithm optimizes for the result you pick.\n\n• **Awareness**: Show your ads to people most likely to remember them.\n• **Traffic**: Send people to a destination, like your website, app, or Instagram event.\n• **Sales**: Find people likely to purchase your product or service.\n\nChoosing the wrong objective is a common mistake. If you want sales, don't choose 'Traffic'—optimize for the actual conversion."
-  },
-  specialCategory: {
-    title: "Special Ad Categories",
-    content: "Ads related to Credit, Employment, Housing, or Social Issues have restricted targeting options to prevent discrimination. For example, you cannot target by age, gender, or zip code for housing ads."
-  },
-
-  // Ad Set Step
-  budget: {
-    title: "Budget Strategy",
-    content: "• **Daily Budget**: The average you'll spend each day. Good for evergreen campaigns that run continuously.\n• **Lifetime Budget**: The maximum you'll spend for the entire duration of the ad set. Good for limited-time promotions. This also unlocks 'Ad Scheduling' (dayparting), allowing you to run ads only at specific times of day."
-  },
-  startDate: {
-    title: "Start Date",
-    content: "Scheduling your ads allows you to control exactly when they go live. For time-sensitive promotions, ensure your start date aligns with your launch. You can schedule ads to start in the future."
-  },
-  endDate: {
-    title: "End Date",
-    content: "Setting an end date is crucial for preventing runaway spend. It ensures your campaign stops automatically after your promotion or budget period ends. If you leave this blank, the ad runs until you manually turn it off or hit your spending limit."
-  },
-  audience: {
-    title: "Audience Definition",
-    content: "This is one of the most powerful features of Facebook Ads.\n\n• **Core Audiences**: Targeting based on demographics (age, gender), location, interests, and behaviors.\n• **Custom Audiences**: Retargeting people who have already engaged with your business (e.g., visited your website, watched a video).\n• **Lookalike Audiences**: New people who share similar characteristics to your best existing customers."
-  },
-  locations: {
-    title: "Locations",
-    content: "You can target people living in or recently in a location. You can be as broad as a country or as specific as a 1-mile radius around a pin drop. This is crucial for local businesses."
-  },
-  ageRange: {
-    title: "Age Range",
-    content: "Targeting the right age group ensures your budget isn't wasted on people unlikely to be interested. Consider your customer persona's typical age demographic. Note: For certain special categories (Housing, Credit, Employment), age targeting is restricted."
-  },
-  gender: {
-    title: "Gender",
-    content: "While many products are gender-neutral, some specific items (like women's apparel or men's grooming) perform better with gender-specific targeting. Always test if excluding a gender lowers your cost per result."
-  },
-  detailedTargeting: {
-    title: "Detailed Targeting",
-    content: "Detailed targeting allows you to reach people based on interests (e.g., 'Yoga'), behaviors (e.g., 'Frequent Travelers'), or demographics. \n\n**Tip:** Avoid narrowing your audience too much. A broader audience often allows the algorithm to find the best people at a lower cost."
-  },
-
-  // Ad Creative Step
-  facebookPage: {
-    title: "Facebook Page",
-    content: "Your Facebook Page is your business's identity on the platform. Ads must run from a verified page, which adds credibility to your advertisement. Users can click through to your page to see your organic posts."
-  },
-  instagramAccount: {
-    title: "Instagram Account",
-    content: "Linking an Instagram account allows you to run ads on Instagram Feed, Stories, and Reels under your brand's handle. If you don't connect one, your Facebook Page name and logo will be used for Instagram placements."
-  },
-  creativeFormat: {
-    title: "Ad Format",
-    content: "Different formats serve different storytelling needs.\n\n• **Single Image**: Simple and effective. Focuses on one strong visual.\n• **Carousel**: Allows you to showcase up to 10 images or videos, each with its own link. Great for showing multiple products or telling a step-by-step story.\n• **Video**: generally has higher engagement rates. Short, vertical videos (Reels) are currently very effective."
-  },
-  imageUrl: {
-    title: "Ad Image",
-    content: "Visuals are the first thing users see. High-quality, relevant images stop the scroll. \n\n**Best Practice:** Ensure your image has less than 20% text. Facebook's algorithm penalizes images with too much text, reducing your reach."
-  },
-  primaryText: {
-    title: "Primary Text",
-    content: "This appears above the image on Facebook and below it on Instagram. The first sentence (the 'hook') is critical. It should address a pain point or grab attention immediately before the text is truncated with 'See More'."
-  },
-  headline: {
-    title: "Headline",
-    content: "On Facebook, this appears in bold next to the CTA button. It should be short, punchy, and reinforce the main offer or benefit (e.g., '50% Off - This Week Only')."
-  },
-  description: {
-    title: "Description",
-    content: "The description appears below the headline in some placements (like Desktop News Feed). Use it to provide secondary details, social proof, or urgency (e.g., 'Over 10,000 satisfied customers' or 'Offer ends midnight')."
-  },
-  websiteUrl: {
-    title: "Website URL",
-    content: "This is the destination where users land after clicking. Ensure it is mobile-optimized and relevant to the ad content. Sending users to a specific product page usually converts better than sending them to your homepage."
-  },
-  callToAction: {
-    title: "Call To Action (CTA)",
-    content: "The button on your ad. Ads with a clear CTA perform significantly better than those without. 'Learn More' is often the best performing soft CTA, while 'Shop Now' is better for direct intent."
-  }
+  hierarchy: window('Campaign, ad set, and ad', 'The campaign sets the objective. The ad set defines delivery settings. The ad contains identity, media, copy, and destination.', 'A change at the campaign level can affect the choices available below it. Name each level so another person can understand the structure.', 'A real account can have multiple ad sets and multiple ads. This exercise follows one campaign, one ad set, and one ad.', 'Explain how the three levels work together in your campaign.'),
+  campaignName: window('Campaign name', 'A descriptive internal name helps you organize campaigns. It does not appear in the ad.', 'Consider a convention such as Business_Objective_Period. Choose a name that you could recognize months later.', 'Campaign, ad set, and ad names are separate internal labels.', 'What does your naming convention communicate?'),
+  campaignObjective: window('Campaign objective', 'The objective tells the delivery system the type of result to pursue. It is separate from the business goal you explain to your instructor.', 'Awareness, Traffic, Engagement, Leads, App promotion, and Sales represent different actions. Start with what you want people to do.', 'Conversion locations and performance goals depend on the objective. This practice workspace offers a simplified selection of manual setup paths. Availability in a real account can vary.', 'Why does this objective support your business goal?'),
+  buyingType: window('Buying type', 'Auction buying competes for available advertising opportunities. Reservation buying involves a different planning and eligibility workflow.', 'This exercise focuses on manual auction setup. It does not model a reservation plan or the auction algorithm.', 'Buying options depend on the account, objective, and available platform features. A restored older draft may retain its historical buying-type label.'),
+  specialCategory: window('Special ad categories', 'Some categories require additional declarations and limits on targeting.', 'Identify whether your offer concerns housing, employment, or financial products and services. Avoid assuming that every demographic option remains available.', 'This exercise broadens age and gender controls for these categories. It is a simplified classroom model; actual rules depend on category and jurisdiction.', 'How does your category affect the targeting choices you can make?'),
+  spendingLimit: window('Campaign spending limit', 'An optional campaign-wide cap is separate from an ad set daily or lifetime budget.', 'Compare the cap with the planned schedule and budget. A cap can stop spending before the planned schedule ends.', 'Daily budgets represent an average. This app shows planning arithmetic and does not forecast delivery or spending fluctuations.'),
+  destination: window('Conversion location', 'This setting identifies where the desired action happens, such as your website, a messaging app, an instant form, or an app.', 'The location should allow the action you intend to measure. An instant form can collect an inquiry inside the platform; a website destination sends someone elsewhere.', 'Available combinations depend on the objective. This app never connects to a website dataset or collects actual leads.', 'Where will the desired action happen, and why?'),
+  performanceGoal: window('Performance goal', 'The performance goal specifies the result the delivery system attempts to maximize within the selected objective.', 'Clicks, landing page views, conversations, leads, purchases, and app installs describe different actions. Choose what you intend to measure.', 'Selecting a goal does not guarantee results. Some goals require tracking setup, sufficient data, or account eligibility.', 'What observable action would count as success?'),
+  datasetName: window('Dataset and conversion event', 'A website dataset can receive events used for measurement and conversion optimization. The event names the action you want recorded.', 'Distinguish an observed page view, a submitted lead, and a completed purchase. Name the dataset and choose the event you would configure.', 'Meta Pixel and other event tools require real implementation outside this simulator. The label here is a planning field, not a connection test.'),
+  budget: window('Daily and lifetime budgets', 'A daily budget is an average daily allocation. A lifetime budget is an allocation across a scheduled period.', 'Relate the amount to your business goal, duration, and resources. Explain the assumptions behind your allocation.', 'The schedule summary uses calendar-day arithmetic. It is not a delivery forecast, and daily spending can vary on the real platform.', 'Why is this budget and schedule appropriate for your plan?'),
+  schedule: window('Schedule and account time zone', 'The start date and time identify when the ad set should begin. A lifetime budget requires an end date in this exercise.', 'Check that the promotion, destination, and staffing will be ready. Pay attention to account time zone rather than assuming it matches your location.', 'The real platform accounts for scheduling, review, and account configuration. This practice workspace records the selected settings without delivering ads.'),
+  audience: window('Audience controls', 'Audience settings describe the people eligible for delivery or the source of an existing audience.', 'Explain the connection between audience needs and your offer. Demographics and interests are planning choices, not proof that someone will respond.', 'This exercise records your targeting plan. It does not query Meta interests, population sizes, or an audience database.', 'Why would this audience care about your offer?'),
+  audienceSource: window('Custom and lookalike audiences', 'A custom audience starts with an existing relationship or interaction. A lookalike audience uses a source to find similar people.', 'Describe a legitimate source and the relevant relationship, such as previous inquiries or page engagement. Do not upload customer records for this exercise.', 'Real audiences require access, permission, eligible sources, and platform processing. The description here does not create an audience.'),
+  placements: window('Placements', 'Placements are the surfaces where an ad can appear. This workspace previews Facebook and Instagram Feed and Stories.', 'Inspect how the same asset fits different layouts. Check text readability, cropping, and whether the CTA remains understandable.', 'Advantage+ placements let the system choose among eligible surfaces. Manual placements let you select them. Real platform options extend beyond the four previews shown here.', 'Why did you select these placements?'),
+  identity: window('Ad identity', 'The Page or account name tells people who is advertising. It differs from your internal campaign and ad names.', 'Use a consistent business identity. Review how it appears on Facebook and Instagram.', 'Real advertising requires appropriate Page/account access. Entering names here does not connect or verify an account.'),
+  creativeFormat: window('Creative format', 'A single image presents one visual. A carousel presents a sequence of cards with individual headlines and destinations.', 'Choose a format that communicates your offer. For a carousel, consider the order and purpose of each card.', 'This exercise supports single images and 2–10 carousel cards. Video, Reels, and other advanced formats require separate production considerations. Placement rendering can differ.'),
+  imageUrl: window('Ad media', 'The visual communicates the offer before someone reads all the copy.', 'Upload your own image or use a permitted image URL. Preview cropping and check that essential text remains legible. Describe the image for accessibility.', 'Uploads stay in this browser. External URLs load from their provider and may become unavailable. No fixed image-text percentage is scored in this exercise.'),
+  primaryText: window('Primary text', 'Primary text explains the offer and appears in different positions across placements.', 'Make the opening understandable. Consider what the audience needs to know before taking action. Inspect the placement preview for truncation.', 'Character counts here are descriptive. They do not measure persuasion or predict performance.', 'Why did you choose this message for this audience?'),
+  headline: window('Headline and description', 'The headline emphasizes the offer or action. Some placements also show a description.', 'Review whether your headline, primary text, image, and destination communicate the same offer.', 'Different placements display different fields. A field present in setup may not appear everywhere.'),
+  callToAction: window('Call to action', 'The CTA button labels the action someone can take next.', 'Consider what the destination actually allows someone to do. Your instructor evaluates whether the CTA fits your strategy.', 'CTA availability varies by destination and format. On-ad engagement can use no destination button.'),
+  websiteUrl: window('Destination URL and URL parameters', 'The destination is where someone lands. URL parameters can identify the source, campaign, and creative in analytics.', 'Check that the page supports the advertised offer and intended action. Parameters such as utm_source, utm_medium, and utm_campaign help organize measurement.', 'The app validates URL structure but does not visit, audit, or verify the destination. URL parameters do not install tracking.'),
+  instantForm: window('Instant form', 'An instant form collects information inside the platform after someone responds to the ad.', 'Choose the information needed for your business goal and explain why each question is necessary. Include the planned privacy-policy destination.', 'The form here is a non-submitting preview. It records questions and copy without collecting or transmitting answers.'),
+  messages: window('Messaging destination', 'A messaging ad starts a conversation with the business.', 'Write an opening message and consider who will respond. Explain how the conversation relates to the campaign goal.', 'This preview does not connect Messenger or Instagram and cannot send messages.'),
+  app: window('App promotion', 'App promotion connects the ad to an app destination and an install or activity goal.', 'Identify the app, store, and relevant action. Explain how you would measure that action.', 'Real app campaigns require app/account configuration and may use an SDK or event integration. This simulator records the plan only.'),
+  publish: window('Review and publish', 'Publishing sends the configured campaign for platform processing. It is separate from submitting your class assignment.', 'Inspect the full hierarchy, settings, creative, and destination before confirming. Mechanical setup checks do not evaluate effectiveness.', 'A real ad undergoes review and delivery processing. This app records publication in a practice account; it does not approve ads, spend money, or produce results.'),
+  documentation: window('Assignment documentation', 'The assignment packet records your settings, creative, and explanations so your instructor can evaluate them.', 'Explain your objective, audience, budget, creative, placements, and measurement plan in your own words. Follow your instructor’s assignment instructions.', 'Your instructor is the grader. The packet contains no automated score or strategic verdict. Browser timestamps and history are a local record, not verified proof of authorship.'),
 };

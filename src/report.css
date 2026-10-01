@@ -1,0 +1,411 @@
+.assignment-report {
+  font-family:Arial,Helvetica,sans-serif;
+  color:#182437;
+  font-size:14px;
+  line-height:1.5;
+  max-width:1000px;
+  margin:0 auto;
+  padding:30px;
+  overflow-wrap:anywhere;
+}
+.assignment-report * {
+  box-sizing:border-box;
+}
+.assignment-report h1 {
+  font-size:26px;
+  margin:5px 0;
+}
+.assignment-report h2 {
+  font-size:21px;
+  margin:0 0 14px;
+}
+.assignment-report h3 {
+  font-size:16px;
+  margin:0 0 8px;
+}
+.assignment-report p {
+  margin:6px 0 12px;
+  white-space:pre-wrap;
+}
+.assignment-report .eyebrow {
+  font-size:11px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  font-weight:bold;
+  color:#456285;
+}
+.report-header {
+  border-bottom:3px solid #1864d9;
+  padding-bottom:20px;
+  margin-bottom:22px;
+}
+.report-header dl {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin:15px 0;
+}
+.report-header dl>div {
+  display:block;
+}
+.report-header dt {
+  font-size:12px;
+  color:#5a6a80;
+}
+.report-header dd {
+  margin:0;
+  font-weight:bold;
+}
+.report-note {
+  border:1px solid #d2deef;
+  background:#f4f7fc;
+  padding:12px;
+  font-size:12px;
+}
+.assignment-report .summary-grid {
+  display:grid;
+  gap:15px;
+}
+.assignment-report .summary-card {
+  border:1px solid #c9d3df;
+  padding:16px;
+  border-radius:6px;
+}
+.assignment-report .summary-card dl {
+  margin:0;
+}
+.assignment-report .summary-card dl>div {
+  display:grid;
+  grid-template-columns:29% 1fr;
+  gap:12px;
+  margin:0 0 8px;
+  font-size:13px;
+}
+.assignment-report .summary-card dt {
+  color:#53657b;
+}
+.assignment-report .summary-card dd {
+  margin:0;
+  white-space:pre-wrap;
+}
+.report-section {
+  margin-top:28px;
+  border-top:1px solid #cbd6e4;
+  padding-top:20px;
+}
+.report-explanation {
+  margin-bottom:16px;
+}
+.report-explanation p {
+  white-space:pre-wrap;
+}
+.report-preview-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:22px;
+  align-items:start;
+}
+.assignment-report figure {
+  margin:0;
+  break-inside:avoid;
+}
+.assignment-report figcaption {
+  font-size:13px;
+  font-weight:bold;
+  margin-bottom:9px;
+}
+.assignment-report .ad-preview {
+  border:1px solid #c7d0db;
+  background:#fff;
+  border-radius:6px;
+  overflow:hidden;
+  max-width:360px;
+  width:100%;
+  margin:auto;
+}
+.assignment-report .ad-identity {
+  display:flex;
+  gap:8px;
+  align-items:center;
+  padding:11px;
+}
+.assignment-report .identity-avatar {
+  width:30px;
+  height:30px;
+  display:grid;
+  place-items:center;
+  background:#e6eaf1;
+  color:#51627a;
+  border-radius:50%;
+  flex-shrink:0;
+}
+.assignment-report .ad-identity strong {
+  font-size:12px;
+  display:block;
+}
+.assignment-report .ad-identity span {
+  display:flex;
+  font-size:10px;
+  align-items:center;
+  color:#66778e;
+}
+.assignment-report .more-icon {
+  margin-left:auto;
+}
+.assignment-report .ad-copy {
+  padding:0 11px 10px;
+  margin:0;
+  font-size:12px;
+  white-space:pre-wrap;
+}
+.assignment-report .ad-image {
+  aspect-ratio:1/1;
+  background:#eef1f5;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  position:relative;
+  overflow:hidden;
+  font-size:12px;
+}
+.assignment-report .ad-image img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.assignment-report .ad-link {
+  display:flex;
+  gap:10px;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px;
+  background:#f0f2f5;
+}
+.assignment-report .ad-link div {
+  min-width:0;
+}
+.assignment-report .ad-link small,.assignment-report .ad-link strong,.assignment-report .ad-link span {
+  display:block;
+  overflow-wrap:anywhere;
+}
+.assignment-report .ad-link small {
+  font-size:10px;
+  text-transform:uppercase;
+  color:#53657b;
+}
+.assignment-report .ad-link strong {
+  font-size:12px;
+}
+.assignment-report .ad-link div>span {
+  font-size:11px;
+}
+.assignment-report .preview-cta {
+  display:inline-block;
+  flex-shrink:0;
+  padding:7px 10px;
+  border-radius:4px;
+  font-size:11px;
+  background:#dfe5ed;
+  color:#26394f;
+  font-weight:bold;
+}
+.assignment-report .social-actions {
+  display:flex;
+  justify-content:space-around;
+  padding:8px;
+  border-top:1px solid #d7dfe8;
+  font-size:10px;
+  color:#66768d;
+}
+.assignment-report .social-actions span {
+  display:flex;
+  gap:4px;
+  align-items:center;
+}
+.assignment-report .instagram-actions {
+  display:flex;
+  gap:10px;
+  padding:9px;
+}
+.assignment-report .story-preview .ad-image {
+  aspect-ratio:9/16;
+}
+.assignment-report .story-preview {
+  background:#233249;
+  color:white;
+}
+.assignment-report .story-preview .ad-identity span {
+  color:#dee6f2;
+}
+.assignment-report .story-preview .ad-link {
+  background:#233249;
+  justify-content:center;
+}
+.assignment-report .story-preview .ad-link>div {
+  display:none;
+}
+.assignment-report .story-copy {
+  position:absolute;
+  bottom:15px;
+  left:12px;
+  right:12px;
+  padding:11px;
+  background:rgba(8,15,25,.8);
+  color:white;
+  text-align:center;
+}
+.assignment-report .story-copy strong {
+  font-size:14px;
+}
+.assignment-report .story-copy p {
+  font-size:12px;
+  margin:5px 0 0;
+}
+.assignment-report .carousel-controls {
+  font-size:11px;
+  padding:8px;
+  background:#f1f4f8;
+  color:#52647c;
+}
+.report-carousel-card {
+  padding:16px;
+  border:1px solid #c7d0df;
+  margin:0 0 20px!important;
+}
+.report-carousel-card img {
+  width:230px;
+  max-width:100%;
+  height:auto;
+}
+.assignment-report .mock-input {
+  padding:10px;
+  background:#f3f5f8;
+  border:1px solid #c7d0df;
+  margin:7px 0 12px;
+}
+.assignment-report .field label {
+  font-size:13px;
+  font-weight:bold;
+}
+.assignment-report .notice {
+  padding:12px;
+  background:#f2f6fc;
+  border:1px solid #d4dfee;
+  font-size:12px;
+}
+.assignment-report .message-bubble {
+  padding:15px;
+  background:#edf4ff;
+  white-space:pre-wrap;
+}
+.process-record {
+  padding-left:20px;
+}
+.process-record li {
+  margin-bottom:9px;
+}
+.process-record time {
+  display:block;
+  font-size:11px;
+  color:#5a6a80;
+}
+.process-record span {
+  font-size:12px;
+}
+.report-footer {
+  padding-top:20px;
+  margin-top:20px;
+  border-top:1px solid #cbd6e4;
+  font-size:11px;
+  color:#5a6a80;
+}
+.standalone-report {
+  margin:0;
+  background:#fff;
+}
+.standalone-report .report-only {
+  display:block;
+}
+@media(max-width:600px) {
+  .assignment-report {
+    padding:20px;
+  }
+  .report-preview-grid,.report-header dl {
+    grid-template-columns:1fr;
+  }
+  .assignment-report .summary-card dl>div {
+    grid-template-columns:1fr;
+    gap:2px;
+  }
+}
+@media print {
+  @page {
+    size:A4;
+    margin:15mm;
+  }
+  .assignment-report {
+    padding:0;
+    font-size:11px;
+    max-width:none;
+  }
+  .assignment-report h1 {
+    font-size:22px;
+  }
+  .assignment-report h2 {
+    font-size:17px;
+    break-after:avoid;
+  }
+  .assignment-report h3,.assignment-report figcaption {
+    break-after:avoid;
+  }
+  .assignment-report .summary-card dl>div {
+    font-size:11px;
+  }
+  .report-explanation,.report-preview-grid figure,.report-carousel-card {
+    break-inside:avoid;
+  }
+  .report-preview-grid {
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+  }
+  .assignment-report .ad-preview {
+    max-width:270px;
+  }
+  .report-header dl {
+    grid-template-columns:1fr 1fr;
+  }
+  .assignment-report .summary-card dl>div {
+    grid-template-columns:29% 1fr;
+  }
+  .assignment-report * {
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+}
+/* Full story copy flows below the media in assignment packets. */
+.assignment-report .story-preview .ad-image {
+  display:block;
+  aspect-ratio:auto;
+  overflow:visible;
+  min-height:100px;
+}
+.assignment-report .story-preview .ad-image>img {
+  display:block;
+  aspect-ratio:9/16;
+  height:auto;
+  object-fit:cover;
+}
+.assignment-report .story-copy {
+  position:static;
+  margin:0;
+  padding:12px;
+  background:#233249;
+}
+.assignment-report .story-preview .ad-image>span:not([hidden]) {
+  display:block;
+  padding:30px;
+  text-align:center;
+}
+.assignment-report img[hidden] {
+  display:none;
+}

@@ -1,225 +1,32 @@
-import React from 'react';
+import { useState } from 'react';
+import { Printer, Send, FileText, Pause, Play } from 'lucide-react';
 import { useAdCampaign } from '../context/AdCampaignContext';
-import { Printer, CheckCircle, FileText } from 'lucide-react';
-
-const ReviewStep = () => {
-  const { campaignData, updateField, prevStep, resetCampaign } = useAdCampaign();
-
-  const handlePrint = () => {
-    window.print();
-  };
-
-  const handleFinish = () => {
-    if (window.confirm('Are you sure you want to finish and reset the simulator?')) {
-      resetCampaign();
-    }
-  };
-
-  return (
-    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <div>
-        <div className="flex justify-between items-start">
-          <div>
-            <h2 className="text-2xl font-bold text-gray-900">Review & Submit</h2>
-            <p className="text-gray-500 mt-1">Review your campaign details and document your strategy.</p>
-          </div>
-          <div className="text-right hidden print:block">
-            <p className="text-sm text-gray-500">Date Generated</p>
-            <p className="font-medium text-gray-900">{new Date().toLocaleDateString()}</p>
-          </div>
-        </div>
-      </div>
-
-      {/* Summary Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Campaign Summary */}
-        <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
-          <h3 className="font-semibold text-gray-900 mb-3 border-b pb-2">Campaign Details</h3>
-          <dl className="space-y-2 text-sm">
-            <div className="flex justify-between">
-              <dt className="text-gray-500">Name</dt>
-              <dd className="font-medium text-gray-900 text-right">{campaignData.campaignName}</dd>
-            </div>
-            <div className="flex justify-between">
-              <dt className="text-gray-500">Objective</dt>
-              <dd className="font-medium text-gray-900 capitalize">{campaignData.campaignObjective}</dd>
-            </div>
-            <div className="flex justify-between">
-              <dt className="text-gray-500">Buying Type</dt>
-              <dd className="font-medium text-gray-900 capitalize">{campaignData.buyingType}</dd>
-            </div>
-            <div className="flex justify-between">
-              <dt className="text-gray-500">Spending Limit</dt>
-              <dd className="font-medium text-gray-900">{campaignData.spendingLimit ? `$${campaignData.spendingLimit}` : 'None'}</dd>
-            </div>
-            <div className="flex justify-between">
-              <dt className="text-gray-500">Special Category</dt>
-              <dd className="font-medium text-gray-900 capitalize">{campaignData.specialCategory}</dd>
-            </div>
-          </dl>
-        </div>
-
-        {/* Ad Set Summary */}
-        <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
-          <h3 className="font-semibold text-gray-900 mb-3 border-b pb-2">Ad Set Details</h3>
-          <dl className="space-y-2 text-sm">
-            <div className="flex justify-between">
-              <dt className="text-gray-500">Budget</dt>
-              <dd className="font-medium text-gray-900">${campaignData.budgetAmount} ({campaignData.budgetType})</dd>
-            </div>
-            <div className="flex justify-between">
-              <dt className="text-gray-500">Schedule</dt>
-              <dd className="font-medium text-gray-900 text-right">
-                {campaignData.startDate} to {campaignData.endDate || 'Ongoing'}
-              </dd>
-            </div>
-            <div className="flex justify-between">
-              <dt className="text-gray-500">Audience</dt>
-              <dd className="font-medium text-gray-900">{campaignData.ageRange} • {campaignData.gender}</dd>
-            </div>
-            <div className="flex justify-between">
-              <dt className="text-gray-500">Locations</dt>
-              <dd className="font-medium text-gray-900 text-right max-w-[150px] truncate">{campaignData.locations}</dd>
-            </div>
-            <div className="flex justify-between items-start">
-              <dt className="text-gray-500 shrink-0">Targeting</dt>
-              <dd className="font-medium text-gray-900 text-right line-clamp-2">{campaignData.detailedTargeting || 'None'}</dd>
-            </div>
-          </dl>
-        </div>
-
-        {/* Ad Creative Summary */}
-        <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm md:col-span-2">
-          <h3 className="font-semibold text-gray-900 mb-3 border-b pb-2">Ad Creative Details</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <dl className="space-y-2 text-sm">
-              <div className="flex justify-between">
-                <dt className="text-gray-500">Facebook Page</dt>
-                <dd className="font-medium text-gray-900">{campaignData.facebookPage}</dd>
-              </div>
-              <div className="flex justify-between">
-                <dt className="text-gray-500">Instagram</dt>
-                <dd className="font-medium text-gray-900">{campaignData.instagramAccount || 'None'}</dd>
-              </div>
-              <div className="flex justify-between">
-                <dt className="text-gray-500">Format</dt>
-                <dd className="font-medium text-gray-900 capitalize">{campaignData.adFormat}</dd>
-              </div>
-              <div className="flex justify-between">
-                <dt className="text-gray-500">Call to Action</dt>
-                <dd className="font-medium text-gray-900 capitalize">{campaignData.callToAction.replace('-', ' ')}</dd>
-              </div>
-            </dl>
-            <dl className="space-y-2 text-sm">
-              <div className="flex justify-between">
-                <dt className="text-gray-500">Headline</dt>
-                <dd className="font-medium text-gray-900 text-right truncate max-w-[200px]">{campaignData.headline}</dd>
-              </div>
-              <div className="flex justify-between">
-                <dt className="text-gray-500">Primary Text</dt>
-                <dd className="font-medium text-gray-900 text-right truncate max-w-[200px]">{campaignData.primaryText}</dd>
-              </div>
-              <div className="flex justify-between">
-                <dt className="text-gray-500">Website URL</dt>
-                <dd className="font-medium text-gray-900 text-right truncate max-w-[200px]">{campaignData.websiteUrl}</dd>
-              </div>
-              <div className="flex justify-between">
-                <dt className="text-gray-500">Image URL</dt>
-                <dd className="font-medium text-gray-900 text-right truncate max-w-[200px]">{campaignData.imageUrl}</dd>
-              </div>
-            </dl>
-          </div>
-        </div>
-      </div>
-
-      {/* Strategy Documentation */}
-      <div className="bg-blue-50 border border-blue-100 rounded-xl p-6">
-        <div className="flex items-center gap-2 mb-4">
-          <FileText className="text-blue-600" size={24} />
-          <h3 className="text-lg font-bold text-blue-900">Strategy Rationale</h3>
-        </div>
-
-        <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium text-blue-900 mb-1">Student Name</label>
-            <input
-              type="text"
-              value={campaignData.studentName}
-              onChange={(e) => updateField('studentName', e.target.value)}
-              className="w-full px-4 py-2 border border-blue-200 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-              placeholder="Enter your name"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-blue-900 mb-1">
-              Why did you choose this objective and audience?
-            </label>
-            <textarea
-              value={campaignData.strategyDescription}
-              onChange={(e) => updateField('strategyDescription', e.target.value)}
-              rows={5}
-              className="w-full px-4 py-2 border border-blue-200 rounded-lg resize-none focus:ring-2 focus:ring-blue-500 outline-none"
-              placeholder="Explain your strategic thinking here. Consider your target persona and business goals..."
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Action Buttons */}
-      <div className="flex flex-col md:flex-row justify-between gap-4 pt-4 border-t border-gray-200">
-        <button
-          onClick={prevStep}
-          className="text-gray-600 hover:text-gray-900 font-medium px-4 py-2 text-center"
-        >
-          Back
-        </button>
-
-        <div className="flex flex-col md:flex-row gap-3">
-          <button
-            onClick={handleFinish}
-            className="flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-2 px-6 rounded-lg shadow-sm transition-colors"
-          >
-            <CheckCircle size={18} /> Finish & Reset
-          </button>
-
-          <button
-            onClick={handlePrint}
-            className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg shadow-sm transition-colors"
-          >
-            <Printer size={18} /> Print / Save PDF
-          </button>
-        </div>
-      </div>
-
-      {/* Hidden Print Styling */}
-      <style>{`
-        @media print {
-          body * {
-            visibility: hidden;
-          }
-          #root, #root * {
-            visibility: visible;
-          }
-          /* Hide non-printable elements */
-          nav, button, .sticky-nav, .navigation-buttons, .progress-bar {
-            display: none !important;
-          }
-          /* Ensure layout is conducive to printing */
-          .min-h-screen {
-            height: auto !important;
-            overflow: visible !important;
-          }
-
-          /* Force backgrounds to print */
-          * {
-            -webkit-print-color-adjust: exact !important;
-            print-color-adjust: exact !important;
-          }
-        }
-      `}</style>
-    </div>
-  );
-};
-
-export default ReviewStep;
+import { validateCampaign } from '../lib/campaign';
+import { getObjective, destinationLabels } from '../data/platformOptions';
+import { Input, Textarea, Section, ErrorList } from './FormControls';
+import CampaignSummary from './CampaignSummary';
+import PracticeDialog from './PracticeDialog';
+export default function ReviewStep() {
+  const { workspace, campaignData: data, updateField: update, goToStep, publishCampaign, togglePaused, hasUnpublishedChanges, printReport, downloadReport } = useAdCampaign();
+  const [confirmPublish, setConfirmPublish] = useState(false);
+  const errors = validateCampaign(data);
+  const props = { data, update };
+  return <div className="step-content"><div className="step-heading"><span className="eyebrow">Review</span><h2>Review and publish</h2><p>Inspect the setup, record your explanation, and practice the publishing step.</p></div>
+    {workspace.publication && <section className="publication-banner" aria-live="polite"><div><span className="status-badge">{workspace.publication.paused ? 'Paused · practice' : 'Published · practice'}</span><h3>{hasUnpublishedChanges ? 'Your draft has unpublished changes' : 'Publication recorded'}</h3><p>Last published: {new Date(workspace.publication.publishedAt).toLocaleString()}</p><p>A real ad would now be processed for review and delivery. This practice account runs no ads.</p></div><button type="button" className="button secondary" onClick={togglePaused}>{workspace.publication.paused ? <Play size={17}/> : <Pause size={17}/>} {workspace.publication.paused ? 'Resume practice campaign' : 'Pause practice campaign'}</button></section>}
+    <Section title="Setup requirements" help="publish"><p>{errors.length ? 'Resolve the configuration issues below before publishing.' : 'Required setup fields are present and structurally valid.'}</p><p className="field-hint">These checks cover setup requirements. Your instructor evaluates the strategy and effectiveness.</p><ErrorList errors={errors} onSelect={error => { goToStep(error.step); requestAnimationFrame(() => { const element = document.getElementById(error.field) || document.getElementById(`${error.field}-field`); element?.focus(); element?.scrollIntoView({block:'center'}); }); }}/></Section>
+    <CampaignSummary data={data}/>
+    <Section title="Assignment documentation" help="documentation" description="Write your explanations in your own words. Follow your instructor’s assignment requirements.">
+      <div className="field-grid"><Input {...props} name="studentName" label="Student name"/><Input {...props} name="courseSection" label="Course / section"/><Input {...props} name="assignmentTitle" label="Assignment title"/></div>
+      <Textarea {...props} name="businessGoal" label="Business goal and offer" placeholder="What is the business trying to accomplish? What are you offering?"/>
+      <Textarea {...props} name="strategyDescription" label="Why this objective and audience?" placeholder="Connect the business goal, audience needs, and selected objective."/>
+      <Textarea {...props} name="budgetRationale" label="Budget and schedule explanation" placeholder="Explain your allocation and timing, including the assumptions you used."/>
+      <Textarea {...props} name="creativeRationale" label="Creative, CTA, and placement explanation" placeholder="Explain the message, format, destination, and placements you selected."/>
+      <Textarea {...props} name="measurementPlan" label="Measurement plan" placeholder="What would you measure, where would it be recorded, and why?"/>
+      <Textarea {...props} name="revisionNotes" label="Changes made during creation" placeholder="Describe important revisions and why you made them."/>
+    </Section>
+    <div className="report-actions"><FileText size={22}/><div><h3>Prepare your assignment packet</h3><p>Export the full settings, selected-placement previews, explanations, and process record. Submit through your instructor’s designated channel.</p></div></div>
+    <div className="button-row"><button type="button" className="button secondary" onClick={() => printReport('draft')}><Printer size={17}/>Print / Save current draft PDF</button>{workspace.publication && <button type="button" className="button secondary" onClick={() => printReport('published')}><Printer size={17}/>Print / Save published version PDF</button>}{workspace.publication && <button type="button" className="button secondary" onClick={() => downloadReport('published')}><FileText size={17}/>Download published assignment HTML</button>}</div>
+    <div className="step-actions"><button type="button" className="button secondary" onClick={() => goToStep(2)}>Back to ad</button><button type="button" className="button publish" disabled={errors.length > 0 || (!!workspace.publication && !hasUnpublishedChanges)} onClick={() => setConfirmPublish(true)}><Send size={17}/>{workspace.publication ? 'Publish changes' : 'Publish in practice account'}</button></div>
+    {confirmPublish && <PracticeDialog title="Confirm publication" onClose={() => setConfirmPublish(false)} footer={<><button type="button" className="button secondary" onClick={() => setConfirmPublish(false)}>Return to review</button><button type="button" className="button publish" onClick={() => { if (publishCampaign()) { setConfirmPublish(false); requestAnimationFrame(() => document.querySelector('.publication-banner')?.scrollIntoView({block:'center'})); } }}>Confirm practice publication</button></>}><dl className="confirmation-details"><div><dt>Campaign</dt><dd>{data.campaignName}</dd></div><div><dt>Objective</dt><dd>{getObjective(data.campaignObjective)?.label}</dd></div><div><dt>Destination</dt><dd>{destinationLabels[data.destination]}</dd></div><div><dt>Budget</dt><dd>${data.budgetAmount} USD ({data.budgetType})</dd></div><div><dt>Audience locations</dt><dd>{data.locations}</dd></div></dl><p className="notice">This action records the publication step locally. It does not send ads to Meta, spend money, or submit your assignment.</p></PracticeDialog>}
+  </div>;
+}

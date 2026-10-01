@@ -1,47 +1,61 @@
-# Facebook Ads Simulator: user guide
+# Facebook Simulator Revamp: student guide
 
-This guide describes the teaching workflow in the current React application. It is not a Meta platform-policy reference or a guarantee of current Ads Manager interface parity.
+Create a campaign that your instructor can evaluate. Use the learning windows when a setting needs context, and explain your choices in your own words. This exercise represents a manual subset of Ads Manager rather than every live account option.
 
-## 1. Campaign: explain the objective
+## Campaign
 
-Choose a campaign name that communicates the business, objective, and context. Select the objective and campaign-level settings. The learning question is: **What result should this campaign pursue, and why is it appropriate?**
+Name the campaign, select an objective, and declare the represented special category if applicable. The objective changes the conversion locations and performance goals available below it. An optional campaign spending limit is separate from the ad set budget.
 
-Special-category controls are included for classroom discussion. Check official platform guidance before planning an actual regulated-category campaign; a simulator selection is not a compliance check.
+Open the information button beside a setting for an explanation, considerations, real-platform context, and a documentation prompt. The windows use bundled instructional text and do not grade the choice.
 
-## 2. Ad set: connect the audience and budget
+## Ad set
 
-Plan daily or lifetime budget, dates, locations, and the audience. Use the budget visualization to discuss assumptions, not to quote expected real-world reach or clicks. Explain why the intended audience would care about the offer.
+Name the ad set and select where the desired action happens. Depending on the objective, this can be a website, instant form, messaging app, app, or interaction with the ad. Choose the performance goal, then configure the daily or lifetime budget, dates, start time, and account time zone. Lifetime budgets require an end date.
 
-## 3. Creative: make the offer understandable
+Describe locations and targeting. Custom and lookalike audience descriptions record the source you would use; no customer list is uploaded. Represented special categories broaden age and gender controls. Actual category restrictions vary by jurisdiction and account.
 
-Configure the represented page/account identity, image, primary text, headline, destination, and call to action. Review the ad preview for message clarity and consistency. Preview layouts illustrate the concept; live platforms can render content differently.
+Choose Advantage+ or manual placements. This exercise represents Facebook Feed, Instagram Feed, Facebook Stories, and Instagram Stories. Planning arithmetic shows the budget across calendar days without predicting reach, clicks, spending fluctuations, or performance.
 
-Use images you have permission to use. An externally hosted image can become unavailable or make a request to its hosting provider. Do not use confidential files or personally identifying student images in demonstrations.
+## Ad
 
-The strength indicator encourages completeness. It does not independently evaluate conversion potential, legal compliance, brand quality, or campaign performance.
+Name the ad and enter the represented Page/account identity. Upload a PNG, JPG, WEBP, or GIF up to 10 MB, or enter an HTTP(S) image URL. Uploaded images are included in saved campaign files. An image URL can become unavailable and loads content from its provider.
 
-## 4. Review: defend the choices
+Choose a single image or a carousel of 2–10 cards. Each carousel card needs media and a headline. Reorder the cards and inspect their sequence. Website cards can override the main destination URL.
 
-Check the summary and complete the student-name and strategy fields required by the activity. Explain how the objective, audience, budget, creative, and destination fit together.
+Write primary text, headline, optional description, and the available CTA. Character counts provide context; they are not a quality score. Placement previews illustrate cropping and copy presentation. The assignment summary retains the full text.
 
-Use the print control to review the browser's print preview. Choose Save as PDF when available. Submit the resulting file through the instructor's designated channel; the application does not upload it to a course system.
+Configure the destination fields shown for your selected path:
 
-The printed date is generated from the browser. It is a convenience, not verified evidence of when the work was completed.
+| Destination | Setup |
+| --- | --- |
+| Website | Website URL, optional tracking parameters, and a practice dataset/event for website Leads or Sales. |
+| Instant form | Form name, headline, introduction, requested questions, privacy-policy URL, and completion message. |
+| Messaging | Represented messaging app and opening greeting. |
+| App | App name, store, and store URL. |
+| On the ad | Ad interaction without a separate CTA destination. |
 
-## Saved work and reset
+Inspect the CTA destination preview. It cannot transmit a lead, send a message, or verify a website.
 
-Campaign changes are persisted in the current browser using localForage after the initial saved-state load. Data is associated with this site and browser, with no cross-device account sync. Persistence can fail if browser storage is unavailable or restricted.
+## Review and practice publication
 
-Keep a printed/exported copy of work that matters. The finish/reset action asks for confirmation and resets the campaign. Clearing browser site data also removes the local draft. On shared computers, reset the exercise after saving the submission elsewhere.
+Review the configuration and resolve any setup requirements. These check missing or structurally invalid settings, not whether the strategy is effective. Your instructor is the grader.
 
-## Suggested reflection questions
+Complete the documentation required by your assignment: name, section, business goal, objective/audience reasoning, budget/schedule reasoning, creative/placement reasoning, measurement plan, and revisions. The app allows publication without assigning a grade to these explanations.
 
-- Which audience need connects the objective to the offer?
-- What assumption would you test first with real campaign data?
-- What would you change if the budget were halved?
+Confirm **Publish in practice account** to record the publication step and settings locally. No ads are sent or run. A real campaign would proceed through platform review and delivery. You can pause/resume the practice campaign, edit the draft, and publish changes. Earlier published settings stay separate until you republish.
 
-These are suggested instructional prompts, not an automated grade or an official course requirement.
+## Preserve and submit the work
 
-## Troubleshooting
+**Save campaign file** creates a JSON backup. **Open campaign file** validates a version 2 export and asks before replacing your current draft. Download the current campaign first if you want to keep both.
 
-If saved work does not return, confirm that you are using the same site, browser, and profile and that site storage is allowed. If the page or image fails to load, record the browser and step and check the image URL without sharing private data. For deployment and build issues, use [MAINTAINING.md](MAINTAINING.md).
+**Download assignment HTML** creates a readable packet. The review controls also open the print dialog for PDF output. Published exports use the recorded campaign settings and current explanations, clearly labeled in the packet. Review print preview before submitting. External image URLs require access to their provider; uploaded media remains embedded.
+
+The packet contains full settings, placement previews, all carousel cards, destination setup, explanations, and a local process record. The record captures navigation, updated field names, publication, pause/resume, and import actions; it is not a complete keystroke history or verified evidence of authorship.
+
+Submit through your instructor's designated channel. The app does not submit an assignment or connect to an LMS.
+
+## Draft recovery
+
+Automatic saving applies to the same site, browser, and profile. Watch the visible save status. If storage fails, download a campaign file before leaving. An unsupported saved draft is preserved and can be downloaded for recovery. Older supported drafts receive inferred new controls; inspect those settings before publishing.
+
+**New campaign** asks before replacing the draft and offers a backup download. Clearing browser site data removes local work. Keep exported work somewhere you can retrieve it.

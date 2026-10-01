@@ -1,27 +1,31 @@
 # Maintainer guide
 
-## Existing configuration
+## Configuration and checks
 
-The package provides `dev`, `lint`, `build`, and `preview` scripts. Vite uses `base: './'`, writes into `docs/`, and empties that generated directory during a build. Keep documentation outside `docs/`.
+Use the pinned lockfile and run `npm ci`, `npm test`, `npm run lint`, and `npm run build`. Tests use Node's built-in runner with no added packages. Lint excludes generated `docs/` output and checks source and test files.
 
-Inspect **Settings > Pages** and any connected hosting dashboard before deployment to confirm the actual source branch, build command, and output. Committed build files are not proof of deployed settings. Do not add or migrate hosting as a side effect of a README update.
+Vite retains relative asset paths (`base: './'`), generates `docs/`, and empties that folder at build time. Keep source documentation outside it. Tailwind scans only `src/` so previously generated bundles cannot change the next build. Include the generated build in a reviewed release because the existing GitHub Pages setup serves committed output. The existing Cloudflare configuration is retained without changes.
 
-## Validation checklist
+Inspect actual hosting settings before a release. Do not infer deployment from the presence of generated files, migrate hosting, or change authentication as part of routine UI maintenance. A production merge or deployment requires owner approval.
 
-Run `npm ci`, `npm run lint`, and `npm run build`, then inspect the app with `npm run preview`. These are separate checks: record any lint failure even if the build succeeds.
+## Manual validation before release
 
-Exercise all four steps with fictional data. Confirm automatic persistence across reload, review fields, preview rendering, external-image failure behavior, and reset. Inspect print preview, keyboard navigation, educational dialogs, and narrow-screen layout. No automated end-to-end test script is declared in the current package manifest.
+Exercise the four steps with fictional data, including the website, instant-form, messaging, and app paths. Confirm objective/location dependency updates, positive budget validation, lifetime schedule validation, manual placements, image upload/failure handling, carousel reordering, destination previews, and publication confirmation.
 
-Teaching copy should distinguish simulation estimates from real forecasts. Keep technical claims aligned with the manifest and source; do not claim accessibility certification, platform parity, or psychometric validation from a visual review.
+Verify browser saving across reload, old-draft migration, JSON export/import, reset confirmation, and storage warnings. Publish, edit settings, compare current/published reports, and republish. Verify that explanation edits do not create a false unpublished campaign-change status.
 
-## Updates and GitHub presentation
+Inspect keyboard operation, modal focus containment and restoration, Escape dismissal, narrow-screen previews, HTML export, and actual print preview with long copy, long explanations, and all carousel cards. Unit tests and a build do not prove browser interaction or print layout.
 
-For a tested milestone, describe the student-visible improvements, fixes, known limitations, and upgrade implications in a release note tied to the reviewed commit. Do not manufacture historic release dates or publish a tag merely to make the repository look active.
+Keep learning content descriptive. Do not reintroduce automatic quality scores, strategic judgments, result projections, or scenario engines. The instructor grades effectiveness. Label simplified platform controls and represented placements, and avoid claiming full account parity or accessibility certification.
 
-Suggested About description: **Practice campaign, ad-set, and creative planning in an interactive social advertising learning tool.** Suggested topics: `marketing-education`, `social-advertising`, `react`, `vite`.
+## Storage and upgrades
 
-Set the About website to the verified hosted app. Use a real, current screenshot with fictional content for a social preview. These are repository settings; editing this document does not change them.
+Version 2 uses `fbAdsSimWorkspace_v2` and migrates supported flat `fbAdsSimData` drafts. Unknown/corrupt stored data blocks automatic overwriting and offers a raw recovery download. The old key is removed when the student explicitly starts a new campaign. JSON export preserves one current workspace and its latest published snapshot; it is not a multi-campaign archive.
 
-## Rollback
+Preserve the format identifiers and add explicit migration rules before changing the schema. Imported timestamps and histories are unverified, editable local records. Do not treat them as grading evidence by themselves.
 
-Keep documentation changes in their own pull request. Before merge, closing the PR leaves the default branch untouched. After an approved merge, revert the documentation commit through a separate PR and retain the prior working deployment. Even documentation-only merges can trigger a connected hosting build.
+## Deployment and rollback
+
+Review [documentation/REVAMP.md](documentation/REVAMP.md) and the PR validation record. Before approval, the feature branch and PR are the reviewable artifacts; the production default branch stays unchanged. After an approved release, rollback through a reviewed revert and rebuild `docs/`. Consider recovery/export implications before reverting to a version that cannot read new drafts.
+
+The pre-revamp baseline is `578abbed5ec4cda4cd1e8fd2021c083848a78a81`. Closing an unmerged revamp PR leaves that baseline unchanged.

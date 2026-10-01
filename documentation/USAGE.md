@@ -1,17 +1,9 @@
-# Usage Guide
+# Classroom usage
 
-## For Students
-1. Navigate to the simulator URL
-2. Input campaign parameters
-3. Adjust variables to see real-time changes
-4. Analyze results and optimize strategy
+Students create a campaign, ad set, and ad; consult contextual learning windows; review setup; record their reasoning; and confirm practice publication. Export the campaign JSON for continuation and the assignment HTML or PDF for submission through the instructor's designated channel.
 
-## For Instructors
-1. Use as a demonstration tool during lectures
-2. Assign practical exercises
-3. Evaluate student understanding of Facebook advertising concepts
+The instructor evaluates the campaign's strategy and effectiveness. The app only validates required configuration, formats, and represented option combinations. There are no simulated outcomes, scenarios, grades, or optimization recommendations.
 
-## Technical Requirements
-- Modern web browser (Chrome, Firefox, Safari, or Edge)
-- JavaScript enabled
-- Internet connection
+Use a modern browser with JavaScript and browser storage enabled. The exercise needs no real Meta account, API, payment method, targeting database, or external content feed. Uploaded media travels with campaign exports; external image URLs need their provider to remain accessible.
+
+See [the complete student guide](../REFERENCE_MANUAL.md).
