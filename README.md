@@ -1,67 +1,70 @@
-# Facebook Ads Simulator
+# Facebook Simulator Revamp
 
-Turn an advertising idea into a campaign plan you can explain, preview, and discuss.
+Practice creating a Facebook advertising campaign and document the decisions for instructor evaluation.
 
-This interactive MARK 4360 teaching tool introduces the campaign, ad-set, and creative decisions behind social advertising. Students can practice with fictional brands, review their choices, and prepare a printable strategy summary without connecting a real advertising account.
+This independent MARK 4360 classroom tool follows one campaign, one ad set, and one ad through setup, review, and practice publication. Contextual learning windows explain the settings and ask students to articulate their reasoning. **The instructor grades strategy and effectiveness.** The app checks required setup fields and supported combinations; it generates no grades, performance outcomes, or simulated scenarios.
 
-**[Open the simulator](https://mralexgarrido.github.io/mark4360_fb/)** · [User guide](REFERENCE_MANUAL.md) · [Report an issue](https://github.com/mralexgarrido/mark4360_fb/issues)
+**[Open the simulator](https://mralexgarrido.github.io/mark4360_fb/)** · [Student guide](REFERENCE_MANUAL.md) · [Maintainer guide](MAINTAINING.md)
 
-## The learning workflow
+## Student workflow
 
-| Step | Practice |
+| Level | Practice |
 | --- | --- |
-| Campaign | Define the campaign name, objective, buying type, and campaign-level settings. |
-| Ad set | Plan the budget, schedule, location, demographics, and audience. |
-| Ad creative | Develop the identity, image, copy, destination, and call to action. |
-| Review & Submit | Review the campaign and write the strategic reasoning behind the choices. |
+| Campaign | Name the campaign; choose an objective, special category, and optional spending limit. |
+| Ad set | Configure conversion location, performance goal, budget, schedule, audience, and placements. |
+| Ad | Configure identity, uploaded media or image URL, single-image or carousel creative, copy, CTA, and destination. |
+| Review & publish | Resolve setup requirements, explain decisions, confirm practice publication, and export the assignment packet. |
 
-The application includes contextual educational explanations, an ad preview, browser-local draft persistence, and print output. Budgets, estimates, and strength indicators are teaching aids, not live Meta campaign data or validated forecasts.
+Website, instant-form, messaging, and app paths expose different settings. Facebook and Instagram Feed and Stories previews illustrate selected placements. The destination preview shows configured content without submitting leads, sending messages, or visiting the destination.
 
-## Try it in class
+Publication records an immutable local snapshot of campaign settings. Students can pause, resume, edit, and publish changes. This practices the publication motion; it does not model Meta approval, delivery, spending, or outcomes.
 
-Choose a fictional business and a measurable objective. Complete the four steps, then ask a partner to identify whether the audience, offer, creative, and destination support that objective. In the review step, explain one tradeoff you made and what you would test next.
+## Assignment files and saved work
 
-Use the print control to open the browser's print dialog and save a PDF when needed. **Review & Submit does not submit work to a learning management system.** Follow the instructor's separate submission instructions.
+- **Save campaign file** downloads a versioned JSON file that can restore the draft, publication, explanations, and local process record in another browser.
+- **Download assignment HTML** creates a readable packet with full settings, previews, carousel sequence, destination content, student explanations, and process record. Uploaded assets are embedded. External image URLs still depend on their provider.
+- **Print / Save PDF** opens the browser print dialog. Current draft and published settings can be exported separately. Published packets explicitly include current student explanations.
+- **New campaign** asks before replacing the draft and offers a download first.
 
-Campaign changes are saved automatically in this browser using localForage. Saved work does not follow you to another device or browser. Clearing site data removes it. Export the review before using the finish/reset action, and use fictional information on shared computers. External image URLs may load content from the image provider; browser-local storage is not a claim that the page makes no network requests.
+Automatic saving uses localForage in the current site and browser. Clearing site data removes local work. Visible warnings explain storage failures; unrecognized stored drafts remain available for recovery rather than being overwritten. Older flat drafts are migrated when supported, with new settings inferred for review. Keep a campaign file for work that matters.
 
-## Local development
+Submit the packet through the instructor's designated channel. The app does not submit to an LMS. Timestamps and history are local, editable records, not verified proof of authorship.
 
-Use Node.js 22.14 or newer within the Node.js 22 release line and npm:
+## Development
+
+Use Node.js 22.14 or newer and npm:
 
 ```sh
-git clone https://github.com/mralexgarrido/mark4360_fb.git
-cd mark4360_fb
 npm ci
 npm run dev
 ```
 
-Open the address printed by Vite. Available checks and preview commands are:
+Checks and production preview:
 
 ```sh
+npm test
 npm run lint
 npm run build
 npm run preview
 ```
 
-The current Vite configuration uses relative asset paths (`base: './'`) and writes the production build to **`docs/`**. That folder is generated output, not the location for source documentation. Preserve `package-lock.json`; investigate install failures rather than replacing dependencies indiscriminately.
+No dependencies were added for this revamp. The Node test runner covers objective paths, validation, legacy migration, safe imports, publication isolation, file round trips, and server-rendered report content using the existing Vite toolchain. React provides the interface, localForage provides browser storage, and Vite builds the application. Existing dependencies remain pinned by the lockfile.
 
-## Architecture
-
-React provides the interface, Tailwind CSS provides styling, Recharts supports the budget visualization, and localForage persists campaign data. Vite builds the application. See [package.json](package.json) for the complete dependency list.
+Vite retains `base: './'` and writes generated assets into `docs/`. Keep source documentation outside that folder. GitHub Pages can serve the committed build; any production merge or deployment requires maintainer approval.
 
 | Path | Responsibility |
 | --- | --- |
-| `src/components/` | Campaign steps, preview, educational dialogs, and review |
-| `src/context/AdCampaignContext.jsx` | Shared campaign state, automatic persistence, and reset |
-| `src/data/` | Teaching content |
-| `vite.config.js` | Relative base path and `docs/` build output |
-| `legacy/` | Earlier implementation, separate from the current React source |
+| `src/components/` | Setup forms, learning dialogs, previews, review, and assignment report |
+| `src/context/AdCampaignContext.jsx` | Workspace state, saving, publication, and exports |
+| `src/lib/campaign.js` | Field transitions, validation, migration, and versioned campaign files |
+| `src/data/` | Bundled teaching content and represented platform options |
+| `src/report.css` | Standalone HTML and print packet layout |
+| `tests/` | Dependency-free campaign logic regression tests |
 
-## Support and maintenance
+## Scope and support
 
-Use [GitHub Issues](https://github.com/mralexgarrido/mark4360_fb/issues) for reproducible bugs and teaching improvements. Include the step, browser, expected result, and actual result using fictional data. Do not attach student records, account credentials, or real customer lists.
+The workflow represents a manual classroom subset of Ads Manager, not full interface parity. It uses USD, one campaign/ad set/ad, image and carousel media, and four represented placements. Audience locations, interests, custom audiences, datasets, and account identities are planning descriptions. No account APIs, targeting databases, tracking integrations, or external content services are required for the exercise. There is no performance dashboard or automated strategic recommendation.
 
-Read [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidance and [MAINTAINING.md](MAINTAINING.md) for validation and release checks. Maintained by [Alex Garrido](https://github.com/mralexgarrido).
+Use [GitHub Issues](https://github.com/mralexgarrido/mark4360_fb/issues) for reproducible bugs and teaching improvements. Use fictional data and do not attach student records or account credentials. See [documentation/REVAMP.md](documentation/REVAMP.md) for implementation boundaries and validation status.
 
-This independent educational project is not Meta Ads Manager and is not endorsed by Meta, Facebook, or Instagram. Platform names and marks belong to their respective owners. No project-level `LICENSE` file is currently included; contact the repository owner about reuse.
+Maintained by [Alex Garrido](https://github.com/mralexgarrido). This project is independent of Meta and is not endorsed by Meta, Facebook, or Instagram. No project-level license is currently included; contact the owner about reuse.

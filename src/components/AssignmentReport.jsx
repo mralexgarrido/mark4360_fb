@@ -1,0 +1,26 @@
+import { useAdCampaign } from '../context/AdCampaignContext';
+import { SIMULATOR_VERSION } from '../data/platformOptions';
+import { selectedPlacements, campaignChanged } from '../lib/campaign';
+import CampaignSummary from './CampaignSummary';
+import AdPreview, { DestinationPreview } from './AdPreview';
+const explanations = [
+  ['businessGoal','Business goal and offer'],['strategyDescription','Objective and audience explanation'],['budgetRationale','Budget and schedule explanation'],['creativeRationale','Creative, CTA, and placement explanation'],['measurementPlan','Measurement plan'],['revisionNotes','Revisions and reasoning'],
+];
+export default function AssignmentReport() {
+  const { workspace, reportSource } = useAdCampaign();
+  return <AssignmentReportContent workspace={workspace} reportSource={reportSource}/>;
+}
+export function AssignmentReportContent({ workspace, reportSource = 'draft' }) {
+  const current = workspace.data;
+  const published = reportSource === 'published' && workspace.publication;
+  const data = published ? { ...workspace.publication.data, ...Object.fromEntries(['studentName','courseSection','assignmentTitle',...explanations.map(([key]) => key)].map(key => [key,current[key]])) } : current;
+  return <article id="assignment-report" className="assignment-report report-only"><header className="report-header"><span className="eyebrow">MARK 4360 · Facebook Ads Simulator</span><h1>{data.assignmentTitle || 'Campaign creation assignment'}</h1><p>{published ? 'Published campaign settings with current student explanations' : 'Current campaign draft'}</p><dl><div><dt>Student</dt><dd>{data.studentName || 'Not provided'}</dd></div><div><dt>Course / section</dt><dd>{data.courseSection || 'Not provided'}</dd></div><div><dt>Generated</dt><dd>{new Date().toLocaleString()}</dd></div><div><dt>Simulator version</dt><dd>{SIMULATOR_VERSION}</dd></div><div><dt>Publication</dt><dd>{workspace.publication ? `${new Date(workspace.publication.publishedAt).toLocaleString()} · practice account` : 'Not published in practice account'}</dd></div></dl>{!published && campaignChanged(current,workspace.publication) && <p>This draft contains changes made after the recorded publication.</p>}<p className="report-note">This packet records a classroom campaign. No real ads were run, no money was spent, and no performance results or automated grades are generated. Your instructor evaluates the work.</p></header>
+    <CampaignSummary data={data}/>
+    <section className="report-section"><h2>Student explanations</h2>{explanations.map(([key,label]) => <div className="report-explanation" key={key}><h3>{label}</h3><p>{data[key] || 'Not provided'}</p></div>)}</section>
+    <section className="report-section"><h2>Selected-placement previews</h2><p>Illustrative placement layouts. All copy is printed in full for evaluation.</p><div className="report-preview-grid">{selectedPlacements(data).map(placement => <figure key={placement.id}><figcaption>{placement.label}</figcaption><AdPreview data={data} placement={placement} interactive={false}/></figure>)}</div></section>
+    {data.adFormat === 'carousel' && <section className="report-section"><h2>Carousel card sequence</h2>{data.carouselCards.map((card,index) => <figure className="report-carousel-card" key={card.id}><figcaption>Card {index+1}: {card.headline || 'No headline'}</figcaption>{card.imageUrl && <img src={card.imageUrl} alt={card.imageAlt || `Creative for card ${index+1}`}/>}<p>Destination: {card.websiteUrl || data.websiteUrl || 'No separate website destination'}</p><p>Image description: {card.imageAlt || 'Not provided'}</p></figure>)}</section>}
+    {data.destination && data.destination !== 'on-ad' && <section className="report-section"><h2>Destination setup</h2><DestinationPreview data={data}/></section>}
+    <section className="report-section"><h2>Local process record</h2><p>Browser-generated timestamps and actions are an editable local record, not independently verified evidence of authorship.</p>{workspace.events.length ? <ol className="process-record">{workspace.events.map((event,index) => <li key={index}><time>{new Date(event.at).toLocaleString()}</time><span>{event.text}</span></li>)}</ol> : <p>No navigation or publication actions recorded.</p>}</section>
+    <footer className="report-footer">Facebook Simulator Revamp · {SIMULATOR_VERSION} · Independent classroom practice tool</footer>
+  </article>;
+}

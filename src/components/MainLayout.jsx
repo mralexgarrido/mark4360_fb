@@ -1,50 +1,14 @@
-import React from 'react';
+import { Layers, Target, Users, Image, ClipboardList, BookOpen } from 'lucide-react';
+import { useAdCampaign } from '../context/AdCampaignContext';
 import ProgressBar from './ProgressBar';
-
-const MainLayout = ({ leftPanel, rightPanel }) => {
-  return (
-    <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-      <ProgressBar />
-
-      <main className="flex-1 max-w-7xl mx-auto w-full p-4 md:p-6 lg:p-8">
-        <div className="flex flex-col lg:flex-row gap-6 h-full">
-          {/* Left Panel: Configuration (Scrollable) */}
-          <div className="flex-1 lg:w-3/5 bg-white rounded-xl shadow-sm border border-gray-200 p-6 h-fit">
-            {leftPanel}
-          </div>
-
-          {/* Right Panel: Preview/Simulator (Sticky) */}
-          <div className="lg:w-2/5 hidden lg:block print:block">
-            <div className="sticky top-28 space-y-6 print:static">
-              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 overflow-hidden print:border-none print:shadow-none print:p-0">
-                <h3 className="text-gray-500 text-xs font-semibold uppercase tracking-wider mb-4 border-b pb-2 print:hidden">
-                  Live Preview & Analysis
-                </h3>
-                {rightPanel}
-              </div>
-
-              {/* Educational Context Widget (Example) */}
-              <div className="hidden print:hidden bg-blue-50 border border-blue-100 rounded-lg p-4">
-                <div className="flex items-start gap-3">
-                  <div className="bg-blue-100 p-2 rounded-full text-blue-600">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 className="text-sm font-semibold text-blue-900">Pro Tip</h4>
-                    <p className="text-sm text-blue-800 mt-1">
-                      Always double-check your audience definition. A broader audience isn't always better if it's not relevant.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </main>
-    </div>
-  );
-};
-
-export default MainLayout;
+import WorkspaceToolbar from './WorkspaceToolbar';
+import InfoIcon from './InfoIcon';
+const icons = [Target,Users,Image,ClipboardList];
+export default function MainLayout({ leftPanel, rightPanel }) {
+  const { campaignData, currentStep, goToStep, storageError, workspace, hasUnpublishedChanges } = useAdCampaign();
+  const labels = [campaignData.campaignName || 'New campaign',campaignData.adSetName || 'New ad set',campaignData.adName || 'New ad','Review & publish'];
+  return <div className="workspace-screen"><a className="skip-link" href="#step-main">Skip to campaign settings</a><header className="app-header"><div className="app-brand"><div className="brand-mark"><Layers size={23}/></div><div><h1>Ads Manager <span>practice</span></h1><p>MARK 4360 · Facebook Simulator Revamp</p></div></div><div className="account-badge"><BookOpen size={17}/><span>Classroom account · USD</span></div></header>
+    <div className="app-shell"><aside className="campaign-tree" aria-label="Campaign hierarchy"><div className="tree-heading"><span>Campaign structure</span><InfoIcon contentKey="hierarchy"/></div>{labels.map((label,index) => { const Icon=icons[index]; return <button type="button" key={index} className={`${currentStep === index ? 'active' : ''} tree-level-${index}`} onClick={() => goToStep(index)} aria-current={currentStep === index ? 'step' : undefined}><Icon size={17}/><span><small>{['Campaign','Ad set','Ad','Final review'][index]}</small><strong>{label}</strong></span></button>; })}<div className="tree-status"><span className="status-badge">{workspace.publication ? workspace.publication.paused ? 'Paused · practice' : hasUnpublishedChanges ? 'Unpublished changes' : 'Published · practice' : 'Draft'}</span><p>One campaign, one ad set, one ad. Follow the setup and explain your decisions.</p></div><div className="tree-note">No real ad account is connected.</div></aside>
+    <main className="workspace-main"><WorkspaceToolbar/>{storageError && <p className="storage-warning" role="alert">{storageError}</p>}<ProgressBar/><div className="editor-grid"><div id="step-main" className="settings-panel" tabIndex={-1}>{leftPanel}</div><aside className="preview-panel" aria-label="Ad preview"><div className="preview-sticky"><div className="preview-heading"><h2>Ad preview</h2><span className="status-badge neutral">Preview only</span></div>{rightPanel}<div className="preview-note"><InfoIcon contentKey="placements"/><p>Check the selected placement’s layout, image crop, copy, and destination.</p></div></div></aside></div><footer className="app-footer">Independent classroom practice tool. Your instructor evaluates the campaign. Publishing here does not run real ads.</footer></main></div>
+  </div>;
+}

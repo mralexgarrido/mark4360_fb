@@ -1,170 +1,27 @@
-import React from 'react';
+import { Target, TrendingUp, MessageCircle, Users, Download, ShoppingBag } from 'lucide-react';
 import { useAdCampaign } from '../context/AdCampaignContext';
-import { Target, TrendingUp, MessageCircle, Users, Download, ShoppingBag, HelpCircle, Info } from 'lucide-react';
+import { objectives, categoryLabels } from '../data/platformOptions';
+import { Input, Select, Section, ErrorList, StepActions } from './FormControls';
 import InfoIcon from './InfoIcon';
-
-const objectives = [
-  { id: 'awareness', label: 'Awareness', icon: Users, desc: 'Show your ads to people who are most likely to remember them.' },
-  { id: 'traffic', label: 'Traffic', icon: TrendingUp, desc: 'Send people to a destination, like your website, app or Facebook event.' },
-  { id: 'engagement', label: 'Engagement', icon: MessageCircle, desc: 'Get more messages, video views, post engagement, page likes or event responses.' },
-  { id: 'leads', label: 'Leads', icon: Target, desc: 'Collect leads for your business or brand.' },
-  { id: 'app-promotion', label: 'App Promotion', icon: Download, desc: 'Find new people to install your app and continue using it.' },
-  { id: 'sales', label: 'Sales', icon: ShoppingBag, desc: 'Find people likely to purchase your product or service.' },
-];
-
-const CampaignStep = () => {
-  const { campaignData, updateField, nextStep } = useAdCampaign();
-
-  const handleNext = () => {
-    if (campaignData.campaignName && campaignData.campaignObjective) {
-      nextStep();
-    } else {
-      alert('Please fill in Campaign Name and Objective.');
-    }
-  };
-
-  return (
-    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-      <div>
-        <h2 className="text-2xl font-bold text-gray-900">Campaign Setup</h2>
-        <p className="text-gray-500 mt-1">Start by defining the goal of your advertising campaign.</p>
-      </div>
-
-      {/* Campaign Name */}
-      <div className="space-y-2">
-        <div className="flex items-center">
-          <label htmlFor="campaignName" className="block text-sm font-medium text-gray-700">
-            Campaign Name
-          </label>
-          <InfoIcon contentKey="campaignName" />
-        </div>
-        <input
-          id="campaignName"
-          type="text"
-          value={campaignData.campaignName}
-          onChange={(e) => updateField('campaignName', e.target.value)}
-          placeholder="e.g., Summer Sale 2024 - Awareness"
-          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-all"
-        />
-        <p className="text-xs text-gray-500 flex items-center gap-1">
-          <Info size={12} />
-          Tip: Include the date, objective, and audience in your name.
-        </p>
-      </div>
-
-      {/* Buying Type & Special Category */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="space-y-2">
-          <div className="flex items-center">
-            <label htmlFor="buyingType" className="block text-sm font-medium text-gray-700">
-              Buying Type
-            </label>
-            <InfoIcon contentKey="buyingType" />
-          </div>
-          <div className="relative">
-            <select
-              id="buyingType"
-              value={campaignData.buyingType}
-              onChange={(e) => updateField('buyingType', e.target.value)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg appearance-none bg-white focus:ring-2 focus:ring-blue-500 outline-none"
-            >
-              <option value="auction">Auction</option>
-              <option value="reach-frequency">Reach and Frequency</option>
-            </select>
-          </div>
-        </div>
-
-        <div className="space-y-2">
-          <div className="flex items-center">
-            <label htmlFor="specialCategory" className="block text-sm font-medium text-gray-700">
-              Special Ad Category
-            </label>
-            <InfoIcon contentKey="specialCategory" />
-            <span className="text-gray-400 font-normal ml-1">(Optional)</span>
-          </div>
-          <select
-            id="specialCategory"
-            value={campaignData.specialCategory}
-            onChange={(e) => updateField('specialCategory', e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg bg-white focus:ring-2 focus:ring-blue-500 outline-none"
-          >
-            <option value="none">None</option>
-            <option value="housing">Housing</option>
-            <option value="employment">Employment</option>
-            <option value="credit">Credit</option>
-          </select>
-        </div>
-      </div>
-
-      {/* Campaign Objective */}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center">
-            <label className="block text-sm font-medium text-gray-700">
-              Campaign Objective
-            </label>
-            <InfoIcon contentKey="campaignObjective" />
-          </div>
-          <a href="#" className="text-xs text-blue-600 hover:underline flex items-center gap-1">
-            <HelpCircle size={12} /> Help me choose
-          </a>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {objectives.map((obj) => {
-            const Icon = obj.icon;
-            const isSelected = campaignData.campaignObjective === obj.id;
-
-            return (
-              <div
-                key={obj.id}
-                onClick={() => updateField('campaignObjective', obj.id)}
-                className={`cursor-pointer p-4 rounded-xl border-2 transition-transform transform hover:scale-[1.02] active:scale-[0.98] ${
-                  isSelected
-                    ? 'border-blue-500 bg-blue-50 shadow-md ring-1 ring-blue-500'
-                    : 'border-gray-200 hover:border-blue-200 hover:bg-gray-50'
-                }`}
-              >
-                <div className={`p-2 rounded-lg w-fit mb-3 ${isSelected ? 'bg-blue-200 text-blue-700' : 'bg-gray-100 text-gray-500'}`}>
-                  <Icon size={20} />
-                </div>
-                <h3 className={`font-semibold ${isSelected ? 'text-blue-900' : 'text-gray-900'}`}>{obj.label}</h3>
-                <p className="text-xs text-gray-500 mt-1 leading-relaxed">{obj.desc}</p>
-              </div>
-            );
-          })}
-        </div>
-      </div>
-
-      {/* Spending Limit */}
-      <div className="space-y-2 pt-4 border-t border-gray-100">
-        <div className="flex items-center">
-          <label htmlFor="spendingLimit" className="block text-sm font-medium text-gray-700">
-            Campaign Spending Limit ($)
-          </label>
-          <InfoIcon contentKey="spendingLimit" />
-        </div>
-        <input
-          id="spendingLimit"
-          type="number"
-          value={campaignData.spendingLimit}
-          onChange={(e) => updateField('spendingLimit', e.target.value)}
-          placeholder="Optional"
-          className="w-full md:w-1/2 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none"
-        />
-      </div>
-
-      {/* Actions */}
-      <div className="flex justify-end pt-6">
-        <button
-          onClick={handleNext}
-          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg shadow-sm transition-colors"
-        >
-          Next: Ad Set
-        </button>
-      </div>
-    </div>
-  );
-};
-
-export default CampaignStep;
+import useStepValidation from '../lib/useStepValidation';
+const icons = [Users, TrendingUp, MessageCircle, Target, Download, ShoppingBag];
+export default function CampaignStep() {
+  const { campaignData: data, updateField: update, nextStep } = useAdCampaign();
+  const { errors, errorFor, advance, focusError } = useStepValidation(data,0,nextStep);
+  const props = { data, update };
+  return <div className="step-content"><div className="step-heading"><span className="eyebrow">Campaign level</span><h2>Create a campaign</h2><p>Choose the result you want to pursue.</p></div>
+    <ErrorList errors={errors} onSelect={focusError}/>
+    <Section title="Campaign details" help="hierarchy"><Input {...props} name="campaignName" label="Campaign name" help="campaignName" error={errorFor('campaignName')} placeholder="Business_Objective_Period"/>
+      <div className="field-grid"><Select {...props} name="buyingType" label="Buying type" help="buyingType" options={[{value:'auction',label:'Auction'}, ...(data.buyingType === 'reach-frequency' ? [{value:'reach-frequency',label:'Reach and frequency (restored draft)'}] : [])]} hint="This exercise follows the manual auction setup."/><Select {...props} name="specialCategory" label="Special ad category" help="specialCategory" options={Object.entries(categoryLabels).map(([value,label]) => ({value,label}))}/></div>
+    </Section>
+    <Section title="Campaign objective" help="campaignObjective"><fieldset id="campaignObjective" className="objective-options" tabIndex={-1} aria-describedby={errorFor('campaignObjective') ? 'objective-error' : undefined}><legend className="sr-only">Choose a campaign objective</legend>{objectives.map((objective,index) => {
+      const Icon = icons[index];
+      return <label key={objective.id} className={`objective-option ${data.campaignObjective === objective.id ? 'selected' : ''}`}><input type="radio" name="objective" value={objective.id} checked={data.campaignObjective === objective.id} onChange={() => update('campaignObjective',objective.id)}/><Icon size={23}/><strong>{objective.label}</strong><span>{objective.description}</span></label>;
+    })}</fieldset>{errorFor('campaignObjective') && <p className="field-error" id="objective-error">{errorFor('campaignObjective')}</p>}
+      <button type="button" className="text-button" onClick={() => document.querySelector('[aria-label="Learn about Campaign objective"]')?.click()}>Help me understand the objectives</button>
+    </Section>
+    <Section title="Spending controls"><Input {...props} name="spendingLimit" label="Campaign spending limit (USD)" help="spendingLimit" type="number" min="0.01" step="0.01" optional error={errorFor('spendingLimit')} hint="A campaign cap is separate from your ad set budget."/></Section>
+    <div className="learning-cue"><InfoIcon contentKey="campaignObjective"/><p>Your objective sets up the choices in your ad set. Your instructor evaluates why you chose it.</p></div>
+    <StepActions next={advance} label="Next: Ad set"/>
+  </div>;
+}

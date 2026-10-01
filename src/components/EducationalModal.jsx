@@ -1,67 +1,17 @@
-import React from 'react';
+import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
-
-const EducationalModal = ({ onClose, title, content }) => {
-  const handleBackdropClick = (e) => {
-    e.stopPropagation(); // Stop bubbling to React tree (InfoIcon -> Label)
-    onClose();
-  };
-
-  const handleContentClick = (e) => {
-    e.stopPropagation();
-  };
-
-  const handleCloseButtonClick = (e) => {
-    e.stopPropagation();
-    onClose();
-  };
-
-  return createPortal(
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200"
-      onClick={handleBackdropClick}
-    >
-      <div
-        onClick={handleContentClick}
-        className="bg-white rounded-xl shadow-xl max-w-lg w-full overflow-hidden animate-in zoom-in-95 duration-200"
-      >
-        <div className="bg-blue-600 p-6 flex justify-between items-start">
-          <h3 className="text-xl font-bold text-white pr-8">{title}</h3>
-          <button
-            onClick={handleCloseButtonClick}
-            className="text-blue-100 hover:text-white transition-colors bg-blue-700 hover:bg-blue-800 rounded-full p-1 cursor-pointer"
-          >
-            <X size={20} />
-          </button>
-        </div>
-
-        <div className="p-6 overflow-y-auto max-h-[60vh]">
-          <div className="prose prose-blue max-w-none text-gray-700 whitespace-pre-line">
-            {content.split(/(\*\*.*?\*\*)/g).map((part, index) => {
-              if (part.startsWith('**') && part.endsWith('**')) {
-                return <strong key={index}>{part.slice(2, -2)}</strong>;
-              }
-              return part;
-            })}
-          </div>
-
-          <div className="mt-8 pt-4 border-t border-gray-100">
-            <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4">
-              <div className="flex">
-                <div className="ml-3">
-                  <p className="text-sm text-yellow-700">
-                    <strong>Student Note:</strong> Understanding this concept is key for your justification in the final review step.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>,
-    document.body
-  );
-};
-
-export default EducationalModal;
+export default function EducationalModal({ onClose, title, content }) {
+  const dialog = useRef(null);
+  useEffect(() => {
+    const element = dialog.current;
+    const previousFocus = document.activeElement;
+    element.showModal();
+    return () => { element.close(); previousFocus?.focus(); };
+  }, []);
+  return createPortal(<dialog ref={dialog} className="learning-dialog" aria-labelledby="learning-title" onCancel={onClose} onClick={e => { if (e.target === dialog.current) { const bounds = dialog.current.getBoundingClientRect(); if (e.clientX < bounds.left || e.clientX > bounds.right || e.clientY < bounds.top || e.clientY > bounds.bottom) onClose(); } }}>
+    <div className="dialog-header"><div><span className="eyebrow">Learning window</span><h2 id="learning-title">{title}</h2></div><button type="button" className="icon-button" aria-label="Close learning window" onClick={onClose}><X size={22}/></button></div>
+    <div className="dialog-body">{typeof content === 'string' ? <p className="preserve-lines">{content}</p> : <><h3>What this controls</h3><p>{content.what}</p><h3>Think through your choice</h3><p>{content.consider}</p><h3>In Ads Manager</h3><p>{content.platform}</p>{content.prompt && <div className="learning-prompt"><strong>For your explanation</strong><p>{content.prompt}</p></div>}</>}</div>
+    <div className="dialog-footer"><button type="button" className="button primary" onClick={onClose}>Return to my campaign</button></div>
+  </dialog>, document.body);
+}
