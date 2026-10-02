@@ -2,7 +2,9 @@ import { getObjective, getGoals, getCTAs, placements, SIMULATOR_VERSION } from '
 export const STORAGE_KEY = 'fbAdsSimWorkspace_v2';
 export const LEGACY_KEY = 'fbAdsSimData';
 export const MAX_IMAGE_BYTES = 10 * 1024 * 1024;
-export const MAX_IMPORT_BYTES = 80 * 1024 * 1024;
+// A workspace may contain eleven 10 MB uploaded assets in both its draft and
+// publication. Allow their base64 expansion plus settings and documentation.
+export const MAX_IMPORT_BYTES = 320 * 1024 * 1024;
 export function localDate(date = new Date()) {
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
 }
@@ -24,6 +26,11 @@ export function blankCampaign() {
 }
 export function blankWorkspace() {
   return { schemaVersion: 2, simulatorVersion: SIMULATOR_VERSION, data: blankCampaign(), currentStep: 0, events: [], publication: null };
+}
+export function recordFieldEdit(events, field, at = new Date().toISOString()) {
+  const entry = { at, text: `Edited ${field}.` };
+  const previous = events.at(-1);
+  return (previous?.text === entry.text ? [...events.slice(0,-1), entry] : [...events, entry]).slice(-150);
 }
 const enums = {
   campaignObjective: ['', 'awareness', 'traffic', 'engagement', 'leads', 'app-promotion', 'sales'],
@@ -149,10 +156,14 @@ export function validateCampaign(data) {
     if (!data.headline.trim() && data.adFormat !== 'carousel') add(2, 'headline', 'Enter a headline for the website ad.');
     if (['sales', 'leads'].includes(data.campaignObjective) && !data.datasetName.trim()) add(1, 'datasetName', 'Name the practice dataset used to measure conversions.');
   }
-  if (data.destination === 'app' && (!data.appName.trim() || !isWebUrl(data.appUrl))) add(2, 'appUrl', 'Enter the app name and a complete HTTP(S) store URL.');
+  if (data.destination === 'app') {
+    if (!data.appName.trim()) add(2, 'appName', 'Enter the app name.');
+    if (!isWebUrl(data.appUrl)) add(2, 'appUrl', 'Enter a complete HTTP(S) app store URL.');
+  }
   if (data.destination === 'messages' && !data.messageGreeting.trim()) add(2, 'messageGreeting', 'Enter the opening message.');
   if (data.destination === 'instant-form') {
-    if (!data.formName.trim() || !data.formHeadline.trim()) add(2, 'formName', 'Name the instant form and enter its headline.');
+    if (!data.formName.trim()) add(2, 'formName', 'Name the instant form.');
+    if (!data.formHeadline.trim()) add(2, 'formHeadline', 'Enter the instant form headline.');
     if (!data.formQuestions.length) add(2, 'formQuestions', 'Select at least one question for the form.');
     if (!isWebUrl(data.privacyUrl)) add(2, 'privacyUrl', 'Enter a complete HTTP(S) privacy-policy URL for the practice form.');
   }

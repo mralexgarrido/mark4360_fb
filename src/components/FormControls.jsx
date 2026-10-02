@@ -8,7 +8,7 @@ export function Field({ id, label, help, hint, error, children, optional = false
   </div>;
 }
 export function Input({ data, update, name, label, help, hint, error, type = 'text', optional, ...props }) {
-  return <Field id={name} label={label} help={help} hint={hint} error={error} optional={optional}><input id={name} type={type} maxLength={24000} value={data[name]} onChange={e => update(name,e.target.value)} aria-invalid={!!error} aria-describedby={[hint && `${name}-hint`,error && `${name}-error`].filter(Boolean).join(' ') || undefined} {...props}/></Field>;
+  return <Field id={name} label={label} help={help} hint={hint} error={error} optional={optional}><input id={name} type={type} maxLength={24000} value={data[name]} onChange={e => update(name,e.target.value)} onInput={['date','time'].includes(type) ? e => update(name,e.target.value) : undefined} aria-invalid={!!error} aria-describedby={[hint && `${name}-hint`,error && `${name}-error`].filter(Boolean).join(' ') || undefined} {...props}/></Field>;
 }
 export function Textarea({ data, update, name, label, help, hint, error, optional, rows = 3, ...props }) {
   return <Field id={name} label={label} help={help} hint={hint} error={error} optional={optional}><textarea id={name} value={data[name]} onChange={e => update(name,e.target.value)} rows={rows} maxLength={24000} aria-invalid={!!error} aria-describedby={[hint && `${name}-hint`,error && `${name}-error`].filter(Boolean).join(' ') || undefined} {...props}/></Field>;
