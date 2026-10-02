@@ -59,3 +59,9 @@ Submit through your instructor's designated channel. The app does not submit an 
 Automatic saving applies to the same site, browser, and profile. Watch the visible save status. If storage fails, download a campaign file before leaving. An unsupported saved draft is preserved and can be downloaded for recovery. Older supported drafts receive inferred new controls; inspect those settings before publishing.
 
 **New campaign** asks before replacing the draft and offers a backup download. Clearing browser site data removes local work. Keep exported work somewhere you can retrieve it.
+
+## Saving and export reliability (2.0.1)
+
+Wait for **Saved in this browser** before closing the tab, and keep a **Save campaign file** JSON backup. Edits are saved immediately and the local process record groups consecutive typing in one field. Campaign files up to 320 MB can be opened, including large image-rich drafts and their published snapshots. Each uploaded image is still limited to 10 MB.
+
+The final review screen offers current draft HTML, current draft PDF, and published HTML/PDF after practice publication. HTML and PDF are the readable assignment packet; JSON is the editable backup. All selected placements, full copy, carousel cards, destination content, explanations, and recent process actions are included. Follow your instructor’s required submission format. Uploaded images travel with the packet; external image URLs require access to their provider. Printing waits for images and reports unavailable assets. Published reports identify the current paused/published status and retain published settings with current explanations.

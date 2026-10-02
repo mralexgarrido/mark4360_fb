@@ -23,10 +23,10 @@ Publication records an immutable local snapshot of campaign settings. Students c
 
 - **Save campaign file** downloads a versioned JSON file that can restore the draft, publication, explanations, and local process record in another browser.
 - **Download assignment HTML** creates a readable packet with full settings, previews, carousel sequence, destination content, student explanations, and process record. Uploaded assets are embedded. External image URLs still depend on their provider.
-- **Print / Save PDF** opens the browser print dialog. Current draft and published settings can be exported separately. Published packets explicitly include current student explanations.
+- **Print / Save PDF** opens the browser print dialog. Images finish loading before printing; unavailable images are identified before opening the print dialog. Current draft and published settings can be exported separately. Published packets explicitly include current student explanations.
 - **New campaign** asks before replacing the draft and offers a download first.
 
-Automatic saving uses localForage in the current site and browser. Clearing site data removes local work. Visible warnings explain storage failures; unrecognized stored drafts remain available for recovery rather than being overwritten. Older flat drafts are migrated when supported, with new settings inferred for review. Keep a campaign file for work that matters.
+Automatic saving writes edits immediately through localForage in the current site and browser, coalesces pending edits in order, and confirms only the newest completed save. Leaving while work remains unsaved triggers a browser warning. Clearing site data removes local work. Visible warnings explain storage failures; unrecognized stored drafts remain available for recovery rather than being overwritten. Older flat drafts are migrated when supported, with new settings inferred for review. Keep a campaign file for work that matters.
 
 Submit the packet through the instructor's designated channel. The app does not submit to an LMS. Timestamps and history are local, editable records, not verified proof of authorship.
 

@@ -5,6 +5,8 @@ import {
   blankCampaign, blankWorkspace, applyCampaignField, publicationSnapshot,
   validateCampaign, migrateWorkspace, exportWorkspace, importWorkspace,
   campaignChanged, budgetSummary, selectedPlacements, trackedUrl, isImageSource,
+  MAX_IMPORT_BYTES,
+  recordFieldEdit,
 } from '../src/lib/campaign.js';
 const image = 'data:image/png;base64,iVBORw0KGgo=';
 function configured(objective = 'traffic', destination = 'website') {
@@ -38,6 +40,38 @@ test('blank and malformed settings cannot publish', () => {
   const fields = validateCampaign(data).map(error => error.field);
   for (const field of ['budgetAmount', 'locations', 'websiteUrl', 'endDate']) assert.ok(fields.includes(field));
   assert.equal(publicationSnapshot(data), null);
+});
+test('field edits are recorded before navigation or export, with consecutive typing grouped', () => {
+  let events = [];
+  for (let index = 0; index < 200; index++) events = recordFieldEdit(events, 'primaryText', `typing-${index}`);
+  assert.equal(events.length, 1);
+  assert.equal(events[0].at, 'typing-199');
+  events = recordFieldEdit(events, 'measurementPlan', '2026-10-02T10:00:00Z');
+  const workspace = { ...blankWorkspace(), data: configured(), events };
+  assert.deepEqual(importWorkspace(exportWorkspace(workspace)).events, events);
+  assert.equal(events[1].text, 'Edited measurementPlan.');
+});
+test('large self-exported campaigns above the former 80 MB cap can be reopened intact', () => {
+  const asset = 'data:image/png;base64,' + 'A'.repeat(7 * 1024 * 1024);
+  const workspace = { ...blankWorkspace(), data: configured() };
+  workspace.data.adFormat = 'carousel';
+  workspace.data.carouselCards = Array.from({ length: 6 }, (_, index) => ({ id: `card-${index}`, imageUrl: asset, imageName: `image-${index}.png`, imageAlt: `Image ${index}`, headline: `Card ${index}`, websiteUrl: '' }));
+  workspace.publication = publicationSnapshot(workspace.data);
+  const text = exportWorkspace(workspace);
+  assert.ok(Buffer.byteLength(text) > 80 * 1024 * 1024);
+  assert.ok(Buffer.byteLength(text) < MAX_IMPORT_BYTES);
+  const restored = importWorkspace(text);
+  assert.equal(restored.data.carouselCards.length, 6);
+  assert.equal(restored.data.carouselCards[5].imageUrl.length, asset.length);
+  assert.equal(restored.publication.data.carouselCards[5].headline, 'Card 5');
+});
+test('missing form and app fields identify the exact control to fix', () => {
+  const app = { ...configured('app-promotion', 'app'), appName: '', appUrl: 'bad' };
+  const form = { ...configured('leads', 'instant-form'), formName: '', formHeadline: '' };
+  assert.ok(validateCampaign(app).some(error => error.field === 'appName'));
+  assert.ok(validateCampaign(app).some(error => error.field === 'appUrl'));
+  assert.ok(validateCampaign(form).some(error => error.field === 'formName'));
+  assert.ok(validateCampaign(form).some(error => error.field === 'formHeadline'));
 });
 test('calendar dates, time zone, and lifetime schedule are structural requirements', () => {
   const data = { ...configured(), startDate: '2026-02-30', endDate: '', budgetType: 'lifetime', timezone: 'invalid/zone', startTime: '25:00' };
