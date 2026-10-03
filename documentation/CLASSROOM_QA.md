@@ -1,4 +1,4 @@
-# Classroom workflow QA: 2.0.3
+# Classroom workflow QA: 2.0.4
 
 ## Purpose
 
@@ -23,6 +23,8 @@ Students practice campaign, ad set, creative, review, and publication steps, the
 - Keep original-audience and carousel summaries from presenting inactive source/media descriptions.
 - Preserve draft/published assignment filename suffixes even when campaign names are long.
 
+- Focus and scroll to the beginning of each newly opened settings step; preserve subsequent error-field focus from review.
+
 ## Automated checks
 
 **36 regression tests pass**, alongside `npm run lint`, `npm run build`, and `git diff --check`. Native Node tests cover all 11 represented objective/destination combinations; structural validation; migration; imports; immutable publication; calendar arithmetic; tracking; large-file round trips; grouped process edits; ordered save/reset and storage-error recovery; bounded image readiness; and complete portable report content across all destinations. Reports preserve full long copy, long explanations, selected placements, carousel sequence, embedded images, form questions/privacy/completion, messages, app setup, and escaped text.
@@ -31,7 +33,7 @@ Students practice campaign, ad set, creative, review, and publication steps, the
 
 The live cloud browser exercised a fictional Traffic/Website campaign through review, explanation fields, publication confirmation, pause/resume, reload, preview expansion, selected placements, placement validation, two-card carousel reordering, and per-card tracked destination previews. An immediate reload reproduced the old pause/resume persistence failure. After deployment, resume state survived the same reload, the end date persisted, and the planned allocation updated correctly. Current/published HTML preparation completed without app runtime errors. The print action passed image readiness and invoked printing; actual native PDF output remains unverified.
 
-Additional live checks covered Leads/instant-form privacy, question selection, introduction and completion copy; custom audience requirements; Engagement/Instagram messaging; App promotion identity/store validation; Sales dataset requirements; Awareness without a CTA; special-category demographic restrictions; and preservation of explanations across objective changes. Documentation-only edits did not enable campaign republishing. Form/app validation focused the correct missing control. The 2.0.2 deployment passed active app URL labeling, removal of inactive carousel website URLs, and return to the current draft/latest explanation after printing. Learning windows passed focus containment, Escape dismissal, and focus restoration. A missing image URL displayed a visible fallback and blocked incomplete PDF preparation; replacing it cleared the fallback. Final filename and summary checks are recorded in the 2.0.3 release PR.
+Additional live checks covered Leads/instant-form privacy, question selection, introduction and completion copy; custom audience requirements; Engagement/Instagram messaging; App promotion identity/store validation; Sales dataset requirements; Awareness without a CTA; special-category demographic restrictions; and preservation of explanations across objective changes. Documentation-only edits did not enable campaign republishing. Form/app validation focused the correct missing control. The 2.0.2 deployment passed active app URL labeling, removal of inactive carousel website URLs, and return to the current draft/latest explanation after printing. Learning windows passed focus containment, Escape dismissal, and focus restoration. A missing image URL displayed a visible fallback and blocked incomplete PDF preparation; replacing it cleared the fallback. Final filename, summary, and step-navigation checks are recorded in the release PR. A pre-fix navigation check found the new review heading 1741 pixels above the viewport after advancing from a long creative form.
 
 Browser file-chooser attachment stalled and the download-event listener timed out. The environment also blocked localhost previews. These are verification limits, not evidence that ordinary student uploads/downloads work or fail. Actual student-device file upload, downloaded HTML reopening, JSON reopening via the picker, native PDF output, and phone/Safari/Firefox behavior require final manual confirmation. Do not describe this audit as a guarantee of perfect behavior or an accessibility certification.
 

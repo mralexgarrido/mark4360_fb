@@ -84,6 +84,11 @@ export function AdCampaignProvider({ children }) {
     const changedFields = [...edits.current];
     edits.current.clear();
     setWorkspace(previous => ({ ...previous, currentStep: step, events: addEvent(previous, `Opened ${steps[step]}${changedFields.length ? `. Updated fields: ${changedFields.join(', ')}.` : '.'}`) }));
+    requestAnimationFrame(() => {
+      const panel = document.getElementById('step-main');
+      panel?.focus({ preventScroll: true });
+      panel?.scrollIntoView({ block: 'start', behavior: 'auto' });
+    });
   };
   const publishCampaign = () => {
     const snapshot = publicationSnapshot(workspace.data);
