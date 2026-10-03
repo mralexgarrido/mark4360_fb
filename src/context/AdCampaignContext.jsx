@@ -64,7 +64,10 @@ export function AdCampaignProvider({ children }) {
     window.addEventListener('afterprint', finishPrint);
     return () => { window.removeEventListener('beforeunload', guardUnsavedWork); window.removeEventListener('afterprint', finishPrint); };
   }, []);
-  const markPending = () => { saver.current.markDirty(); pendingSave.current = true; setSaveStatus('Saving in this browser'); };
+  const markPending = () => {
+    saver.current.markDirty(); pendingSave.current = true; setSaveStatus('Saving in this browser');
+    if (!exportBusy) { setReportWorkspace(null); setReportSource('draft'); setExportStatus(''); }
+  };
   const workspaceForExport = () => {
     const fields = [...edits.current];
     return fields.length ? { ...workspace, events: addEvent(workspace, `Current draft edits included in this export: ${fields.join(', ')}.`) } : workspace;

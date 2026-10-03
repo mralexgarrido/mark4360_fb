@@ -1,5 +1,5 @@
 import { SIMULATOR_VERSION } from '../data/platformOptions';
-import { selectedPlacements, campaignChanged } from '../lib/campaign';
+import { selectedPlacements, campaignChanged, trackedUrl } from '../lib/campaign';
 import CampaignSummary from './CampaignSummary';
 import AdPreview, { DestinationPreview } from './AdPreview';
 const explanations = [
@@ -13,7 +13,7 @@ export default function AssignmentReportContent({ workspace, reportSource = 'dra
     <CampaignSummary data={data}/>
     <section className="report-section"><h2>Student explanations</h2>{explanations.map(([key,label]) => <div className="report-explanation" key={key}><h3>{label}</h3><p>{data[key] || 'Not provided'}</p></div>)}</section>
     <section className="report-section"><h2>Selected-placement previews</h2><p>Illustrative placement layouts. All copy is printed in full for evaluation.</p><div className="report-preview-grid">{selectedPlacements(data).map(placement => <figure key={placement.id}><figcaption>{placement.label}</figcaption><AdPreview data={data} placement={placement} interactive={false}/></figure>)}</div></section>
-    {data.adFormat === 'carousel' && <section className="report-section"><h2>Carousel card sequence</h2>{data.carouselCards.map((card,index) => <figure className="report-carousel-card" key={card.id}><figcaption>Card {index+1}: {card.headline || 'No headline'}</figcaption>{card.imageUrl && <img src={card.imageUrl} alt={card.imageAlt || `Creative for card ${index+1}`}/>}<p>Destination: {card.websiteUrl || data.websiteUrl || 'No separate website destination'}</p><p>Image description: {card.imageAlt || 'Not provided'}</p></figure>)}</section>}
+    {data.adFormat === 'carousel' && <section className="report-section"><h2>Carousel card sequence</h2>{data.carouselCards.map((card,index) => <figure className="report-carousel-card" key={card.id}><figcaption>Card {index+1}: {card.headline || 'No headline'}</figcaption>{card.imageUrl && <img src={card.imageUrl} alt={card.imageAlt || `Creative for card ${index+1}`}/>}<p>Destination: {data.destination === 'website' ? trackedUrl({ ...data, websiteUrl: card.websiteUrl || data.websiteUrl }) || 'Not configured' : 'Uses the ad’s configured conversion location'}</p><p>Image description: {card.imageAlt || 'Not provided'}</p></figure>)}</section>}
     {data.destination && data.destination !== 'on-ad' && <section className="report-section"><h2>Destination setup</h2><DestinationPreview data={data}/></section>}
     <section className="report-section"><h2>Local process record</h2><p>The most recent 150 browser-generated actions are recorded. Consecutive edits in one field are grouped. This is an editable local record, not independently verified evidence of authorship.</p>{workspace.events.length ? <ol className="process-record">{workspace.events.map((event,index) => <li key={index}><time>{new Date(event.at).toLocaleString()}</time><span>{event.text}</span></li>)}</ol> : <p>No navigation or publication actions recorded.</p>}</section>
     <footer className="report-footer">Facebook Simulator Revamp · {SIMULATOR_VERSION} · Independent classroom practice tool</footer>

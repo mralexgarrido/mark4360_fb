@@ -177,3 +177,8 @@ test('budget arithmetic is calendar-based and tracking parameters preserve URL p
   assert.equal(isImageSource('javascript:alert(1)'), false);
   assert.equal(isImageSource('data:image/svg+xml;base64,PHN2Zz4='), false);
 });
+test('website tracking parameters do not leak into an app destination', () => {
+  const data = { ...configured('app-promotion', 'app'), appUrl: 'https://example.com/app?store=apple', urlParameters: 'utm_source=old-website' };
+  assert.equal(trackedUrl(data), 'https://example.com/app?store=apple');
+  assert.equal(trackedUrl({ ...data, destination: 'messages' }), '');
+});

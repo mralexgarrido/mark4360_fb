@@ -26,7 +26,7 @@ export default function AdPreview({ data: suppliedData, placement: suppliedPlace
   const source = card?.imageUrl || (data.adFormat === 'single-image' ? data.imageUrl : '');
   const identity = isInstagram ? data.instagramAccount || data.facebookPage || 'Your account' : data.facebookPage || 'Your Page';
   let hostname = '';
-  try { hostname = new URL(card?.websiteUrl || destinationUrl(data)).hostname; } catch { hostname = destinationLabels[data.destination] || 'Destination'; }
+  try { hostname = new URL(data.destination === 'website' ? card?.websiteUrl || data.websiteUrl : destinationUrl(data)).hostname; } catch { hostname = destinationLabels[data.destination] || 'Destination'; }
   const headline = card?.headline || data.headline;
   const text = interactive && !expandedCopy && data.primaryText.length > (isStory ? 100 : 170) ? `${data.primaryText.slice(0,isStory ? 100 : 170)}…` : data.primaryText;
   const cta = ctaLabels[data.callToAction] || 'Learn More';
