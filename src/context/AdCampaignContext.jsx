@@ -131,7 +131,7 @@ export function AdCampaignProvider({ children }) {
     try {
       const { renderToStaticMarkup } = await import('react-dom/server');
       const report = renderToStaticMarkup(createElement(AssignmentReportContent, { workspace: snapshot, reportSource: source }));
-      downloadText(`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Facebook campaign assignment</title><style>${reportStyles}</style></head><body class="standalone-report">${report}</body></html>`, fileName(snapshot.data.campaignName + '-' + source + '-assignment','html'), 'text/html');
+      downloadText(`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Facebook campaign assignment</title><style>${reportStyles}</style></head><body class="standalone-report">${report}</body></html>`, fileName(snapshot.data.campaignName,'html',`${source}-assignment`), 'text/html');
       setExportStatus(`${source === 'published' ? 'Published assignment' : 'Current draft assignment'} HTML prepared. Check your browser downloads. Keep the campaign JSON file to resume editing.`);
     } catch { setExportStatus('The assignment could not be downloaded. Try again or save a campaign file to keep your work.'); }
     finally { setExportBusy(false); }
