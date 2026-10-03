@@ -1,4 +1,4 @@
-export const SIMULATOR_VERSION = '2.0.1';
+export const SIMULATOR_VERSION = '2.0.2';
 export const objectives = [
   { id: 'awareness', label: 'Awareness', description: 'Build visibility for your business.', destinations: ['on-ad', 'website'], goals: ['Maximize reach', 'Maximize impressions'] },
   { id: 'traffic', label: 'Traffic', description: 'Send people to a destination.', destinations: ['website', 'messages'], goals: ['Maximize landing page views', 'Maximize link clicks'] },

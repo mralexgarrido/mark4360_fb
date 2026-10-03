@@ -1,4 +1,4 @@
-# Classroom workflow QA: 2.0.1
+# Classroom workflow QA: 2.0.2
 
 ## Purpose
 
@@ -17,13 +17,18 @@ Students practice campaign, ad set, creative, review, and publication steps, the
 - Capture date/time input events immediately, including calendar and time controls.
 - Put current HTML alongside PDF and published exports on final review, explaining readable submissions versus editable JSON backups. Identify paused/publication status in reports.
 
+- Clear retained print snapshots and export notices when the student edits or navigates after printing, including browsers without a print-closed event.
+- Keep carousel previews and reports on the active conversion location; include tracked per-card website URLs and prevent website tracking parameters leaking into app-store URLs.
+
 ## Automated checks
 
-`npm test`, `npm run lint`, `npm run build`, and `git diff --check` must pass. Native Node tests cover all 11 represented objective/destination combinations; structural validation; migration; imports; immutable publication; calendar arithmetic; tracking; large-file round trips; grouped process edits; ordered save/reset and storage-error recovery; bounded image readiness; and complete portable report content across all destinations. Reports preserve full long copy, long explanations, selected placements, carousel sequence, embedded images, form questions/privacy/completion, messages, app setup, and escaped text.
+**34 regression tests pass**, alongside `npm run lint`, `npm run build`, and `git diff --check`. Native Node tests cover all 11 represented objective/destination combinations; structural validation; migration; imports; immutable publication; calendar arithmetic; tracking; large-file round trips; grouped process edits; ordered save/reset and storage-error recovery; bounded image readiness; and complete portable report content across all destinations. Reports preserve full long copy, long explanations, selected placements, carousel sequence, embedded images, form questions/privacy/completion, messages, app setup, and escaped text.
 
 ## Browser checks and limits
 
-The live cloud browser exercised a fictional Traffic/Website campaign through review, explanation fields, publication confirmation, pause/resume, reload, preview expansion, selected placements, placement validation, two-card carousel reordering, and per-card tracked destination previews. An immediate reload reproduced the old pause/resume persistence failure.
+The live cloud browser exercised a fictional Traffic/Website campaign through review, explanation fields, publication confirmation, pause/resume, reload, preview expansion, selected placements, placement validation, two-card carousel reordering, and per-card tracked destination previews. An immediate reload reproduced the old pause/resume persistence failure. After deployment, resume state survived the same reload, the end date persisted, and the planned allocation updated correctly. Current/published HTML preparation completed without app runtime errors. The print action passed image readiness and invoked printing; actual native PDF output remains unverified.
+
+Additional live checks covered Leads/instant-form privacy, question selection, introduction and completion copy; custom audience requirements; Engagement/Instagram messaging; App promotion identity/store validation; Sales dataset requirements; Awareness without a CTA; special-category demographic restrictions; and preservation of explanations across objective changes. Documentation-only edits did not enable campaign republishing. Form/app validation focused the correct missing control. Post-print and inactive-destination issues were corrected in 2.0.2. Repeat these checks on the deployed version after release; final deployment checks are recorded in the release PR.
 
 Browser file-chooser attachment stalled and the download-event listener timed out. The environment also blocked localhost previews. These are verification limits, not evidence that ordinary student uploads/downloads work or fail. Actual student-device file upload, downloaded HTML reopening, JSON reopening via the picker, native PDF output, and phone/Safari/Firefox behavior require final manual confirmation. Do not describe this audit as a guarantee of perfect behavior or an accessibility certification.
 

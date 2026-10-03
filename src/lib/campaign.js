@@ -185,6 +185,7 @@ export function selectedPlacements(data) { return placements.filter(p => data.pl
 export function destinationUrl(data) { return data.destination === 'app' ? data.appUrl : data.destination === 'website' ? data.websiteUrl : ''; }
 export function trackedUrl(data) {
   const url = destinationUrl(data);
+  if (data.destination !== 'website') return url;
   if (!isWebUrl(url)) return url;
   const result = new URL(url);
   new URLSearchParams(data.urlParameters.replace(/^\?/, '')).forEach((value,key) => result.searchParams.set(key,value));

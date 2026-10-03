@@ -12,7 +12,7 @@ test('assignment renderer includes full creative, rationale, carousel order, and
     const workspace = blankWorkspace();
     workspace.data = applyCampaignField(workspace.data, 'campaignObjective', 'traffic');
     Object.assign(workspace.data, { campaignName: 'Published campaign', primaryText: 'Full copy '.repeat(300) + 'END OF COPY',
-      strategyDescription: 'Student explanation '.repeat(300) + 'END OF REASONING', websiteUrl: 'https://example.com/offer',
+      strategyDescription: 'Student explanation '.repeat(300) + 'END OF REASONING', websiteUrl: 'https://example.com/offer', urlParameters: 'utm_source=facebook',
       adFormat: 'carousel', carouselCards: [
         { id: 'one', imageUrl: '', imageAlt: 'First image', headline: 'First card', websiteUrl: '' },
         { id: 'two', imageUrl: '', imageAlt: 'Second image', headline: 'Second card', websiteUrl: 'https://example.com/second' },
@@ -28,7 +28,7 @@ test('assignment renderer includes full creative, rationale, carousel order, and
     assert.ok(published.includes('END OF REASONING'));
     assert.ok(published.includes('Card 1: First card'));
     assert.ok(published.includes('Card 2: Second card'));
-    assert.ok(published.includes('https://example.com/second'));
+    assert.ok(published.includes('https://example.com/second?utm_source=facebook'));
     assert.ok(published.includes('Facebook Stories'));
     assert.ok(published.includes('Instagram Feed'));
     assert.ok(published.includes('practice account · paused'));
@@ -55,13 +55,16 @@ test('every destination and all explanations survive a portable report with embe
       placementMode: 'manual', placements: ['facebook-feed'], formName: 'Lead inquiry', formHeadline: 'Contact our business',
       formDescription: 'FORM INTRODUCTION', privacyUrl: 'https://example.com/privacy', thankYouMessage: 'FORM COMPLETION',
       messageGreeting: 'OPENING MESSAGE', appName: 'APP NAME', appUrl: 'https://example.com/app', websiteUrl: 'https://example.com/offer',
-      urlParameters: 'utm_source=facebook' });
+      urlParameters: 'utm_source=facebook', adFormat: 'carousel', carouselCards: [
+        { id:'one', imageUrl:asset, imageAlt:'First image', headline:'First offer', websiteUrl:'https://old.example.com/website' },
+        { id:'two', imageUrl:asset, imageAlt:'Second image', headline:'Second offer', websiteUrl:'' },
+      ] });
     workspace.events.push({ at: '2026-10-02T10:00:00Z', text: 'PROCESS ACTION' });
     for (const [destination, expected] of [
       ['website', ['https://example.com/offer?utm_source=facebook']],
       ['instant-form', ['Lead inquiry', 'FORM INTRODUCTION', 'Full name', 'Email', 'https://example.com/privacy', 'FORM COMPLETION']],
       ['messages', ['OPENING MESSAGE', 'Messenger']],
-      ['app', ['APP NAME', 'Apple App Store', 'https://example.com/app?utm_source=facebook']],
+      ['app', ['APP NAME', 'Apple App Store', 'https://example.com/app']],
       ['on-ad', ['FULL CREATIVE']],
     ]) {
       workspace.data.destination = destination;
@@ -69,6 +72,7 @@ test('every destination and all explanations survive a portable report with embe
       for (const text of [...expected, 'BUSINESS REASONING', 'AUDIENCE REASONING', 'BUDGET REASONING', 'CREATIVE REASONING', 'MEASUREMENT REASONING', 'REVISION REASONING', 'PROCESS ACTION', asset]) assert.ok(html.includes(text), `${destination} omitted ${text}`);
       assert.ok(!html.includes('Instagram Stories'));
       assert.ok(!html.includes('<script'));
+      if (destination !== 'website') assert.ok(!html.includes('old.example.com'), `${destination} leaked an inactive website destination`);
     }
   } finally { await server.close(); }
 });
